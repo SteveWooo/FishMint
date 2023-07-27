@@ -8,7 +8,7 @@
 
 在该平台上，只要你能运用基本的前端技术，即可彻底定制、修改你的专属PC桌面挂件
 
-- 进入 https://github.com/SteveWooo/KTool/releases 下载对应平台的压缩包，解压，双击KTool.exe启动
+- 下载基座：进入 https://github.com/SteveWooo/KTool/releases 下载对应系统的压缩包，解压，双击KTool.exe即可启动基座
 - 在弹出界面的框框输入 "/help" ，回车，即可查看帮助
 - 比如输入 "/open note" 即可启动一个便利贴
 
