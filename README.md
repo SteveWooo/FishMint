@@ -1,8 +1,11 @@
 # KTool 
 
-<img src="./favicon.ico" width="80" height="80" />
+<div style="text-align:center">
+  <img src="./favicon.ico" width="80" height="80" />
+  <br />
+  <b>完全可定制化的PC桌面挂件平台</b>
+</div>
 
-<b>完全可定制化的PC桌面挂件平台</b>
 
 ## 🏃‍快速开始
 
