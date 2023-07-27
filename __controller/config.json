@@ -1,0 +1,18 @@
+{
+    "configure": {
+        "x": 100,
+        "y": 100,
+        "width": 330,
+        "height": 220,
+        "type": "toolbar",
+        "frame": false,
+        "resizable": true,
+        "transparent": true,
+        "hasShadow": true,
+        "alwaysOnTop": false,
+
+        "kt_devTools": false,
+        "kt_isolateSession": true,
+        "kt_recordRectInfo": true
+    }
+}

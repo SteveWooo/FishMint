@@ -1,0 +1,65 @@
+@font-face {
+    font-family: JiangCheng;
+    src: url('../res/fonts/jiangchengCircle.ttf') format('truetype');
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    background: transparent;
+    /* font-family: JiangCheng; */
+}
+
+/* 无frame下，加上这个类的dom才能被作为边框拖动整个窗口 */
+.kt-drager {
+    -webkit-app-region: drag;
+}
+
+/* 一些用来装东西的div通用样式 */
+.div-container:hover {
+    cursor: default;
+}
+
+/* 给textarea用的通用样式 */
+.kt-good-textarea-1 {
+    resize: none;
+    box-sizing: border-box;
+}
+.kt-good-textarea-1:focus {
+    outline: none;
+}
+.kt-good-textarea-1::-webkit-scrollbar {
+    width: 8px;
+    background-color: #D8D8C0;
+}
+.kt-good-textarea-1::-webkit-scrollbar-thumb {
+    border-radius: 3px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    background-color: #4B3434;
+}
+.kt-good-textarea-1::-webkit-scrollbar-track {
+    background-color: transparent;
+}
+
+/* 命令专用输出框的样式 */
+.kt-cmd-output {
+    resize: none;
+    box-sizing: border-box;
+}
+.kt-cmd-output::-webkit-scrollbar {
+    width: 8px;
+    background-color: #D8D8C0;
+}
+.kt-cmd-output:focus {
+    outline: none;
+}
+.kt-cmd-output::-webkit-scrollbar-thumb {
+    border-radius: 3px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    background-color: #4B3434;
+}
+.kt-cmd-output::-webkit-scrollbar-track {
+    background-color: transparent;
+}
