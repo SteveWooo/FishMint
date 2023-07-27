@@ -1,5 +1,9 @@
 # KTool
-PC Widgets Platform.
+完全用户定制化的PC桌面挂件平台🐟
+
+在该平台上，只要你能运用基本的前端技术，即可彻底定制、修改你的专属PC桌面挂件
+
+一切都是纯纯的Web
 
 ## 快速开始
 - 进入 https://github.com/SteveWooo/KTool/releases 下载对应平台的压缩包，解压，双击KTool.exe启动
