@@ -76,76 +76,30 @@ app配置代表初次启动app的时候需要载入的属性，以下用控制�
 
 kt实例挂载在全局window上，可以从note和控制台应用中了解具体DEMO用法，以下是每个接口的参数说明
 
-#### 通用调用方式、通用参数
-接口调用方式如下
+#### 通用调用方式
+基座内核接口调用方式如下
 ```js
 let res = await kt.blablabla({
     ...others // 参数
 })
 ```
-通用返回信息:
+
+electron部分透传的接口调用方式如下
+```js
+let res = await kt.screen_balabala({
+    params: [] // 会...展开传给对应的函数的
+})
+```
+
+electron部分透传的接口返回数据结构
 ```js
 {
-    status: 2000, // 错误码，非2000都是有问题
-    message: '', // 错误信息
-    ...others // 其他参数
+    status: 2000,
+    result: {}, // 透传electron接口返回的结果
 }
 ```
 
-#### OpenApp
-打开一个新的app
-
-参数：
-- appDirName: KTool目录下的app目录，比如note
-
-#### CloseWindow
-关闭当前窗口
-
-参数：
-无
-
-#### DbSet
-给当前窗口存储一个key，窗口被关闭后，数据将会被删除（控制台app除外）
-
-参数：
-- key: 字段key
-- value: 字段value
-
-#### DbGet
-获取当前窗口存储的key
-
-参数：
-- key: 字段key
-
-返回：
-- status: 状态码
-- message: 错误信息
-- value: 字段value
-
-#### SetWindowRect
-设置当前窗口的位置、宽高
-
-参数：
-- x: x坐标
-- y: y坐标，相对于屏幕左上角为原点
-- width: 窗口宽
-- height: 窗口高
-
-#### GetWindowInfo
-获取当前窗口的信息
-
-参数：
-无
-
-返回示例：
-暂略
-
-#### screen_getPrimaryDisplay
-获取主要显示器的参数，对应electron中screen的接口。screen中几个get也用同样的方式透传，screen_ + 接口名。但考虑到拓展问题，参数要用一个 params 来装。如：
-
-await kt.screen_getPrimaryDisplay({
-    params: [arg1, arg2, arg3]
-})
+#### [详细接口文档](https://stevewooo.github.io/KTool)
 
 ## 免责声明
 本项目内提供的所有软件与资料均遵循本项目开源协议内容，基于本平台二次开发应用的责任均有开发者自行承担，望开发者知悉
