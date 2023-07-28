@@ -39,7 +39,7 @@
 
 ### 0、创建一个app
 
-本项目中，utils文件夹外的都是app，可以通过open指令、kt.OpenApp接口来启动。开发者创建一个新的App步骤如下
+本项目中，utils、docs文件夹外的都是app，可以通过open指令、kt.OpenApp接口来启动。开发者创建一个新的App步骤如下
 
 - 创建一个文件夹，命名为你想要的app名称；
 - 在上述文件夹中创建config.json和index.html文件；
