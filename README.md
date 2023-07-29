@@ -11,7 +11,7 @@
 
 在该平台上，只要你能运用基本的前端技术，即可彻底定制、修改你的专属PC桌面挂件
 
-- 下载基座：进入 https://github.com/SteveWooo/KTool/releases 下载对应系统的压缩包，解压，双击KTool.exe即可启动基座
+- 下载基座：进入 [下载页面](https://github.com/SteveWooo/KTool/releases) 下载对应系统的压缩包，解压，双击KTool.exe即可启动基座
 - 在弹出界面的框框输入 "/help" ，回车，即可查看帮助
 - 比如输入 "/open note" 即可启动一个便利贴
 
@@ -39,7 +39,7 @@
 
 ### 0、创建一个app
 
-本项目中，utils文件夹外的都是app，可以通过open指令、kt.OpenApp接口来启动。开发者创建一个新的App步骤如下
+本项目中，utils、docs文件夹外的都是app，可以通过open指令、kt.OpenApp接口来启动。开发者创建一个新的App步骤如下
 
 - 创建一个文件夹，命名为你想要的app名称；
 - 在上述文件夹中创建config.json和index.html文件；
@@ -76,76 +76,35 @@ app配置代表初次启动app的时候需要载入的属性，以下用控制�
 
 kt实例挂载在全局window上，可以从note和控制台应用中了解具体DEMO用法，以下是每个接口的参数说明
 
-#### 通用调用方式、通用参数
-接口调用方式如下
+#### 通用调用方式
+基座内核接口调用方式如下
 ```js
 let res = await kt.blablabla({
     ...others // 参数
 })
 ```
-通用返回信息:
+
+electron部分透传的接口调用方式如下
+```js
+let res = await kt.screen_balabala({
+    params: [] // 会...展开传给对应的函数的
+})
+```
+
+electron部分透传的接口返回数据结构
 ```js
 {
-    status: 2000, // 错误码，非2000都是有问题
-    message: '', // 错误信息
-    ...others // 其他参数
+    status: 2000,
+    result: {}, // 透传electron接口返回的结果
 }
 ```
 
-#### OpenApp
-打开一个新的app
+#### [详细接口文档](https://stevewooo.github.io/KTool)
 
-参数：
-- appDirName: KTool目录下的app目录，比如note
+## 🤖数据&配置
+所有应用产生的数据，都在软件目录的 'userData' 目录中，用户可自行备份。
 
-#### CloseWindow
-关闭当前窗口
-
-参数：
-无
-
-#### DbSet
-给当前窗口存储一个key，窗口被关闭后，数据将会被删除（控制台app除外）
-
-参数：
-- key: 字段key
-- value: 字段value
-
-#### DbGet
-获取当前窗口存储的key
-
-参数：
-- key: 字段key
-
-返回：
-- status: 状态码
-- message: 错误信息
-- value: 字段value
-
-#### SetWindowRect
-设置当前窗口的位置、宽高
-
-参数：
-- x: x坐标
-- y: y坐标，相对于屏幕左上角为原点
-- width: 窗口宽
-- height: 窗口高
-
-#### GetWindowInfo
-获取当前窗口的信息
-
-参数：
-无
-
-返回示例：
-暂略
-
-#### screen_getPrimaryDisplay
-获取主要显示器的参数，对应electron中screen的接口。screen中几个get也用同样的方式透传，screen_ + 接口名。但考虑到拓展问题，参数要用一个 params 来装。如：
-
-await kt.screen_getPrimaryDisplay({
-    params: [arg1, arg2, arg3]
-})
+注意：在KTool下的目录名称，即appDirName，该名称被用作应用的唯一索引（为了避免引入复杂的AppID机制）。因此在导入其他人开发的应用时，应注意命名问题，防止发生数据冲突
 
 ## 免责声明
 本项目内提供的所有软件与资料均遵循本项目开源协议内容，基于本平台二次开发应用的责任均有开发者自行承担，望开发者知悉
