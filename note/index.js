@@ -58,6 +58,13 @@ kt.OnStaticFileChange(async (event, args) => {
     // location.reload()
 })
 
+kt.on.StaticFileChange(() => {
+    location.reload()
+})
+kt.on.WindowBrocast((e, data) => {
+    // console.log(data.content)
+})
+
 // kt.OnWindowBrocast((e, data)=> {
 //     console.log(data)
 // })
