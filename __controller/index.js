@@ -55,3 +55,11 @@ ReactDOM.render(<KtRoot />, document.getElementById("root"))
 kt.OnStaticFileChange(async (event, args) => {
     // location.reload()
 })
+
+// setTimeout(async () => {
+//     await kt.WindowBrocast({
+//         content: {
+//             hello: 'windows'
+//         }
+//     })
+// }, 500)

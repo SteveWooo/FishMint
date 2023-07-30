@@ -57,3 +57,10 @@ ReactDOM.render(<KtRoot />, document.getElementById("root"))
 kt.OnStaticFileChange(async (event, args) => {
     // location.reload()
 })
+
+// kt.OnWindowBrocast((e, data)=> {
+//     console.log(data)
+// })
+// kt.eScreen.getPrimaryDisplay().then(r => {
+//     console.log(r)
+// })
