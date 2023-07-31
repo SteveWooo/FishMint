@@ -80,6 +80,11 @@ let res = await kt.GetWindowInfo({})
 ## 免责声明
 本项目内提供的所有软件与资料均遵循本项目开源协议内容，基于本平台二次开发应用的责任均有开发者自行承担，望开发者知悉
 
+## 依赖
+
+基座依赖以下第三方开源项目：
+electron、electron-builder、express、request
+
 ## License
 本项目内发布的应用均为 MIT
 
