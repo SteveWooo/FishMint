@@ -82,4 +82,3 @@ let res = await kt.GetWindowInfo({})
 
 ## License
 MIT
-
