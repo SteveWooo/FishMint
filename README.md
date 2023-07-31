@@ -3,7 +3,7 @@
 <div align="center">
   <img src="./favicon.ico" width="120" height="120" />
   <br />
-  <b>完全可定制化的PC桌面挂件平台</b>
+  <b>完全可定制的PC桌面挂件平台</b>
 </div>
 
 
