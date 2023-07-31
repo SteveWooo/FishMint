@@ -103,7 +103,13 @@
             <dt><a href="kt.eScreen.html">eScreen</a></dt>
             <dd></dd>
         
+            <dt><a href="kt.eWindow.html">eWindow</a></dt>
+            <dd></dd>
+        
             <dt><a href="kt.on.html">on</a></dt>
+            <dd></dd>
+        
+            <dt><a href="kt.system.html">system</a></dt>
             <dd></dd>
         </dl>
     
@@ -127,7 +133,7 @@
 
 
 <div class="description">
-    关闭当前窗口
+    关闭当前窗口</br>关闭窗口后，线程、DBSet的window作用域内的数据都会被清理干净</br>因此类似便利贴之类的应用，应谨慎使用该接口
 </div>
 
 
@@ -584,7 +590,175 @@
     
 
     
-    <h4 class="name" id=".GetWindowInfo"><span class="type-signature">(async, static) </span>GetWindowInfo<span class="signature">()</span><span class="type-signature"> &rarr; {<a href="global.html#GenericResponse">GenericResponse</a>|GenericResponse.configure}</span></h4>
+    <h4 class="name" id=".GetAppInfo"><span class="type-signature">(async, static) </span>GetAppInfo<span class="signature">()</span><span class="type-signature"> &rarr; {<a href="global.html#GenericResponse">GenericResponse</a>|String|String|Object}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    获取当前app的信息
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+    <dt class="tag-since">Since:</dt>
+    <dd class="tag-since"><ul class="dummy"><li>release-0.0.2</li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+<ul>
+        <li>
+<div class="param-desc">
+    - 通用返回
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type"><a href="global.html#GenericResponse">GenericResponse</a></span>
+
+
+    </dd>
+</dl>
+</li>
+    
+        <li>
+<div class="param-desc">
+    res.__wid 窗口唯一标识
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">String</span>
+
+
+    </dd>
+</dl>
+</li>
+    
+        <li>
+<div class="param-desc">
+    res.appDirName 应用名
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">String</span>
+
+
+    </dd>
+</dl>
+</li>
+    
+        <li>
+<div class="param-desc">
+    res.windows 应用下的窗口信息
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Object</span>
+
+
+    </dd>
+</dl>
+</li>
+    </ul>
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id=".GetWindowInfo"><span class="type-signature">(async, static) </span>GetWindowInfo<span class="signature">()</span><span class="type-signature"> &rarr; {<a href="global.html#GenericResponse">GenericResponse</a>|<a href="global.html#WindowConfigure">WindowConfigure</a>}</span></h4>
     
 
     
@@ -683,7 +857,7 @@
     
         <li>
 <div class="param-desc">
-    configure 窗口的详细属性
+    response.configure 窗口的详细属性
 </div>
 
 
@@ -694,13 +868,170 @@
     </dt>
     <dd>
         
-<span class="param-type">GenericResponse.configure</span>
+<span class="param-type"><a href="global.html#WindowConfigure">WindowConfigure</a></span>
 
 
     </dd>
 </dl>
 </li>
     </ul>
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id=".HideWindow"><span class="type-signature">(async, static) </span>HideWindow<span class="signature">(__wid)</span><span class="type-signature"> &rarr; {<a href="global.html#GenericResponse">GenericResponse</a>}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    隐藏窗口。</br>注意，窗口隐藏后，线程不会挂起
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>__wid</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">窗口唯一ID。空则代表当前窗口</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+    <dt class="tag-since">Since:</dt>
+    <dd class="tag-since"><ul class="dummy"><li>release-0.0.2</li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    - 通用返回
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type"><a href="global.html#GenericResponse">GenericResponse</a></span>
+
+
+    </dd>
+</dl>
+
+    
 
 
 
@@ -860,7 +1191,7 @@
 
 
 <div class="description">
-    打开一个应用窗口
+    打开一个应用窗口。创建应用窗口的时候会捞config.json的配置信息，其中extraElectronBrowserWindowConfig会透传并覆盖配置信息
 </div>
 
 
@@ -1157,6 +1488,163 @@
     
     <dt class="tag-since">Since:</dt>
     <dd class="tag-since"><ul class="dummy"><li>release-0.0.1</li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    - 通用返回
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type"><a href="global.html#GenericResponse">GenericResponse</a></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id=".ShowWindow"><span class="type-signature">(async, static) </span>ShowWindow<span class="signature">(__wid)</span><span class="type-signature"> &rarr; {<a href="global.html#GenericResponse">GenericResponse</a>}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    显示窗口。
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>__wid</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">窗口唯一ID。空则代表当前窗口</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+    <dt class="tag-since">Since:</dt>
+    <dd class="tag-since"><ul class="dummy"><li>release-0.0.2</li></ul></dd>
     
 
     
@@ -1613,13 +2101,13 @@
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Namespaces</h3><ul><li><a href="ErrorCodes.html">ErrorCodes</a></li><li><a href="kt.html">kt</a></li><li><a href="kt.eScreen.html">eScreen</a></li><li><a href="kt.on.html">on</a></li></ul><h3><a href="global.html">Global</a></h3>
+    <h2><a href="index.html">Home</a></h2><h3>Namespaces</h3><ul><li><a href="ErrorCodes.html">ErrorCodes</a></li><li><a href="kt.html">kt</a></li><li><a href="kt.eScreen.html">eScreen</a></li><li><a href="kt.eWindow.html">eWindow</a></li><li><a href="kt.on.html">on</a></li><li><a href="kt.system.html">system</a></li></ul><h3><a href="global.html">Global</a></h3>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Sun Jul 30 2023 11:30:22 GMT+0800 (中国标准时间)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Mon Jul 31 2023 14:23:31 GMT+0800 (中国标准时间)
 </footer>
 
 <script> prettyPrint(); </script>

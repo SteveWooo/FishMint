@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Namespace: eScreen</title>
+    <title>JSDoc: Namespace: eWindow</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Namespace: eScreen</h1>
+    <h1 class="page-title">Namespace: eWindow</h1>
 
     
 
@@ -29,7 +29,7 @@
 <header>
     
         <h2>
-            <span class="ancestors"><a href="kt.html">kt</a>.</span>eScreen</h2>
+            <span class="ancestors"><a href="kt.html">kt</a>.</span>eWindow</h2>
         
     
 </header>
@@ -38,7 +38,7 @@
     <div class="container-overview">
     
         
-            <div class="description">用于透传部分electron screen接口</div>
+            <div class="description">用于透传部分electron实例化WebBrowser的window接口</div>
         
 
         
@@ -258,7 +258,7 @@
 
     <h5>Example</h5>
     
-    <pre class="prettyprint"><code>window.kt.eScreen.__ktCall({    functionName: 'getPrimaryDisplay',    params: []})</code></pre>
+    <pre class="prettyprint"><code>window.kt.eWindow.__ktCall({    functionName: 'setAlwaysOnTop',    params: [true]})</code></pre>
 
 
 
@@ -276,7 +276,7 @@
 
 
 <div class="description">
-    透传类接口的通用调用方法（注意，没有commonCallMethod这个函数，具体函数名在下方apiList）
+    可用透传类接口的通用调用方法（注意，没有commonCallMethod这个函数，具体函数名在下方apiList）
 </div>
 
 
@@ -416,7 +416,7 @@
 
     <h5>Example</h5>
     
-    <pre class="prettyprint"><code>window.kt.eScreen.getPrimaryDisplay({ params: [] })</code></pre>
+    <pre class="prettyprint"><code>window.kt.eWindow.setAlwaysOnTop({ params: [true] })</code></pre>
 
 
 
@@ -428,13 +428,13 @@
 
         
                 
-<h4 class="name" id=".eScreenApiList">eScreenApiList</h4>
+<h4 class="name" id=".eWindowApiList">eWindowApiList</h4>
 
 
 
 
 <div class="description">
-    可用透传electron screen接口列表。</br>详情参考https://www.electronjs.org/zh/docs/latest/api/screen
+    透传electron BrowserWindow的window接口列表。</br>详情参考https://www.electronjs.org/zh/docs/latest/api/browser-window
 </div>
 
 
@@ -469,7 +469,7 @@
 
         <tr>
             
-                <td class="name"><code>getCursorScreenPoint</code></td>
+                <td class="name"><code>setAlwaysOnTop</code></td>
             
 
             <td class="type">
@@ -492,76 +492,7 @@
 
         <tr>
             
-                <td class="name"><code>getPrimaryDisplay</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">function</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>getAllDisplays</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">function</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>getDisplayNearestPoint</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">function</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>getDisplayMatching</code></td>
+                <td class="name"><code>isAlwaysOnTop</code></td>
             
 
             <td class="type">
