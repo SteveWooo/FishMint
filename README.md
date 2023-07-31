@@ -83,9 +83,12 @@ let res = await kt.GetWindowInfo({})
 ## 依赖
 
 基座依赖以下第三方开源项目：
-electron、electron-builder、express、request
+
+electron、electron-builder、express、request、react
+
+以上均为MIT或Apache2.0协议，基座未对源码进行修改
 
 ## License
-本项目内发布的应用均为 MIT
+MIT
 
 基座将在开发完善到一定程度后开源
