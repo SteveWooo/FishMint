@@ -11,13 +11,12 @@
 
 在该平台上，只要你能运用基本的前端技术，即可彻底定制、修改你的专属PC桌面挂件
 
-- 下载基座：进入 [下载页面](https://github.com/SteveWooo/KTool/releases) 下载对应系统的压缩包，解压，双击KTool.exe即可启动基座
+- 下载基座：进入 [下载页面](https://github.com/SteveWooo/KTool/releases) 解压，双击KTool.exe即可启动基座
 - 在弹出界面的框框输入 "/help" ，回车，即可查看帮助
 - 比如输入 "/open note" 即可启动一个便利贴
 
   👆Tips：Which is 启动了本项目的note工程
-- 关闭主窗口，程序会藏在托盘区
-- 托盘区右键点击capybara图标 即可找到退出按钮 子应用会全部杀掉
+- 关闭主窗口，程序会藏在托盘区。右击图标，即可找到退出按钮
 
 ## ♥获取本项目最新挂件库
 进入程序目录，将KTool目录删除，然后克隆本项目到原本KTool的位置即可。
@@ -49,62 +48,34 @@
 
 ### 1、app配置(config.json)
 
-app配置代表初次启动app的时候需要载入的属性，以下用控制台的配置文件做示范
-```js
-{
-    "configure": {
-        // 窗口初始位置与宽高
-        "x": 100, 
-        "y": 100, 
-        "width": 330,
-        "height": 220,
-        // 下面几个同步electron的BrowserWindow创建参数。详见https://www.electronjs.org/zh/docs/latest/api/browser-window
-        "type": "toolbar",
-        "frame": false,
-        "resizable": true,
-        "transparent": true,
-        "hasShadow": true,
-        "alwaysOnTop": false,
+用于在打开app窗口的时候传入的初始配置
 
-        "kt_devTools": false, // 是否启动开发者工具
-        "kt_isolateSession": true, // 是否使用独立的session空间
-    }
-}
-```
+[配置项说明](https://stevewooo.github.io/KTool/global.html#WindowConfigure)
 
-### 2、kt接口
+### 2、kt api
 
-kt实例挂载在全局window上，可以从note和控制台应用中了解具体DEMO用法，以下是每个接口的参数说明
+kt实例挂载在全局window上，可以从note和控制台应用中了解具体DEMO用法，以下是通用用法与接口文档
 
 #### 通用调用方式
-基座内核接口调用方式如下
+基座内核接口调用示例如下
 ```js
-let res = await kt.blablabla({
-    ...others // 参数
-})
+let res = await kt.GetWindowInfo({})
+// ==> log res
 ```
-
-electron部分透传的接口调用方式如下
-```js
-let res = await kt.screen_balabala({
-    params: [] // 会...展开传给对应的函数的
-})
-```
-
-electron部分透传的接口返回数据结构
-```js
-{
-    status: 2000,
-    result: {}, // 透传electron接口返回的结果
-}
-```
-
 #### [详细接口文档](https://stevewooo.github.io/KTool)
+
+## 🚗分享你的应用
+
+将应用文件夹拷贝给你的朋友使用即可，比如想分享note应用，就将本项目的note目录整个拷贝出去即可。
+
+注意安全问题，早期切勿乱放入陌生人写的应用。
+
+欢迎提pr贡献app
 
 ## 🤖数据&配置
 所有应用产生的数据，都在软件目录的 'userData' 目录中，用户可自行备份。
 
-注意：在KTool下的目录名称，即appDirName，该名称被用作应用的唯一索引（为了避免引入复杂的AppID机制）。因此在导入其他人开发的应用时，应注意命名问题，防止发生数据冲突
+文件夹名称作为应用唯一ID，请注意解决冲突问题
 
 ## 免责声明
 本项目内提供的所有软件与资料均遵循本项目开源协议内容，基于本平台二次开发应用的责任均有开发者自行承担，望开发者知悉
