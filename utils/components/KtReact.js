@@ -42,7 +42,7 @@ window.KtReactComponents.DragBar = class KtDragBar extends React.Component {
         const { CloseWindowButton, RefreshButton } = window.KtReactComponents
         return (
             <div style={this.style()}>
-                <div style={{width: '80%'}} className="kt-drager">
+                <div style={{width: '80%'}} className="kt-dragger">
 
                 </div>
                 <div className="div-container" style={{width: '10%'}}>
@@ -51,6 +51,38 @@ window.KtReactComponents.DragBar = class KtDragBar extends React.Component {
                 <div style={{width: '10%'}}>
                     <CloseWindowButton />
                 </div>
+            </div>
+        )
+    }
+}
+
+window.KtReactComponents.WindowFrame = class KtWindowFrame extends React.Component {
+    constructor(props) {
+        super(props)
+    }
+
+    getStyle() {
+        const colors = window.KtReactComponents.getThemeColors()
+        return {
+            height: '99vh',
+            borderBottom: '2px solid ' + colors.WindowBorderColor,
+            borderLeft: '2px solid ' + colors.WindowBorderColor,
+            borderRight: '2px solid ' + colors.WindowBorderColor,
+            // borderTop: '2px solid ' + colors.WindowBorderColor,
+            borderRadius: '13px 0px 10px 10px',
+            display: 'flex',
+            flexDirection: 'column',
+            flexWrap: 'wrap',
+            alignItems: 'flex-start',
+            fontFamily: 'JiangCheng',
+            backgroundColor: colors.WindowBackgroundColor,
+        }
+    }
+
+    render() {
+        return (
+            <div style={this.getStyle()}>
+                { this.props.children }
             </div>
         )
     }

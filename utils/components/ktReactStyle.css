@@ -11,7 +11,7 @@ body {
 }
 
 /* 无frame下，加上这个类的dom才能被作为边框拖动整个窗口 */
-.kt-drager {
+.kt-dragger {
     -webkit-app-region: drag;
 }
 
