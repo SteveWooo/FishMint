@@ -42,9 +42,7 @@
 
 - 创建一个文件夹，命名为你想要的app名称；
 - 在上述文件夹中创建config.json和index.html文件；
-- config.json下文介绍；index.html就是你的页面辣。
-
-聪明的你肯定早已经发现，这个项目整个目录是被托管到静态文件服务器的。
+- config.json下段介绍；index.html就是你的页面辣。
 
 ### 1、app配置(config.json)
 
