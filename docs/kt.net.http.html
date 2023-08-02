@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Namespace: system</title>
+    <title>JSDoc: Namespace: http</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Namespace: system</h1>
+    <h1 class="page-title">Namespace: http</h1>
 
     
 
@@ -29,7 +29,7 @@
 <header>
     
         <h2>
-            <span class="ancestors"><a href="kt.html">kt</a>.</span>system</h2>
+            <span class="ancestors"><a href="kt.html">kt</a><a href="kt.net.html">.net</a>.</span>http</h2>
         
     
 </header>
@@ -38,7 +38,7 @@
     <div class="container-overview">
     
         
-            <div class="description">调用部分系统指令，高危区域</div>
+            <div class="description">http(s)接口</div>
         
 
         
@@ -110,7 +110,7 @@
     
 
     
-    <h4 class="name" id=".ExecSync"><span class="type-signature">(async, static) </span>ExecSync<span class="signature">(cmd)</span><span class="type-signature"> &rarr; {<a href="global.html#GenericResponse">GenericResponse</a>|String}</span></h4>
+    <h4 class="name" id=".httpRequest"><span class="type-signature">(static) </span>httpRequest<span class="signature">()</span><span class="type-signature"> &rarr; {<a href="global.html#GenericResponse">GenericResponse</a>|Number|String|Object|String}</span></h4>
     
 
     
@@ -118,7 +118,7 @@
 
 
 <div class="description">
-    ☠执行系统命令。较为危险，暂不开放</br>执行目录为exe所在目录
+    发起一个http请求，会跨域的哟</br>
 </div>
 
 
@@ -154,7 +154,76 @@
 
         <tr>
             
-                <td class="name"><code>cmd</code></td>
+                <td class="name"><code>args.url</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">请求url</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>args.method</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">请求方法。默认GET</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>args.headers</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">额外请求头</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>args.data</code></td>
             
 
             <td class="type">
@@ -170,140 +239,35 @@
 
             
 
-            <td class="description last">执行指令</td>
+            <td class="description last">请求体。请注意是String类型字段</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>args.extraAxiosRequestParam</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">其他axios请求参数字段，会以最高优先级附带覆盖到axios请求参数上，详情参考：https://axios-http.com/docs/req_config</td>
         </tr>
 
     
     </tbody>
 </table>
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-    <dt class="tag-since">Since:</dt>
-    <dd class="tag-since"><ul class="dummy"><li>none</li></ul></dd>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h5>Returns:</h5>
-<ul>
-        <li>
-<div class="param-desc">
-    - 通用返回
-</div>
-
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type"><a href="global.html#GenericResponse">GenericResponse</a></span>
-
-
-    </dd>
-</dl>
-</li>
-    
-        <li>
-<div class="param-desc">
-    res.output - 执行命令返回内容
-</div>
-
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">String</span>
-
-
-    </dd>
-</dl>
-</li>
-    </ul>
-
-
-
-
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id=".GetExecPath"><span class="type-signature">(async, static) </span>GetExecPath<span class="signature">()</span><span class="type-signature"> &rarr; {<a href="global.html#GenericResponse">GenericResponse</a>|String}</span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    获取可执行程序执行目录
-</div>
-
-
-
-
-
-
-
 
 
 
@@ -386,7 +350,67 @@
     
         <li>
 <div class="param-desc">
-    res.path
+    res.httpStatusCode - http状态码
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Number</span>
+
+
+    </dd>
+</dl>
+</li>
+    
+        <li>
+<div class="param-desc">
+    res.data - 文本形式的返回
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">String</span>
+
+
+    </dd>
+</dl>
+</li>
+    
+        <li>
+<div class="param-desc">
+    res.json - 如果请求结果是json，则返回json结构的数据
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Object</span>
+
+
+    </dd>
+</dl>
+</li>
+    
+        <li>
+<div class="param-desc">
+    res.message - 请求错误信息
 </div>
 
 
@@ -406,6 +430,11 @@
     </ul>
 
 
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>// GET请求const res = await kt.net.http.request({    url: 'https://www.yourapi.com/path',    method: 'GET',})// POST请求const res = await kt.net.http.request({    url: 'https://www.yourapi.com/path'，    method: 'POST',    headers: {        'Content-Type': 'Application/json'    },    data: JSON.stringify({ 'Hello': 'KTool' }),    extraAxiosRequestParam: {        timeout: 5000    }})</code></pre>
 
 
 

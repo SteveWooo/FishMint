@@ -10,7 +10,7 @@ const EVENT_TYPE = {
     MOVED: 'moved'
 }
 
-const MAX_LEAF = 3;
+const MAX_LEAF = 0;
 
 // 上下边界
 const TOP_GAP = 50
@@ -33,8 +33,8 @@ class KtRoot extends React.Component {
     }
 
     async componentDidMount() {
-        let appInfo = await kt.GetAppInfo()
-        let windowInfo = await kt.GetWindowInfo()
+        let appInfo = await kt.getAppInfo()
+        let windowInfo = await kt.getWindowInfo()
         if (windowInfo.startupArgs && windowInfo.startupArgs.obj === OBJ_LIST.LEAF) {
             this._initLeaf()
         } else {
@@ -67,12 +67,12 @@ class KtRoot extends React.Component {
             obj: OBJ_LIST.CAPYBARA
         })
         // 处理水豚的逻辑
-        kt.on.WindowBrocast(async (e, data) => {
+        kt.on.windowBrocast(async (e, data) => {
             if (data.content.event === EVENT_TYPE.MOVED) {
                 this.checkLeafCouldEat()
             }
         })
-        kt.on.WindowMoved(async (e, data) => {
+        kt.on.windowMoved(async (e, data) => {
             this.checkLeafCouldEat()
         })
 
@@ -81,7 +81,7 @@ class KtRoot extends React.Component {
 
         // 修改位置和大小
         const screenInfo = (await kt.eScreen.getPrimaryDisplay()).result
-        await kt.SetWindowRect({
+        await kt.setWindowRect({
             x: screenInfo.workArea.width - 220,
             y: screenInfo.workArea.height - 300,
             width: 200,
@@ -102,7 +102,7 @@ class KtRoot extends React.Component {
         let x = Math.random() * (xMax - 20) + 20
         let y = Math.random() * (yMax - 20) + 20
 
-        await kt.SetWindowRect({
+        await kt.setWindowRect({
             x: x,
             y: y,
             width: 50,
@@ -110,8 +110,8 @@ class KtRoot extends React.Component {
         })
 
         // 处理叶子的逻辑
-        await kt.on.WindowMoved(async (e, data) => {
-            await kt.WindowBrocast({
+        await kt.on.windowMoved(async (e, data) => {
+            await kt.windowBrocast({
                 content: {
                     event: EVENT_TYPE.MOVED,
                     obj: OBJ_LIST.LEAF
@@ -121,16 +121,15 @@ class KtRoot extends React.Component {
     }
 
     async doCreateLeaf() {
-        let appInfo = await kt.GetAppInfo()
+        let appInfo = await kt.getAppInfo()
         if (Object.keys(appInfo.windows).length < MAX_LEAF + 1) { 
-            await kt.OpenApp({
+            await kt.openApp({
                 appDirName: 'github.com.stevewooo/capybara',
                 startupArgs: {
                     obj: OBJ_LIST.LEAF
                 }
             })
         }
-
         clearTimeout(this.createLeafTimeout)
         this.createLeafTimeout = null
         this.createLeafTimeout = setTimeout(async () => {
@@ -140,13 +139,13 @@ class KtRoot extends React.Component {
 
     // 检查是否有叶子可以吃
     async checkLeafCouldEat() {
-        let appWindows = (await kt.GetAppInfo()).windows
-        let configure = (await kt.GetWindowInfo()).configure
+        let appWindows = (await kt.getAppInfo()).windows
+        let configure = (await kt.getWindowInfo()).configure
         for(let __wid in appWindows) {
             if (__wid === configure.__wid) continue 
 
             if (this.areRectanglesColliding(configure, appWindows[__wid].configure)) {
-                kt.CloseWindow({
+                kt.closeWindow({
                     __wid: __wid
                 })
             }
@@ -198,7 +197,7 @@ class KtRoot extends React.Component {
 
 let hotUpdate = false;
 // 热更新
-kt.OnStaticFileChange(async (event, args) => {
+kt.on.staticFileChange(async (event, args) => {
     hotUpdate = true
     location.reload()
 })
@@ -208,23 +207,23 @@ window.addEventListener('beforeunload', async e => {
     if (!hotUpdate) {
         e.preventDefault()
         e.returnValue = '确定要离开吗？';
-        let windowInfo = await kt.GetWindowInfo()
+        let windowInfo = await kt.getWindowInfo()
         if (windowInfo.startupArgs && windowInfo.startupArgs.obj === OBJ_LIST.LEAF) {
-            await kt.CloseWindow()
+            await kt.closeWindow()
             return 
         }
         // 将所有应用内的应用都关闭，然后再离开
-        const appInfos = (await kt.GetAppInfo())
+        const appInfos = (await kt.getAppInfo())
         for(let wid in appInfos.windows) { 
             if (wid === windowInfo.__wid) continue
-            await kt.CloseWindow({
+            await kt.closeWindow({
                 __wid: wid
             })
         } 
 
-        await kt.CloseWindow()
+        await kt.closeWindow()
     }
 })
 
 ReactDOM.render(<KtRoot />, document.getElementById("root"))
-kt.ShowWindow().then()
+kt.showWindow().then()

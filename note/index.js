@@ -54,14 +54,11 @@ class KtRoot extends React.Component {
 ReactDOM.render(<KtRoot />, document.getElementById("root"))
 
 // 热更新
-kt.OnStaticFileChange(async (event, args) => {
-    // location.reload()
-})
 
-kt.on.StaticFileChange(() => {
+kt.on.staticFileChange(() => {
     location.reload()
 })
-kt.on.WindowBrocast((e, data) => {
+kt.on.windowBrocast((e, data) => {
     // console.log(data.content)
 })
 

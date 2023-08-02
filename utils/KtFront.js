@@ -40,7 +40,7 @@ class KtFront {
                 }
             }
 
-            const openRes = await kt.OpenApp({
+            const openRes = await kt.openApp({
                 appDirName: param[1]
             })
             if (openRes.status !== 2000) {
