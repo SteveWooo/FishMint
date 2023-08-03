@@ -5,7 +5,7 @@ class KtRoot extends React.Component {
         super(props)
         this.state = {}
     }
-
+    
     getStyle() {
         const colors = window.KtReactComponents.themes[window.KtReactComponents.usingTheme]
         return {
