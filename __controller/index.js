@@ -3,7 +3,19 @@ const { DragBar, CmdInputter } = window.KtReactComponents
 class KtRoot extends React.Component {
     constructor(props) {
         super(props)
-        this.state = {}
+        this.state = {
+            appList: {}
+        }
+
+        this.clickAudioRef = React.createRef()
+    }
+
+    async componentDidMount() {
+        const appListRes = await kt.controller.getAppList()
+        // console.log(appListRes)
+        this.setState({
+            appList: appListRes.appList
+        })
     }
     
     getStyle() {
@@ -28,7 +40,7 @@ class KtRoot extends React.Component {
         return {
             // backgroundColor: '#fff',
             width: '100%',
-            flexGrow: 1,
+            // flexGrow: 1,
 
             display: 'flex',
             justifyContent: 'center',
@@ -37,14 +49,72 @@ class KtRoot extends React.Component {
         }
     }
 
+    async openApp(appDirName) {
+        this.clickAudioRef.current.play()
+        await kt.openApp({
+            appDirName: appDirName
+        })
+    } 
+
     render() {
+        const colors = window.KtReactComponents.themes[window.KtReactComponents.usingTheme]
         return (
             <div style={this.getStyle()}>
                 <DragBar></DragBar>
                 <div style={this.contentStyle()}
                     className='div-container'>
-                    <CmdInputter />
+                    <div style={{
+                        display: 'flex',
+                        flexDirection: 'row',
+                        flexWrap: 'wrap',
+                        justifyContent: 'space-around',
+                        // border: '1px solid red',
+                        borderBottom: '2px solid ' + colors.WindowBorderColor,
+                        paddingTop: '10px',
+                        paddingBottom: '10px',
+                        width: '100%',
+                        height: '60px',
+                        overflow: 'auto'
+                    }}>
+                    {
+                        Object.keys(this.state.appList).map(appDirName => {
+                            const app = this.state.appList[appDirName]
+                            const appName = app.appDirName.substring(
+                                app.appDirName.lastIndexOf('/') + 1
+                            )
+                            return (
+                                <div style={{
+                                    width: '80px',
+                                    height: '50px',
+                                    // border: '1px solid #111',
+                                    display: 'flex',
+                                    justifyContent: 'center',
+                                    alignItems: 'center',
+                                    flexDirection: 'column'
+                                }} onClick={() => this.openApp(app.appDirName)}>
+                                    <img style={{
+                                        width: '30px'
+                                    }} src={app.icon} />
+                                    <span style={{
+                                        fontSize: '10px'
+                                    }}>
+                                        {appName}
+                                    </span>
+                                </div>
+                            )
+                        })
+                    }
+                    </div>
+                    <div style={{
+                        display: 'flex',
+                        justifyContent: 'center',
+                        marginTop: '10px'
+                    }}>
+                        <CmdInputter />
+                    </div>
                 </div>
+
+                <audio ref={this.clickAudioRef} src="../utils/res/audios/click.mp3"></audio>
             </div>
         )
     }
@@ -53,7 +123,7 @@ ReactDOM.render(<KtRoot />, document.getElementById("root"))
 
 // 热更新
 kt.on.staticFileChange(async (event, args) => {
-    // location.reload()
+    location.reload()
 })
 
 // setTimeout(async () => {
