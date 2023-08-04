@@ -16,6 +16,12 @@ class KtRoot extends React.Component {
         this.setState({
             appList: appListRes.appList
         })
+
+        // const cube = document.getElementsByClassName('cube');
+        // for(let i = 0; i< cube.length; i++) {
+        //     const randomDuration = Math.random() * 2 + 0.5;
+        //     cube[i].style.animationDuration = `${randomDuration}s`
+        // }
     }
     
     getStyle() {
@@ -112,6 +118,37 @@ class KtRoot extends React.Component {
                     }}>
                         <CmdInputter />
                     </div>
+                    {/* <div style={{
+                        display: 'flex',
+                        flexDirection: 'row',
+                        marginTop: '100px'
+                    }}>
+                        <div className="cube">
+                            <div className="front"></div>
+                            <div className="back"></div>
+                        </div>
+                        <div className="cube">
+                            <div className="front"></div>
+                            <div className="back"></div>
+                        </div>
+                        <div className="cube">
+                            <div className="front"></div>
+                            <div className="back"></div>
+                        </div>
+                        <div className="cube">
+                            <div className="front"></div>
+                            <div className="back"></div>
+                        </div>
+                        <div className="cube">
+                            <div className="front"></div>
+                            <div className="back"></div>
+                        </div>
+                        <div className="cube">
+                            <div className="front"></div>
+                            <div className="back"></div>
+                        </div>
+                        
+                    </div> */}
                 </div>
 
                 <audio ref={this.clickAudioRef} src="../utils/res/audios/click.mp3"></audio>

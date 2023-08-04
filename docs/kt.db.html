@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Namespace: controller</title>
+    <title>JSDoc: Namespace: db</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Namespace: controller</h1>
+    <h1 class="page-title">Namespace: db</h1>
 
     
 
@@ -29,7 +29,7 @@
 <header>
     
         <h2>
-            <span class="ancestors"><a href="kt.html">kt</a>.</span>controller</h2>
+            <span class="ancestors"><a href="kt.html">kt</a>.</span>db</h2>
         
     
 </header>
@@ -38,7 +38,7 @@
     <div class="container-overview">
     
         
-            <div class="description">控制台可用的一些接口</div>
+            <div class="description">封装数据库、缓存接口</div>
         
 
         
@@ -110,7 +110,7 @@
     
 
     
-    <h4 class="name" id=".getAppList"><span class="type-signature">(async, static) </span>getAppList<span class="signature">()</span><span class="type-signature"> &rarr; {<a href="global.html#GenericResponse">GenericResponse</a>|Array}</span></h4>
+    <h4 class="name" id=".DbGet"><span class="type-signature">(async, static) </span>DbGet<span class="signature">(key)</span><span class="type-signature"> &rarr; {<a href="global.html#GenericResponse">GenericResponse</a>|GenericResponse.value}</span></h4>
     
 
     
@@ -118,7 +118,7 @@
 
 
 <div class="description">
-    获取app列表
+    key value数据读取接口
 </div>
 
 
@@ -127,6 +127,55 @@
 
 
 
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>key</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">数据key</td>
+        </tr>
+
+    
+    </tbody>
+</table>
 
 
 
@@ -139,7 +188,7 @@
 
     
     <dt class="tag-since">Since:</dt>
-    <dd class="tag-since"><ul class="dummy"><li>release-0.0.2</li></ul></dd>
+    <dd class="tag-since"><ul class="dummy"><li>release-0.0.1</li></ul></dd>
     
 
     
@@ -189,7 +238,7 @@
 <ul>
         <li>
 <div class="param-desc">
-    res - 通用返回
+    - 通用返回
 </div>
 
 
@@ -209,7 +258,7 @@
     
         <li>
 <div class="param-desc">
-    res.appList - App信息列表
+    - 获取数据key的值
 </div>
 
 
@@ -220,7 +269,7 @@
     </dt>
     <dd>
         
-<span class="param-type">Array</span>
+<span class="param-type">GenericResponse.value</span>
 
 
     </dd>
@@ -229,6 +278,11 @@
     </ul>
 
 
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>const res = await kt.db.get({ key: 'testKey' })</code></pre>
 
 
 

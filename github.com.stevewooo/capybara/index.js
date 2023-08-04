@@ -33,8 +33,8 @@ class KtRoot extends React.Component {
     }
 
     async componentDidMount() {
-        let appInfo = await kt.getAppInfo()
-        let windowInfo = await kt.getWindowInfo()
+        let appInfo = await kt.window.getAppInfo()
+        let windowInfo = await kt.window.getInfo()
         if (windowInfo.startupArgs && windowInfo.startupArgs.obj === OBJ_LIST.LEAF) {
             this._initLeaf()
         } else {
@@ -81,7 +81,7 @@ class KtRoot extends React.Component {
 
         // 修改位置和大小
         const screenInfo = (await kt.eScreen.getPrimaryDisplay()).result
-        await kt.setWindowRect({
+        await kt.window.setRect({
             x: screenInfo.workArea.width - 220,
             y: screenInfo.workArea.height - 300,
             width: 200,
@@ -102,7 +102,7 @@ class KtRoot extends React.Component {
         let x = Math.random() * (xMax - 20) + 20
         let y = Math.random() * (yMax - 20) + 20
 
-        await kt.setWindowRect({
+        await kt.window.setRect({
             x: x,
             y: y,
             width: 50,
@@ -121,7 +121,7 @@ class KtRoot extends React.Component {
     }
 
     async doCreateLeaf() {
-        let appInfo = await kt.getAppInfo()
+        let appInfo = await kt.window.getAppInfo()
         if (Object.keys(appInfo.windows).length < MAX_LEAF + 1) { 
             await kt.openApp({
                 appDirName: 'github.com.stevewooo/capybara',
@@ -139,8 +139,8 @@ class KtRoot extends React.Component {
 
     // 检查是否有叶子可以吃
     async checkLeafCouldEat() {
-        let appWindows = (await kt.getAppInfo()).windows
-        let configure = (await kt.getWindowInfo()).configure
+        let appWindows = (await kt.window.getAppInfo()).windows
+        let configure = (await kt.window.getInfo()).configure
         for(let __wid in appWindows) {
             if (__wid === configure.__wid) continue 
 
@@ -207,13 +207,13 @@ window.addEventListener('beforeunload', async e => {
     if (!hotUpdate) {
         e.preventDefault()
         e.returnValue = '确定要离开吗？';
-        let windowInfo = await kt.getWindowInfo()
+        let windowInfo = await kt.window.getInfo()
         if (windowInfo.startupArgs && windowInfo.startupArgs.obj === OBJ_LIST.LEAF) {
             await kt.closeWindow()
             return 
         }
         // 将所有应用内的应用都关闭，然后再离开
-        const appInfos = (await kt.getAppInfo())
+        const appInfos = (await kt.window.getAppInfo())
         for(let wid in appInfos.windows) { 
             if (wid === windowInfo.__wid) continue
             await kt.closeWindow({
@@ -226,4 +226,4 @@ window.addEventListener('beforeunload', async e => {
 })
 
 ReactDOM.render(<KtRoot />, document.getElementById("root"))
-kt.showWindow().then()
+kt.window.show().then()

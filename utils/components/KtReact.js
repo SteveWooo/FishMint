@@ -108,7 +108,7 @@ window.KtReactComponents.CloseWindowButton = class KtCloseWindowButton extends R
     }
 
     closeWindow() {
-        kt.closeWindow({})
+        kt.window.close({})
     }
 
     iconStyle() {
@@ -296,7 +296,7 @@ window.KtReactComponents.NoteTextarea = class KtNoteTextarea extends React.Compo
     }
 
     async componentDidMount() {
-        const res = await kt.dbGet({
+        const res = await kt.db.get({
             key: 'noteContent'
         })
         if (res.status !== 2000) {
@@ -327,7 +327,7 @@ window.KtReactComponents.NoteTextarea = class KtNoteTextarea extends React.Compo
 
     // 同步本地笔记内容到远程
     async syncData() {
-        const syncRes = await kt.dbSet({
+        const syncRes = await kt.db.set({
             key: 'noteContent',
             value: this.noteRef.current.value
         })
