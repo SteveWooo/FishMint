@@ -11,8 +11,8 @@
         "hasShadow": true,
         "alwaysOnTop": false,
 
-        "kt_devTools": true,
+        "kt_devTools": false,
         "kt_isolateSession": true,
-        "kt_recordRectInfo": true
+        "kt_isolateSessionLevel": "app"
     }
 }

@@ -10,6 +10,7 @@
         "alwaysOnTop": true,
 
         "kt_devTools": true,
-        "kt_showWhenStartup": false
+        "kt_showWhenStartup": false,
+        "kt_isolateSessionLevel": "app"
     }
 }
