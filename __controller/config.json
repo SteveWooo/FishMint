@@ -13,6 +13,7 @@
 
         "kt_devTools": false,
         "kt_isolateSession": true,
+        "kt_recordRectInfo": true,
         "kt_isolateSessionLevel": "app"
     }
 }
