@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Namespace: on</title>
+    <title>JSDoc: Namespace: aes</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Namespace: on</h1>
+    <h1 class="page-title">Namespace: aes</h1>
 
     
 
@@ -29,7 +29,7 @@
 <header>
     
         <h2>
-            <span class="ancestors"><a href="kt.html">kt</a>.</span>on</h2>
+            <span class="ancestors"><a href="kt.html">kt</a><a href="kt.crypto.html">.crypto</a>.</span>aes</h2>
         
     
 </header>
@@ -38,7 +38,7 @@
     <div class="container-overview">
     
         
-            <div class="description">用于订阅基座发起的事件消息</div>
+            <div class="description">aes加密工具</div>
         
 
         
@@ -110,7 +110,7 @@
     
 
     
-    <h4 class="name" id=".WindowBrocast"><span class="type-signature">(static) </span>WindowBrocast<span class="signature">(callback)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id=".decrypt"><span class="type-signature">(static) </span>decrypt<span class="signature">()</span><span class="type-signature"> &rarr; {<a href="global.html#GenericResponse">GenericResponse</a>|String}</span></h4>
     
 
     
@@ -118,7 +118,7 @@
 
 
 <div class="description">
-    窗口广播事件
+    aes解密
 </div>
 
 
@@ -154,13 +154,13 @@
 
         <tr>
             
-                <td class="name"><code>callback</code></td>
+                <td class="name"><code>args.encryptedData</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type"><a href="global.html#WindowBrocastCallbackFunction">WindowBrocastCallbackFunction</a></span>
+<span class="param-type">String</span>
 
 
             
@@ -170,7 +170,53 @@
 
             
 
-            <td class="description last">回调函数</td>
+            <td class="description last">待解密数据</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>args.key</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">加密时用的密钥</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>args.iv</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">aes IV字段。解密需要用到的字段。IV 是用于确保每次加密过程生成的密文是不同的，即使相同的明文也不会得到相同的密文。这对于增加安全性非常重要。</td>
         </tr>
 
     
@@ -234,13 +280,50 @@
 
 
 
+<h5>Returns:</h5>
+<ul>
+        <li>
+<div class="param-desc">
+    res - 通用返回
+</div>
 
 
 
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type"><a href="global.html#GenericResponse">GenericResponse</a></span>
 
-    <h5>Example</h5>
+
+    </dd>
+</dl>
+</li>
     
-    <pre class="prettyprint"><code>window.kt.on.WindowBrocast(async (e, data) => {    console.log('Receive brocast:', data.content, '. From app:', data.from.configure.appDirName)})</code></pre>
+        <li>
+<div class="param-desc">
+    res.data - 解密完成后的数据。如果解密失败，该字段会是一段无意义的乱码
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">String</span>
+
+
+    </dd>
+</dl>
+</li>
+    </ul>
+
+
 
 
 
@@ -250,7 +333,7 @@
     
 
     
-    <h4 class="name" id=".WindowMoved"><span class="type-signature">(static) </span>WindowMoved<span class="signature">(callback)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id=".encrypt"><span class="type-signature">(static) </span>encrypt<span class="signature">()</span><span class="type-signature"> &rarr; {<a href="global.html#GenericResponse">GenericResponse</a>|String|String}</span></h4>
     
 
     
@@ -258,7 +341,7 @@
 
 
 <div class="description">
-    窗口移动事件
+    aes加密
 </div>
 
 
@@ -294,13 +377,13 @@
 
         <tr>
             
-                <td class="name"><code>callback</code></td>
+                <td class="name"><code>args.data</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type"><a href="global.html#WindowInfoCallback">WindowInfoCallback</a></span>
+<span class="param-type">String</span>
 
 
             
@@ -310,7 +393,30 @@
 
             
 
-            <td class="description last">回调函数</td>
+            <td class="description last">待加密数据</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>args.key</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">自定义任意字符串密钥</td>
         </tr>
 
     
@@ -374,153 +480,75 @@
 
 
 
-
-
-
-
-    <h5>Example</h5>
-    
-    <pre class="prettyprint"><code>window.kt.on.WindowMoved((e, data) => {    console.log(data.configure.x, data.configure.y) // 移动后的坐标})</code></pre>
-
-
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id=".WindowResized"><span class="type-signature">(static) </span>WindowResized<span class="signature">(callback)</span><span class="type-signature"></span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    窗口缩放事件
+<h5>Returns:</h5>
+<ul>
+        <li>
+<div class="param-desc">
+    res - 通用返回
 </div>
 
 
 
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
         
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>callback</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type"><a href="global.html#WindowInfoCallback">WindowInfoCallback</a></span>
+<span class="param-type"><a href="global.html#GenericResponse">GenericResponse</a></span>
 
 
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">回调函数</td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-    <dt class="tag-since">Since:</dt>
-    <dd class="tag-since"><ul class="dummy"><li>release-0.0.2</li></ul></dd>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
+    </dd>
 </dl>
+</li>
+    
+        <li>
+<div class="param-desc">
+    res.iv - 解密需要用到的字段。IV 是用于确保每次加密过程生成的密文是不同的，即使相同的明文也不会得到相同的密文。这对于增加安全性非常重要。
+</div>
 
 
 
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">String</span>
+
+
+    </dd>
+</dl>
+</li>
+    
+        <li>
+<div class="param-desc">
+    res.encryptedData - 加密后的内容，解密的时候要用到
+</div>
 
 
 
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">String</span>
 
 
-
-
-
-
-
-
-
+    </dd>
+</dl>
+</li>
+    </ul>
 
 
 
 
     <h5>Example</h5>
     
-    <pre class="prettyprint"><code>window.kt.on.WindowResized((e, data) => {    console.log(data.configure.width, data.configure.height) // 缩放后的宽高})</code></pre>
+    <pre class="prettyprint"><code>const key = 'ktool-key'const sourceData = 'hello world'const enData = await kt.crypto.aes.encrypt({ key: key, data: sourceData })// => 将 enData.encryptedData 和 enData.iv 发送给Bob即可。</code></pre>
 
 
 
