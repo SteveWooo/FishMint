@@ -3,9 +3,8 @@
 <div align="center">
   <img src="./favicon.ico" width="120" height="120" />
   <br />
-  <b>完全可定制的PC桌面挂件平台</b>
+  <b>超个性化PC桌面挂件装饰平台</b>
 </div>
-
 
 ## 🏃‍快速开始
 
