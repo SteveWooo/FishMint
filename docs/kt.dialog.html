@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Namespace: system</title>
+    <title>JSDoc: Namespace: dialog</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Namespace: system</h1>
+    <h1 class="page-title">Namespace: dialog</h1>
 
     
 
@@ -29,7 +29,7 @@
 <header>
     
         <h2>
-            <span class="ancestors"><a href="kt.html">kt</a>.</span>system</h2>
+            <span class="ancestors"><a href="kt.html">kt</a>.</span>dialog</h2>
         
     
 </header>
@@ -38,7 +38,7 @@
     <div class="container-overview">
     
         
-            <div class="description">封装部分系统指令</div>
+            <div class="description">封装弹窗操作</div>
         
 
         
@@ -110,7 +110,7 @@
     
 
     
-    <h4 class="name" id=".execSync"><span class="type-signature">(async, static) </span>execSync<span class="signature">(cmd)</span><span class="type-signature"> &rarr; {<a href="global.html#GenericResponse">GenericResponse</a>|String}</span></h4>
+    <h4 class="name" id=".showErrorBox"><span class="type-signature">(async, static) </span>showErrorBox<span class="signature">(options)</span><span class="type-signature"> &rarr; {<a href="global.html#GenericResponse">GenericResponse</a>|*}</span></h4>
     
 
     
@@ -118,7 +118,7 @@
 
 
 <div class="description">
-    ☠执行系统命令。较为危险，暂不开放</br>执行目录为exe所在目录
+    打开一个 ErrorBox 提示框
 </div>
 
 
@@ -154,312 +154,7 @@
 
         <tr>
             
-                <td class="name"><code>cmd</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">String</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">执行指令</td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-    <dt class="tag-since">Since:</dt>
-    <dd class="tag-since"><ul class="dummy"><li>none</li></ul></dd>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h5>Returns:</h5>
-<ul>
-        <li>
-<div class="param-desc">
-    - 通用返回
-</div>
-
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type"><a href="global.html#GenericResponse">GenericResponse</a></span>
-
-
-    </dd>
-</dl>
-</li>
-    
-        <li>
-<div class="param-desc">
-    res.output - 执行命令返回内容
-</div>
-
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">String</span>
-
-
-    </dd>
-</dl>
-</li>
-    </ul>
-
-
-
-
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id=".getExecPath"><span class="type-signature">(async, static) </span>getExecPath<span class="signature">()</span><span class="type-signature"> &rarr; {<a href="global.html#GenericResponse">GenericResponse</a>|String}</span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    获取可执行程序执行目录
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-    <dt class="tag-since">Since:</dt>
-    <dd class="tag-since"><ul class="dummy"><li>release-0.0.2</li></ul></dd>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h5>Returns:</h5>
-<ul>
-        <li>
-<div class="param-desc">
-    - 通用返回
-</div>
-
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type"><a href="global.html#GenericResponse">GenericResponse</a></span>
-
-
-    </dd>
-</dl>
-</li>
-    
-        <li>
-<div class="param-desc">
-    res.path
-</div>
-
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">String</span>
-
-
-    </dd>
-</dl>
-</li>
-    </ul>
-
-
-
-
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id=".getInfo"><span class="type-signature">(async, static) </span>getInfo<span class="signature">()</span><span class="type-signature"> &rarr; {<a href="global.html#GenericResponse">GenericResponse</a>|Object}</span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    获取系统信息，具体可参考：https://systeminformation.io/general.html 的get函数用法</br>感谢 https://systeminformation.io 这个优秀的项目，大家快去 Buy him a coffee。
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>args.valueObject</code></td>
+                <td class="name"><code>options</code></td>
             
 
             <td class="type">
@@ -475,7 +170,79 @@
 
             
 
-            <td class="description last">参考systeminformation的get函数入参</td>
+            <td class="description last">对话框入参。参数详情请参考 https://www.electronjs.org/zh/docs/latest/api/dialog#dialogshowerrorbox
+                <h6>Properties</h6>
+                
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>title</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">显示在错误框中的标题</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>message</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">显示在错误框中的文本内容</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+            </td>
         </tr>
 
     
@@ -543,7 +310,7 @@
 <ul>
         <li>
 <div class="param-desc">
-    res - 通用返回
+    - res 通用返回
 </div>
 
 
@@ -563,7 +330,7 @@
     
         <li>
 <div class="param-desc">
-    res.result - 透传返回
+    - res.result 透传 electron showMessageBoxSync 结果
 </div>
 
 
@@ -574,7 +341,7 @@
     </dt>
     <dd>
         
-<span class="param-type">Object</span>
+<span class="param-type">*</span>
 
 
     </dd>
@@ -587,7 +354,189 @@
 
     <h5>Example</h5>
     
-    <pre class="prettyprint"><code>const systemInfo = await kt.system.getInfo({   valueObject: {     currentLoad: 'currentLoad',     mem: 'used total',     networkInterfaces: 'ip4 iface',   }})console.log(systemInfo.result.networkInterfaces.ip4) => ipv4 address</code></pre>
+    <pre class="prettyprint"><code>await kt.dialog.showErrorBox({ title: '听我说', message: '出错辣！' })</code></pre>
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id=".showMessageBox"><span class="type-signature">(async, static) </span>showMessageBox<span class="signature">(options)</span><span class="type-signature"> &rarr; {<a href="global.html#GenericResponse">GenericResponse</a>|*}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    打开一个MessageBox提示框
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>options</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">对话框入参。参数详情请参考 https://www.electronjs.org/zh/docs/latest/api/dialog#dialogshowmessageboxsync options</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+    <dt class="tag-since">Since:</dt>
+    <dd class="tag-since"><ul class="dummy"><li>release-0.0.2</li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+<ul>
+        <li>
+<div class="param-desc">
+    - res 通用返回
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type"><a href="global.html#GenericResponse">GenericResponse</a></span>
+
+
+    </dd>
+</dl>
+</li>
+    
+        <li>
+<div class="param-desc">
+    - res.result 透传 electron showMessageBoxSync 结果
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">*</span>
+
+
+    </dd>
+</dl>
+</li>
+    </ul>
+
+
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>let response = await kt.dialog.showMessageBox({    message: '你确定吗',     title: '警告',     type: 'warning',     buttons: ['ok', 'cancel']})console.log(response.result) // => 按了OK的话就会返回 0 了。</code></pre>
 
 
 
