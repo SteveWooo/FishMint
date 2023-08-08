@@ -1,4 +1,4 @@
-const { DragBar, CmdInputter, NoteTextarea } = window.KtReactComponents
+const { DragBar, CmdInputter, NoteTextarea, GlobalHandler } = window.KtReactComponents
 
 class KtRoot extends React.Component {
     constructor(props) {
@@ -42,7 +42,8 @@ class KtRoot extends React.Component {
     render() {
         return (
             <div style={this.getStyle()}>
-                <DragBar></DragBar>
+                <GlobalHandler hotUpdate={true} />
+                <DragBar />
                 <div style={this.contentStyle()}
                     className='div-container'>
                     <NoteTextarea/>
@@ -52,19 +53,3 @@ class KtRoot extends React.Component {
     }
 }
 ReactDOM.render(<KtRoot />, document.getElementById("root"))
-
-// 热更新
-
-kt.on.staticFileChange(() => {
-    location.reload()
-})
-kt.on.windowBrocast((e, data) => {
-    // console.log(data.content)
-})
-
-// kt.OnWindowBrocast((e, data)=> {
-//     console.log(data)
-// })
-// kt.eScreen.getPrimaryDisplay().then(r => {
-//     console.log(r)
-// })

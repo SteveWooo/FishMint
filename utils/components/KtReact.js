@@ -14,6 +14,11 @@ window.KtReactComponents.themes = {
 window.KtReactComponents.usingTheme = 'gg'
 window.KtReactComponents.getThemeColors = () => window.KtReactComponents.themes[window.KtReactComponents.usingTheme]
 
+// 一些组件用的状态
+window.KtReactComponents.status = {
+    doingRefresh: false
+}
+
 /**
  * 拖动栏（因为在无frame页面中需要指定拖动物件才能拖动整个窗口）
  */
@@ -89,6 +94,53 @@ window.KtReactComponents.WindowFrame = class KtWindowFrame extends React.Compone
 }
 
 /**
+ * 方便进行全局管理的一些组件
+ */
+window.KtReactComponents.GlobalHandler = class KtGlobalHandler extends React.Component {
+    constructor(props) {
+        super(props)
+        window.KtReactComponents.status.doingRefresh = false
+    }
+
+    async componentDidMount() {
+        if (this.props.hotUpdate === true) {
+            kt.on.staticFileChange(() => {
+                window.KtReactComponents.status.doingRefresh = true
+                location.reload()
+            })
+        }
+        
+        // 拖动条由于设置了drag，导致这部分区域的右键菜单归系统管
+        // 所以在拖动栏的右键菜单上关闭窗口需要如下处理，才能保证应用窗口被关闭
+        window.addEventListener('beforeunload', async (e) => {
+            if (window.KtReactComponents.status.doingRefresh) return
+            // 控制台不用在前端处理
+            const windowInfo = (await kt.window.getInfo()).configure
+            const CONST = (await kt.const()).const
+            if (windowInfo.__wid === CONST.CONTROLLER_APP_NAME) return 
+
+            e.preventDefault()
+            e.returnValue = '?'
+
+            const checkRes = await kt.dialog.showMessageBox({
+                title: '注意',
+                message: '关闭后将会删除本窗口的内容存档，您确定吗',
+                type: 'warning',
+                buttons: ['ok', 'cancel']
+            })
+
+            if (checkRes.result === 0) {
+                await kt.window.close()
+            }
+        })
+    }
+
+    render() {
+        return ''
+    }
+}
+
+/**
  * 关闭程序的按钮
  */
 window.KtReactComponents.CloseWindowButton = class KtCloseWindowButton extends React.Component {
@@ -107,8 +159,25 @@ window.KtReactComponents.CloseWindowButton = class KtCloseWindowButton extends R
         }
     }
 
-    closeWindow() {
-        kt.window.close({})
+    async closeWindow() {
+        // 控制台不用在前端处理
+        const windowInfo = (await kt.window.getInfo()).configure
+        const CONST = (await kt.const()).const
+        if (windowInfo.__wid === CONST.CONTROLLER_APP_NAME) {
+            await kt.window.close()
+            return 
+        }
+
+        const checkRes = await kt.dialog.showMessageBox({
+            title: '注意',
+            message: '关闭后将会删除本窗口的内容存档，您确定吗',
+            type: 'warning',
+            buttons: ['ok', 'cancel']
+        })
+    
+        if (checkRes.result === 0) {
+            await kt.window.close()
+        }
     }
 
     iconStyle() {
@@ -142,6 +211,7 @@ window.KtReactComponents.RefreshButton = class KtRefreshButton extends React.Com
     }
 
     reload() {
+        window.KtReactComponents.status.doingRefresh = true
         location.reload()
     }
 
@@ -313,11 +383,13 @@ window.KtReactComponents.NoteTextarea = class KtNoteTextarea extends React.Compo
 
         // 注册textarea事件
         this.noteRef.current.addEventListener('blur', async () => {
+            this.noteRef.current.style.overflow = 'hidden'
             clearInterval(this.autoSaveInterval)
             this.syncData()
         })
 
         this.noteRef.current.addEventListener('focus', async () => {
+            this.noteRef.current.style.overflow = 'auto'
             clearInterval(this.autoSaveInterval)
             this.autoSaveInterval = setInterval(async () => {
                 this.syncData()
@@ -345,7 +417,7 @@ window.KtReactComponents.NoteTextarea = class KtNoteTextarea extends React.Compo
             fontFamily: "JiangCheng",
             width: '100%',
             height: '96%',
-            padding: '0 10px 0 10px',
+            padding: '0 15px 0 15px',
             border: 'none'
         }
     }

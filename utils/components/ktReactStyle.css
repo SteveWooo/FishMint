@@ -21,9 +21,11 @@ body {
 }
 
 /* 给textarea用的通用样式 */
-.kt-good-textarea-1 {
+.kt-good-textarea-1 { 
     resize: none;
     box-sizing: border-box;
+    padding-right: 15px;
+    overflow: hidden;
 }
 
 .kt-good-textarea-1:focus {
@@ -31,14 +33,14 @@ body {
 }
 
 .kt-good-textarea-1::-webkit-scrollbar {
-    width: 8px;
+    width: 3px;
     background-color: #D8D8C0;
 }
 
 .kt-good-textarea-1::-webkit-scrollbar-thumb {
-    border-radius: 3px;
-    -moz-border-radius: 3px;
-    -webkit-border-radius: 3px;
+    border-radius: 1px;
+    -moz-border-radius: 1px;
+    -webkit-border-radius: 1px;
     background-color: #4B3434;
 }
 
