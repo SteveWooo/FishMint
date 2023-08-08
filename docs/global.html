@@ -1,25 +1,82 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="utf-8">
-    <title>JSDoc: Global</title>
 
-    <script src="scripts/prettify/prettify.js"> </script>
-    <script src="scripts/prettify/lang-css.js"> </script>
-    <!--[if lt IE 9]>
-      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
-    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
-    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+<head>
+  
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title> Global</title>
+
+  <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script src="./build/entry.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+  <link href="https://fonts.googleapis.com/css?family=Roboto:100,400,700|Inconsolata,700" rel="stylesheet">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+  <link type="text/css" rel="stylesheet" href="https://jmblog.github.io/color-themes-for-google-code-prettify/themes/tomorrow-night.min.css">
+  <link type="text/css" rel="stylesheet" href="styles/app.min.css">
+  <link type="text/css" rel="stylesheet" href="styles/iframe.css">
+  <link type="text/css" rel="stylesheet" href="">
+  <script async defer src="https://buttons.github.io/buttons.js"></script>
+
+  
 </head>
 
-<body>
 
-<div id="main">
 
-    <h1 class="page-title">Global</h1>
-
+<body class="layout small-header">
+    <div id="stickyNavbarOverlay"></div>
     
+
+<div class="top-nav">
+    <div class="inner">
+        <a id="hamburger" role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+        </a>
+        <div class="logo">
+            
+            
+        </div>
+        <div class="menu">
+            
+            <div class="navigation">
+                <a
+                    href="index.html"
+                    class="link"
+                >
+                    Documentation
+                </a>
+                
+                
+                
+            </div>
+        </div>
+    </div>
+</div>
+    <div id="main">
+        <div
+            class="sidebar "
+            id="sidebarNav"
+        >
+            
+            <nav>
+                
+                    <h2><a href="index.html">Documentation</a></h2><div class="category"><h3>Namespaces</h3><ul><li><a href="kt.html">kt</a></li><li><a href="kt.ErrorCodes.html">ErrorCodes</a></li><li><a href="kt.controller.html">controller</a></li><li><a href="kt.crypto.html">crypto</a></li><li><a href="kt.crypto.aes.html">aes</a></li><li><a href="kt.crypto.secp256k1.html">secp256k1</a></li><li><a href="kt.db.html">db</a></li><li><a href="kt.db.DatabaseField.html">DatabaseField</a></li><li><a href="kt.dialog.html">dialog</a></li><li><a href="kt.eScreen.html">eScreen</a></li><li><a href="kt.eWindow.html">eWindow</a></li><li><a href="kt.net.html">net</a></li><li><a href="kt.net.http.html">http</a></li><li><a href="kt.on.html">on</a></li><li><a href="kt.system.html">system</a></li><li><a href="kt.window.html">window</a></li></ul><h3><a href="global.html">Global</a></h3></div>
+                
+            </nav>
+        </div>
+        <div class="core" id="main-content-wrapper">
+            <div class="content">
+                <header class="page-title">
+                    <p></p>
+                    <h1>Global</h1>
+                </header>
+                
 
 
 
@@ -66,7 +123,6 @@
     
 
     
-
     
 
     
@@ -80,7 +136,7 @@
         
     
     </div>
-
+    
     
 
     
@@ -98,24 +154,31 @@
     
 
     
-        <h3 class="subsection-title">Type Definitions</h3>
+        <div class='vertical-section'>
+            <h1>Type Definitions</h1>
+            <div class="members">
+            
+                <div class="member">
 
+
+    
+    <h4 class="name" id="EventCallbackFunction">
+        <a class="href-link" href="#EventCallbackFunction">#</a>
         
-                
-
+        <span class="code-name">
+            
+                EventCallbackFunction<span class="signature">(event, data)</span><span class="type-signature"></span>
+            
+        </span>
+    </h4>
     
 
     
-    <h4 class="name" id="EventCallbackFunction"><span class="type-signature"></span>EventCallbackFunction<span class="signature">(event, data)</span><span class="type-signature"></span></h4>
     
-
+    <div class="description">
+        通用事件回调函数
+    </div>
     
-
-
-
-<div class="description">
-    通用事件回调函数
-</div>
 
 
 
@@ -127,75 +190,79 @@
 
     <h5>Parameters:</h5>
     
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
+<div class="table-container">
+    <table class="params table">
+        <thead>
         <tr>
             
-                <td class="name"><code>event</code></td>
+            <th>Name</th>
             
 
-            <td class="type">
-            
-                
-<span class="param-type">Object</span>
-
-
-            
-            </td>
+            <th>Type</th>
 
             
 
             
 
-            <td class="description last">事件对象</td>
+            <th class="last">Description</th>
         </tr>
+        </thead>
 
-    
-
-        <tr>
-            
-                <td class="name"><code>data</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Object</span>
-
+        <tbody>
+        
 
             
-            </td>
+<tr class="deep-level-0">
+  
+      <td class="name"><code>event</code></td>
+  
+
+  <td class="type">
+  
+      
+<code class="param-type">Object</code>
+
+
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last">事件对象</td>
+</tr>
+
+
+        
 
             
+<tr class="deep-level-0">
+  
+      <td class="name"><code>data</code></td>
+  
 
-            
+  <td class="type">
+  
+      
+<code class="param-type">Object</code>
 
-            <td class="description last">事件参数</td>
-        </tr>
 
-    
-    </tbody>
-</table>
+  
+  </td>
 
+  
+
+  
+
+  <td class="description last">事件参数</td>
+</tr>
+
+
+        
+        </tbody>
+    </table>
+</div>
 
 
 
@@ -226,7 +293,6 @@
     
 
     
-
     
 
     
@@ -254,15 +320,35 @@
 
 
 
+
+
     <h5>Example</h5>
     
-    <pre class="prettyprint"><code>// KTool目录文件更新事件处理window.kt.OnStaticFileChange((e, data) => {    location.reload() // 热更新})</code></pre>
+    
+        <pre class="prettyprint"><code>// KTool目录文件更新事件处理window.kt.OnStaticFileChange((e, data) => {    location.reload() // 热更新})</code></pre>
+    
 
 
-
+</div>
             
-                
-<h4 class="name" id="GenericResponse">GenericResponse</h4>
+                <div class="member">
+
+    <span class="method-parameter is-pulled-right">
+        <label>Type:</label>
+        
+<code class="param-type">Object</code>
+
+
+    </span>
+
+<h4 class="name" id="GenericResponse">
+    <a class="href-link" href="#GenericResponse">#</a>
+    
+    <span class="code-name">
+        GenericResponse
+    </span>
+    
+</h4>
 
 
 
@@ -273,115 +359,103 @@
 
 
 
-    <h5>Type:</h5>
-    <ul>
-        <li>
-            
-<span class="param-type">Object</span>
-
-
-        </li>
-    </ul>
-
-
-
 
 
     <h5 class="subsection-title">Properties:</h5>
 
     
-
-<table class="props">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
+<div class="table-container">
+    <table class="props table">
+        <thead>
         <tr>
             
-                <td class="name"><code>status</code></td>
+            <th>Name</th>
             
 
-            <td class="type">
-            
-                
-<span class="param-type">Number</span>
-
-
-            
-            </td>
+            <th>Type</th>
 
             
 
             
 
-            <td class="description last">操作状态码</td>
+            <th class="last">Description</th>
         </tr>
+        </thead>
+
+        <tbody>
+        
+            
+<tr class="deep-level-0">
+    
+        <td class="name"><code>status</code></td>
+    
+
+    <td class="type">
+    
+        
+<code class="param-type">Number</code>
+
+
+    
+    </td>
 
     
 
-        <tr>
-            
-                <td class="name"><code>message</code></td>
-            
+    
 
-            <td class="type">
+    <td class="description last">操作状态码</td>
+</tr>
+
+        
             
-                
-<span class="param-type">String</span>
+<tr class="deep-level-0">
+    
+        <td class="name"><code>message</code></td>
+    
+
+    <td class="type">
+    
+        
+<code class="param-type">String</code>
 
 
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">返回的消息</td>
-        </tr>
+    
+    </td>
 
     
 
-        <tr>
-            
-                <td class="name"><code>others</code></td>
-            
+    
 
-            <td class="type">
+    <td class="description last">返回的消息</td>
+</tr>
+
+        
             
-                
-<span class="param-type">*</span>
+<tr class="deep-level-0">
+    
+        <td class="name"><code>others</code></td>
+    
 
+    <td class="type">
+    
+        
+<code class="param-type">*</code>
 
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">其他参数</td>
-        </tr>
 
     
-    </tbody>
-</table>
+    </td>
 
+    
+
+    
+
+    <td class="description last">其他参数</td>
+</tr>
+
+        
+        </tbody>
+    </table>
+</div>
 
 
 
@@ -410,7 +484,6 @@
     
 
     
-
     
 
     
@@ -424,10 +497,26 @@
 
 
 
-
+</div>
             
-                
-<h4 class="name" id="TransParam">TransParam</h4>
+                <div class="member">
+
+    <span class="method-parameter is-pulled-right">
+        <label>Type:</label>
+        
+<code class="param-type">Object</code>
+
+
+    </span>
+
+<h4 class="name" id="TransParam">
+    <a class="href-link" href="#TransParam">#</a>
+    
+    <span class="code-name">
+        TransParam
+    </span>
+    
+</h4>
 
 
 
@@ -438,69 +527,57 @@
 
 
 
-    <h5>Type:</h5>
-    <ul>
-        <li>
-            
-<span class="param-type">Object</span>
-
-
-        </li>
-    </ul>
-
-
-
 
 
     <h5 class="subsection-title">Properties:</h5>
 
     
-
-<table class="props">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
+<div class="table-container">
+    <table class="props table">
+        <thead>
         <tr>
             
-                <td class="name"><code>params</code></td>
+            <th>Name</th>
             
 
-            <td class="type">
-            
-                
-<span class="param-type">Array</span>
-
-
-            
-            </td>
+            <th>Type</th>
 
             
 
             
 
-            <td class="description last">透传到electron接口的参数</td>
+            <th class="last">Description</th>
         </tr>
+        </thead>
+
+        <tbody>
+        
+            
+<tr class="deep-level-0">
+    
+        <td class="name"><code>params</code></td>
+    
+
+    <td class="type">
+    
+        
+<code class="param-type">Array</code>
+
 
     
-    </tbody>
-</table>
+    </td>
 
+    
+
+    
+
+    <td class="description last">透传到electron接口的参数</td>
+</tr>
+
+        
+        </tbody>
+    </table>
+</div>
 
 
 
@@ -529,7 +606,6 @@
     
 
     
-
     
 
     
@@ -545,13 +621,31 @@
 
     <h5>Example</h5>
     
-    <pre class="prettyprint"><code>window.kt.eWindow.setAlwaysOnTop({ params: [true] })// 对应到electron里的写法是：window.setAlwaysOnTop(true)</code></pre>
+    
+        <pre class="prettyprint"><code>window.kt.eWindow.setAlwaysOnTop({ params: [true] })// 对应到electron里的写法是：window.setAlwaysOnTop(true)</code></pre>
+    
 
 
-
+</div>
             
-                
-<h4 class="name" id="TransResponse">TransResponse</h4>
+                <div class="member">
+
+    <span class="method-parameter is-pulled-right">
+        <label>Type:</label>
+        
+<code class="param-type">Object</code>
+
+
+    </span>
+
+<h4 class="name" id="TransResponse">
+    <a class="href-link" href="#TransResponse">#</a>
+    
+    <span class="code-name">
+        TransResponse
+    </span>
+    
+</h4>
 
 
 
@@ -562,115 +656,103 @@
 
 
 
-    <h5>Type:</h5>
-    <ul>
-        <li>
-            
-<span class="param-type">Object</span>
-
-
-        </li>
-    </ul>
-
-
-
 
 
     <h5 class="subsection-title">Properties:</h5>
 
     
-
-<table class="props">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
+<div class="table-container">
+    <table class="props table">
+        <thead>
         <tr>
             
-                <td class="name"><code>status</code></td>
+            <th>Name</th>
             
 
-            <td class="type">
-            
-                
-<span class="param-type">Number</span>
-
-
-            
-            </td>
+            <th>Type</th>
 
             
 
             
 
-            <td class="description last">操作状态码</td>
+            <th class="last">Description</th>
         </tr>
+        </thead>
+
+        <tbody>
+        
+            
+<tr class="deep-level-0">
+    
+        <td class="name"><code>status</code></td>
+    
+
+    <td class="type">
+    
+        
+<code class="param-type">Number</code>
+
+
+    
+    </td>
 
     
 
-        <tr>
-            
-                <td class="name"><code>message</code></td>
-            
+    
 
-            <td class="type">
+    <td class="description last">操作状态码</td>
+</tr>
+
+        
             
-                
-<span class="param-type">String</span>
+<tr class="deep-level-0">
+    
+        <td class="name"><code>message</code></td>
+    
+
+    <td class="type">
+    
+        
+<code class="param-type">String</code>
 
 
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">错误信息、信息</td>
-        </tr>
+    
+    </td>
 
     
 
-        <tr>
-            
-                <td class="name"><code>result</code></td>
-            
+    
 
-            <td class="type">
+    <td class="description last">错误信息、信息</td>
+</tr>
+
+        
             
-                
-<span class="param-type">Object</span>
+<tr class="deep-level-0">
+    
+        <td class="name"><code>result</code></td>
+    
 
+    <td class="type">
+    
+        
+<code class="param-type">Object</code>
 
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">透传返回内容</td>
-        </tr>
 
     
-    </tbody>
-</table>
+    </td>
 
+    
+
+    
+
+    <td class="description last">透传返回内容</td>
+</tr>
+
+        
+        </tbody>
+    </table>
+</div>
 
 
 
@@ -699,7 +781,6 @@
     
 
     
-
     
 
     
@@ -715,13 +796,31 @@
 
     <h5>Example</h5>
     
-    <pre class="prettyprint"><code>window.kt.eWindow.isAlwaysOnTop({ params: [] })// return : { status: 2000, result: true }</code></pre>
+    
+        <pre class="prettyprint"><code>window.kt.eWindow.isAlwaysOnTop({ params: [] })// return : { status: 2000, result: true }</code></pre>
+    
 
 
-
+</div>
             
-                
-<h4 class="name" id="UnSafeTransParam">UnSafeTransParam</h4>
+                <div class="member">
+
+    <span class="method-parameter is-pulled-right">
+        <label>Type:</label>
+        
+<code class="param-type">Object</code>
+
+
+    </span>
+
+<h4 class="name" id="UnSafeTransParam">
+    <a class="href-link" href="#UnSafeTransParam">#</a>
+    
+    <span class="code-name">
+        UnSafeTransParam
+    </span>
+    
+</h4>
 
 
 
@@ -732,92 +831,80 @@
 
 
 
-    <h5>Type:</h5>
-    <ul>
-        <li>
-            
-<span class="param-type">Object</span>
-
-
-        </li>
-    </ul>
-
-
-
 
 
     <h5 class="subsection-title">Properties:</h5>
 
     
-
-<table class="props">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
+<div class="table-container">
+    <table class="props table">
+        <thead>
         <tr>
             
-                <td class="name"><code>functionName</code></td>
+            <th>Name</th>
             
 
-            <td class="type">
-            
-                
-<span class="param-type">String</span>
-
-
-            
-            </td>
+            <th>Type</th>
 
             
 
             
 
-            <td class="description last">需要调用的函数名</td>
+            <th class="last">Description</th>
         </tr>
+        </thead>
+
+        <tbody>
+        
+            
+<tr class="deep-level-0">
+    
+        <td class="name"><code>functionName</code></td>
+    
+
+    <td class="type">
+    
+        
+<code class="param-type">String</code>
+
+
+    
+    </td>
 
     
 
-        <tr>
-            
-                <td class="name"><code>params</code></td>
-            
+    
 
-            <td class="type">
+    <td class="description last">需要调用的函数名</td>
+</tr>
+
+        
             
-                
-<span class="param-type">Array</span>
+<tr class="deep-level-0">
+    
+        <td class="name"><code>params</code></td>
+    
 
+    <td class="type">
+    
+        
+<code class="param-type">Array</code>
 
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">透传到electron接口的参数</td>
-        </tr>
 
     
-    </tbody>
-</table>
+    </td>
 
+    
+
+    
+
+    <td class="description last">透传到electron接口的参数</td>
+</tr>
+
+        
+        </tbody>
+    </table>
+</div>
 
 
 
@@ -846,7 +933,6 @@
     
 
     
-
     
 
     
@@ -862,26 +948,34 @@
 
     <h5>Example</h5>
     
-    <pre class="prettyprint"><code>window.kt.eWindow.setAlwaysOnTop({ params: [true] })// 对应到electron里的写法是：window.setAlwaysOnTop(true)</code></pre>
-
-
-
-            
-                
-
     
-
-    
-    <h4 class="name" id="WindowBrocastCallbackFunction"><span class="type-signature"></span>WindowBrocastCallbackFunction<span class="signature">(event, data)</span><span class="type-signature"></span></h4>
-    
-
+        <pre class="prettyprint"><code>window.kt.eWindow.setAlwaysOnTop({ params: [true] })// 对应到electron里的写法是：window.setAlwaysOnTop(true)</code></pre>
     
 
 
-
-<div class="description">
-    窗口广播事件回调函数
 </div>
+            
+                <div class="member">
+
+
+    
+    <h4 class="name" id="WindowBrocastCallbackFunction">
+        <a class="href-link" href="#WindowBrocastCallbackFunction">#</a>
+        
+        <span class="code-name">
+            
+                WindowBrocastCallbackFunction<span class="signature">(event, data)</span><span class="type-signature"></span>
+            
+        </span>
+    </h4>
+    
+
+    
+    
+    <div class="description">
+        窗口广播事件回调函数
+    </div>
+    
 
 
 
@@ -893,147 +987,128 @@
 
     <h5>Parameters:</h5>
     
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
+<div class="table-container">
+    <table class="params table">
+        <thead>
         <tr>
             
-                <td class="name"><code>event</code></td>
+            <th>Name</th>
             
 
-            <td class="type">
-            
-                
-<span class="param-type">Object</span>
-
-
-            
-            </td>
+            <th>Type</th>
 
             
 
             
 
-            <td class="description last">事件对象</td>
+            <th class="last">Description</th>
         </tr>
+        </thead>
 
-    
-
-        <tr>
-            
-                <td class="name"><code>data</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Object</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">广播对象
-                <h6>Properties</h6>
-                
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
+        <tbody>
         
 
-        <th>Type</th>
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>event</code></td>
+  
+
+  <td class="type">
+  
+      
+<code class="param-type">Object</code>
+
+
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last">事件对象</td>
+</tr>
+
 
         
 
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>data</code></td>
+  
+
+  <td class="type">
+  
+      
+<code class="param-type">Object</code>
+
+
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last">广播对象</td>
+</tr>
+
+  
+  
+    
+<tr class="deep-level-1">
+  
+      <td class="name"><code>from.configure</code></td>
+  
+
+  <td class="type">
+  
+      
+<code class="param-type">Object</code>
+
+
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last">发起广播的窗口对象信息</td>
+</tr>
+
+  
+    
+<tr class="deep-level-1">
+  
+      <td class="name"><code>content</code></td>
+  
+
+  <td class="type">
+  
+      
+<code class="param-type">Object</code>
+
+
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last">广播内容</td>
+</tr>
+
+  
+
+
         
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>from.configure</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Object</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">发起广播的窗口对象信息</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>content</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Object</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">广播内容</td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-            </td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
+        </tbody>
+    </table>
+</div>
 
 
 
@@ -1064,7 +1139,6 @@
     
 
     
-
     
 
     
@@ -1093,9 +1167,27 @@
 
 
 
+
+</div>
             
-                
-<h4 class="name" id="WindowConfigure">WindowConfigure</h4>
+                <div class="member">
+
+    <span class="method-parameter is-pulled-right">
+        <label>Type:</label>
+        
+<code class="param-type">Object</code>
+
+
+    </span>
+
+<h4 class="name" id="WindowConfigure">
+    <a class="href-link" href="#WindowConfigure">#</a>
+    
+    <span class="code-name">
+        WindowConfigure
+    </span>
+    
+</h4>
 
 
 
@@ -1106,675 +1198,663 @@
 
 
 
-    <h5>Type:</h5>
-    <ul>
-        <li>
-            
-<span class="param-type">Object</span>
-
-
-        </li>
-    </ul>
-
-
-
 
 
     <h5 class="subsection-title">Properties:</h5>
 
     
+<div class="table-container">
+    <table class="props table">
+        <thead>
+        <tr>
+            
+            <th>Name</th>
+            
 
-<table class="props">
-    <thead>
-    <tr>
+            <th>Type</th>
+
+            
+            <th>Attributes</th>
+            
+
+            
+            <th>Default</th>
+            
+
+            <th class="last">Description</th>
+        </tr>
+        </thead>
+
+        <tbody>
         
-        <th>Name</th>
+            
+<tr class="deep-level-0">
+    
+        <td class="name"><code>__wid</code></td>
+    
+
+    <td class="type">
+    
+        
+<code class="param-type">string</code>
+
+
+    
+    </td>
+
+    
+        <td class="attributes">
         
 
-        <th>Type</th>
+        
+        </td>
+    
+
+    
+        <td class="default">
+        
+        </td>
+    
+
+    <td class="description last">窗口唯一标识</td>
+</tr>
 
         
-        <th>Attributes</th>
+            
+<tr class="deep-level-0">
+    
+        <td class="name"><code>x</code></td>
+    
+
+    <td class="type">
+    
+        
+<code class="param-type">number</code>
+
+
+    
+    </td>
+
+    
+        <td class="attributes">
+        
+            &lt;optional><br>
         
 
         
-        <th>Default</th>
+        </td>
+    
+
+    
+        <td class="default">
+        
+            100
+        
+        </td>
+    
+
+    <td class="description last">窗口在屏幕上的x坐标</td>
+</tr>
+
+        
+            
+<tr class="deep-level-0">
+    
+        <td class="name"><code>y</code></td>
+    
+
+    <td class="type">
+    
+        
+<code class="param-type">number</code>
+
+
+    
+    </td>
+
+    
+        <td class="attributes">
+        
+            &lt;optional><br>
         
 
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
+        
+        </td>
     
 
-        <tr>
-            
-                <td class="name"><code>__wid</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-
-                
-                </td>
-            
-
-            
-                <td class="default">
-                
-                </td>
-            
-
-            <td class="description last">窗口唯一标识</td>
-        </tr>
-
+    
+        <td class="default">
+        
+            100
+        
+        </td>
     
 
-        <tr>
-            
-                <td class="name"><code>x</code></td>
-            
+    <td class="description last">窗口在屏幕上的y坐标</td>
+</tr>
 
-            <td class="type">
+        
             
-                
-<span class="param-type">number</span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-                    &lt;optional><br>
-                
-
-                
-                </td>
-            
-
-            
-                <td class="default">
-                
-                    100
-                
-                </td>
-            
-
-            <td class="description last">窗口在屏幕上的x坐标</td>
-        </tr>
-
+<tr class="deep-level-0">
+    
+        <td class="name"><code>width</code></td>
     
 
-        <tr>
-            
-                <td class="name"><code>y</code></td>
-            
+    <td class="type">
+    
+        
+<code class="param-type">number</code>
 
-            <td class="type">
-            
-                
-<span class="param-type">number</span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-                    &lt;optional><br>
-                
-
-                
-                </td>
-            
-
-            
-                <td class="default">
-                
-                    100
-                
-                </td>
-            
-
-            <td class="description last">窗口在屏幕上的y坐标</td>
-        </tr>
 
     
-
-        <tr>
-            
-                <td class="name"><code>width</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">number</span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-                    &lt;optional><br>
-                
-
-                
-                </td>
-            
-
-            
-                <td class="default">
-                
-                    380
-                
-                </td>
-            
-
-            <td class="description last">窗口宽</td>
-        </tr>
+    </td>
 
     
+        <td class="attributes">
+        
+            &lt;optional><br>
+        
 
-        <tr>
-            
-                <td class="name"><code>height</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">number</span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-                    &lt;optional><br>
-                
-
-                
-                </td>
-            
-
-            
-                <td class="default">
-                
-                    220
-                
-                </td>
-            
-
-            <td class="description last">窗口高</td>
-        </tr>
-
+        
+        </td>
     
 
-        <tr>
-            
-                <td class="name"><code>type</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-                    &lt;optional><br>
-                
-
-                
-                </td>
-            
-
-            
-                <td class="default">
-                
-                    toolbar
-                
-                </td>
-            
-
-            <td class="description last">对应electron WebBrowser的type</td>
-        </tr>
-
+    
+        <td class="default">
+        
+            380
+        
+        </td>
     
 
-        <tr>
-            
-                <td class="name"><code>frame</code></td>
-            
+    <td class="description last">窗口宽</td>
+</tr>
 
-            <td class="type">
+        
             
-                
-<span class="param-type">boolean</span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-                    &lt;optional><br>
-                
-
-                
-                </td>
-            
-
-            
-                <td class="default">
-                
-                    true
-                
-                </td>
-            
-
-            <td class="description last">应用是否有边框</td>
-        </tr>
-
+<tr class="deep-level-0">
+    
+        <td class="name"><code>height</code></td>
     
 
-        <tr>
-            
-                <td class="name"><code>resizable</code></td>
-            
+    <td class="type">
+    
+        
+<code class="param-type">number</code>
 
-            <td class="type">
-            
-                
-<span class="param-type">boolean</span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-                    &lt;optional><br>
-                
-
-                
-                </td>
-            
-
-            
-                <td class="default">
-                
-                    true
-                
-                </td>
-            
-
-            <td class="description last">应用是否有边框</td>
-        </tr>
 
     
-
-        <tr>
-            
-                <td class="name"><code>transparent</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">boolean</span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-                    &lt;optional><br>
-                
-
-                
-                </td>
-            
-
-            
-                <td class="default">
-                
-                    false
-                
-                </td>
-            
-
-            <td class="description last">背景是否透明</td>
-        </tr>
+    </td>
 
     
+        <td class="attributes">
+        
+            &lt;optional><br>
+        
 
-        <tr>
-            
-                <td class="name"><code>hasShadow</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">boolean</span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-                    &lt;optional><br>
-                
-
-                
-                </td>
-            
-
-            
-                <td class="default">
-                
-                    false
-                
-                </td>
-            
-
-            <td class="description last">设置窗口是否有阴影</td>
-        </tr>
-
+        
+        </td>
     
 
-        <tr>
-            
-                <td class="name"><code>alwaysOnTop</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">boolean</span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-                    &lt;optional><br>
-                
-
-                
-                </td>
-            
-
-            
-                <td class="default">
-                
-                    true
-                
-                </td>
-            
-
-            <td class="description last">窗口是否永远在别的窗口的上面</td>
-        </tr>
-
+    
+        <td class="default">
+        
+            220
+        
+        </td>
     
 
-        <tr>
-            
-                <td class="name"><code>kt_devTools</code></td>
-            
+    <td class="description last">窗口高</td>
+</tr>
 
-            <td class="type">
+        
             
-                
-<span class="param-type">boolean</span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-                    &lt;optional><br>
-                
-
-                
-                </td>
-            
-
-            
-                <td class="default">
-                
-                    false
-                
-                </td>
-            
-
-            <td class="description last">是否启动控制台</td>
-        </tr>
-
+<tr class="deep-level-0">
+    
+        <td class="name"><code>type</code></td>
     
 
-        <tr>
-            
-                <td class="name"><code>kt_isolateSessionLevel</code></td>
-            
+    <td class="type">
+    
+        
+<code class="param-type">string</code>
 
-            <td class="type">
-            
-                
-<span class="param-type">String</span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-                    &lt;optional><br>
-                
-
-                
-                </td>
-            
-
-            
-                <td class="default">
-                
-                    "app"
-                
-                </td>
-            
-
-            <td class="description last">窗口使用的session隔离程度。可选：window, app, global</td>
-        </tr>
 
     
-
-        <tr>
-            
-                <td class="name"><code>kt_webSecurity</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">boolean</span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-                    &lt;optional><br>
-                
-
-                
-                </td>
-            
-
-            
-                <td class="default">
-                
-                    true
-                
-                </td>
-            
-
-            <td class="description last">是否开启浏览器安全策略。关闭该参数前，请充分了解浏览器 CSP 的作用⚠</td>
-        </tr>
+    </td>
 
     
+        <td class="attributes">
+        
+            &lt;optional><br>
+        
 
-        <tr>
-            
-                <td class="name"><code>kt_recordRectInfo</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">boolean</span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-                    &lt;optional><br>
-                
-
-                
-                </td>
-            
-
-            
-                <td class="default">
-                
-                    true
-                
-                </td>
-            
-
-            <td class="description last">是否记录窗口的大小、位置信息</td>
-        </tr>
-
+        
+        </td>
     
 
-        <tr>
-            
-                <td class="name"><code>kt_showWhenStartup</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">boolean</span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-                    &lt;optional><br>
-                
-
-                
-                </td>
-            
-
-            
-                <td class="default">
-                
-                    true
-                
-                </td>
-            
-
-            <td class="description last">是否初次启动就显示窗口。（release-0.0.2）</td>
-        </tr>
-
+    
+        <td class="default">
+        
+            toolbar
+        
+        </td>
     
 
-        <tr>
-            
-                <td class="name"><code>kt_extraElectronBrowserWindowConfig</code></td>
-            
+    <td class="description last">对应electron WebBrowser的type</td>
+</tr>
 
-            <td class="type">
+        
             
-                
-<span class="param-type">Object</span>
+<tr class="deep-level-0">
+    
+        <td class="name"><code>frame</code></td>
+    
 
+    <td class="type">
+    
+        
+<code class="param-type">boolean</code>
 
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-                    &lt;optional><br>
-                
-
-                
-                </td>
-            
-
-            
-                <td class="default">
-                
-                    {}
-                
-                </td>
-            
-
-            <td class="description last">透传窗口配置给electron WebBrowser (release-0.0.2 及以上版本支持)</td>
-        </tr>
 
     
-    </tbody>
-</table>
+    </td>
 
+    
+        <td class="attributes">
+        
+            &lt;optional><br>
+        
+
+        
+        </td>
+    
+
+    
+        <td class="default">
+        
+            true
+        
+        </td>
+    
+
+    <td class="description last">应用是否有边框</td>
+</tr>
+
+        
+            
+<tr class="deep-level-0">
+    
+        <td class="name"><code>resizable</code></td>
+    
+
+    <td class="type">
+    
+        
+<code class="param-type">boolean</code>
+
+
+    
+    </td>
+
+    
+        <td class="attributes">
+        
+            &lt;optional><br>
+        
+
+        
+        </td>
+    
+
+    
+        <td class="default">
+        
+            true
+        
+        </td>
+    
+
+    <td class="description last">应用是否有边框</td>
+</tr>
+
+        
+            
+<tr class="deep-level-0">
+    
+        <td class="name"><code>transparent</code></td>
+    
+
+    <td class="type">
+    
+        
+<code class="param-type">boolean</code>
+
+
+    
+    </td>
+
+    
+        <td class="attributes">
+        
+            &lt;optional><br>
+        
+
+        
+        </td>
+    
+
+    
+        <td class="default">
+        
+            false
+        
+        </td>
+    
+
+    <td class="description last">背景是否透明</td>
+</tr>
+
+        
+            
+<tr class="deep-level-0">
+    
+        <td class="name"><code>hasShadow</code></td>
+    
+
+    <td class="type">
+    
+        
+<code class="param-type">boolean</code>
+
+
+    
+    </td>
+
+    
+        <td class="attributes">
+        
+            &lt;optional><br>
+        
+
+        
+        </td>
+    
+
+    
+        <td class="default">
+        
+            false
+        
+        </td>
+    
+
+    <td class="description last">设置窗口是否有阴影</td>
+</tr>
+
+        
+            
+<tr class="deep-level-0">
+    
+        <td class="name"><code>alwaysOnTop</code></td>
+    
+
+    <td class="type">
+    
+        
+<code class="param-type">boolean</code>
+
+
+    
+    </td>
+
+    
+        <td class="attributes">
+        
+            &lt;optional><br>
+        
+
+        
+        </td>
+    
+
+    
+        <td class="default">
+        
+            true
+        
+        </td>
+    
+
+    <td class="description last">窗口是否永远在别的窗口的上面</td>
+</tr>
+
+        
+            
+<tr class="deep-level-0">
+    
+        <td class="name"><code>kt_devTools</code></td>
+    
+
+    <td class="type">
+    
+        
+<code class="param-type">boolean</code>
+
+
+    
+    </td>
+
+    
+        <td class="attributes">
+        
+            &lt;optional><br>
+        
+
+        
+        </td>
+    
+
+    
+        <td class="default">
+        
+            false
+        
+        </td>
+    
+
+    <td class="description last">是否启动控制台</td>
+</tr>
+
+        
+            
+<tr class="deep-level-0">
+    
+        <td class="name"><code>kt_isolateSessionLevel</code></td>
+    
+
+    <td class="type">
+    
+        
+<code class="param-type">String</code>
+
+
+    
+    </td>
+
+    
+        <td class="attributes">
+        
+            &lt;optional><br>
+        
+
+        
+        </td>
+    
+
+    
+        <td class="default">
+        
+            "app"
+        
+        </td>
+    
+
+    <td class="description last">窗口使用的session隔离程度。可选：window, app, global</td>
+</tr>
+
+        
+            
+<tr class="deep-level-0">
+    
+        <td class="name"><code>kt_webSecurity</code></td>
+    
+
+    <td class="type">
+    
+        
+<code class="param-type">boolean</code>
+
+
+    
+    </td>
+
+    
+        <td class="attributes">
+        
+            &lt;optional><br>
+        
+
+        
+        </td>
+    
+
+    
+        <td class="default">
+        
+            true
+        
+        </td>
+    
+
+    <td class="description last">是否开启浏览器安全策略。关闭该参数前，请充分了解浏览器 CSP 的作用⚠</td>
+</tr>
+
+        
+            
+<tr class="deep-level-0">
+    
+        <td class="name"><code>kt_recordRectInfo</code></td>
+    
+
+    <td class="type">
+    
+        
+<code class="param-type">boolean</code>
+
+
+    
+    </td>
+
+    
+        <td class="attributes">
+        
+            &lt;optional><br>
+        
+
+        
+        </td>
+    
+
+    
+        <td class="default">
+        
+            true
+        
+        </td>
+    
+
+    <td class="description last">是否记录窗口的大小、位置信息</td>
+</tr>
+
+        
+            
+<tr class="deep-level-0">
+    
+        <td class="name"><code>kt_showWhenStartup</code></td>
+    
+
+    <td class="type">
+    
+        
+<code class="param-type">boolean</code>
+
+
+    
+    </td>
+
+    
+        <td class="attributes">
+        
+            &lt;optional><br>
+        
+
+        
+        </td>
+    
+
+    
+        <td class="default">
+        
+            true
+        
+        </td>
+    
+
+    <td class="description last">是否初次启动就显示窗口。（release-0.0.2）</td>
+</tr>
+
+        
+            
+<tr class="deep-level-0">
+    
+        <td class="name"><code>kt_extraElectronBrowserWindowConfig</code></td>
+    
+
+    <td class="type">
+    
+        
+<code class="param-type">Object</code>
+
+
+    
+    </td>
+
+    
+        <td class="attributes">
+        
+            &lt;optional><br>
+        
+
+        
+        </td>
+    
+
+    
+        <td class="default">
+        
+            {}
+        
+        </td>
+    
+
+    <td class="description last">透传窗口配置给electron WebBrowser (release-0.0.2 及以上版本支持)</td>
+</tr>
+
+        
+        </tbody>
+    </table>
+</div>
 
 
 
@@ -1806,7 +1886,6 @@
     
 
     
-
     
 
     
@@ -1820,19 +1899,25 @@
 
 
 
-
+</div>
             
-                
+                <div class="member">
 
+
+    
+    <h4 class="name" id="WindowInfoCallback">
+        <a class="href-link" href="#WindowInfoCallback">#</a>
+        
+        <span class="code-name">
+            
+                WindowInfoCallback<span class="signature">(event, data)</span><span class="type-signature"></span>
+            
+        </span>
+    </h4>
     
 
     
-    <h4 class="name" id="WindowInfoCallback"><span class="type-signature"></span>WindowInfoCallback<span class="signature">(event, data)</span><span class="type-signature"></span></h4>
     
-
-    
-
-
 
 
 
@@ -1844,124 +1929,105 @@
 
     <h5>Parameters:</h5>
     
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
+<div class="table-container">
+    <table class="params table">
+        <thead>
         <tr>
             
-                <td class="name"><code>event</code></td>
+            <th>Name</th>
             
 
-            <td class="type">
-            
-                
-<span class="param-type">Event</span>
-
-
-            
-            </td>
+            <th>Type</th>
 
             
 
             
 
-            <td class="description last">事件对象</td>
+            <th class="last">Description</th>
         </tr>
+        </thead>
 
-    
-
-        <tr>
-            
-                <td class="name"><code>data</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Object</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">回调参数
-                <h6>Properties</h6>
-                
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
+        <tbody>
         
 
-        <th>Type</th>
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>event</code></td>
+  
+
+  <td class="type">
+  
+      
+<code class="param-type">Event</code>
+
+
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last">事件对象</td>
+</tr>
+
 
         
 
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>data</code></td>
+  
+
+  <td class="type">
+  
+      
+<code class="param-type">Object</code>
+
+
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last">回调参数</td>
+</tr>
+
+  
+  
+    
+<tr class="deep-level-1">
+  
+      <td class="name"><code>configure</code></td>
+  
+
+  <td class="type">
+  
+      
+<code class="param-type">Object</code>
+
+
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last">窗口的信息</td>
+</tr>
+
+  
+
+
         
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>configure</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Object</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">窗口的信息</td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-            </td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
+        </tbody>
+    </table>
+</div>
 
 
 
@@ -1992,7 +2058,6 @@
     
 
     
-
     
 
     
@@ -2021,7 +2086,11 @@
 
 
 
+
+</div>
             
+            </div>
+        </div>
     
 
     
@@ -2032,19 +2101,26 @@
 
 
 
-</div>
-
-<nav>
-    <h2><a href="index.html">Home</a></h2><h3>Namespaces</h3><ul><li><a href="kt.html">kt</a></li><li><a href="kt.ErrorCodes.html">ErrorCodes</a></li><li><a href="kt.controller.html">controller</a></li><li><a href="kt.crypto.html">crypto</a></li><li><a href="kt.crypto.aes.html">aes</a></li><li><a href="kt.crypto.secp256k1.html">secp256k1</a></li><li><a href="kt.db.html">db</a></li><li><a href="kt.db.DatabaseField.html">DatabaseField</a></li><li><a href="kt.dialog.html">dialog</a></li><li><a href="kt.eScreen.html">eScreen</a></li><li><a href="kt.eWindow.html">eWindow</a></li><li><a href="kt.net.html">net</a></li><li><a href="kt.net.http.html">http</a></li><li><a href="kt.on.html">on</a></li><li><a href="kt.system.html">system</a></li><li><a href="kt.window.html">window</a></li></ul><h3><a href="global.html">Global</a></h3>
-</nav>
-
-<br class="clear">
-
-<footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Tue Aug 08 2023 16:34:46 GMT+0800 (中国标准时间)
-</footer>
-
-<script> prettyPrint(); </script>
+            </div>
+            
+            <footer class="footer">
+                <div class="content has-text-centered">
+                    <p>Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 4.0.2</a></p>
+                    <p class="sidebar-created-by">
+                        <a href="https://github.com/SoftwareBrothers/better-docs" target="_blank">BetterDocs theme</a> provided with <i class="fas fa-heart"></i> by
+                        <a href="http://softwarebrothers.co" target="_blank">SoftwareBrothers - JavaScript Development Agency</a>
+                    </p>
+                </div>
+            </footer>
+            
+        </div>
+        <div id="side-nav" class="side-nav">
+        </div>
+    </div>
+<script src="scripts/app.min.js"></script>
+<script>PR.prettyPrint();</script>
 <script src="scripts/linenumber.js"> </script>
+
+
 </body>
 </html>
