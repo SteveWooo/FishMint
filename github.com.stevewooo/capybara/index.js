@@ -1,4 +1,4 @@
-const { WindowFrame, DragBar, CmdInputter, NoteTextarea } = window.KtReactComponents
+const { WindowFrame, DragBar, CmdInputter, NoteTextarea, GlobalHandler } = window.KtReactComponents
 
 const OBJ_LIST = {
     CAPYBARA: 'capybara',
@@ -157,6 +157,7 @@ class KtRoot extends React.Component {
             <div ref={this.bodyRef} style={{
                 border: '0px solid #eee'
             }}>
+                <GlobalHandler hotUpdate={false} />
                 {/* <DragBar></DragBar> */}
                 {
                     (this.state.obj === OBJ_LIST.CAPYBARA) ? (
@@ -194,36 +195,6 @@ class KtRoot extends React.Component {
         )
     }
 }
-
-let hotUpdate = false;
-// 热更新
-kt.on.staticFileChange(async (event, args) => {
-    hotUpdate = true
-    location.reload()
-})
-
-// 主页关闭的话，其他也可以关掉了
-window.addEventListener('beforeunload', async e => {
-    if (!hotUpdate) {
-        e.preventDefault()
-        e.returnValue = '确定要离开吗？';
-        let windowInfo = await kt.window.getInfo()
-        if (windowInfo.startupArgs && windowInfo.startupArgs.obj === OBJ_LIST.LEAF) {
-            await kt.closeWindow()
-            return 
-        }
-        // 将所有应用内的应用都关闭，然后再离开
-        const appInfos = (await kt.window.getAppInfo())
-        for(let wid in appInfos.windows) { 
-            if (wid === windowInfo.__wid) continue
-            await kt.closeWindow({
-                __wid: wid
-            })
-        } 
-
-        await kt.closeWindow()
-    }
-})
 
 ReactDOM.render(<KtRoot />, document.getElementById("root"))
 kt.window.show().then()

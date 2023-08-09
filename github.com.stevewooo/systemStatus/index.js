@@ -1,4 +1,4 @@
-const { DragBar, WindowFrame } = window.KtReactComponents
+const { DragBar, WindowFrame, GlobalHandler } = window.KtReactComponents
 const { LinearProgress } = MaterialUI;
 
 class KtRoot extends React.Component {
@@ -217,6 +217,7 @@ class KtRoot extends React.Component {
     render() {
         return (
             <WindowFrame>
+                <GlobalHandler hotUpdate={false} />
                 <DragBar />
                 <div style={{
                     display: 'flex',
@@ -254,19 +255,3 @@ class KtRoot extends React.Component {
 
 ReactDOM.render(<KtRoot />, document.getElementById("root"))
 kt.window.show().then()
-
-// ========= 实现热更新 ==========
-let hotUpdate = false;
-kt.on.staticFileChange(() => {
-    hotUpdate = true
-    location.reload()
-})
-// 拖动条由于设置了drag，导致这部分区域的右键菜单归系统管
-// 所以在拖动栏的右键菜单上关闭窗口需要如下处理，才能保证应用窗口被关闭
-window.addEventListener('beforeunload', (e) => {
-    if (hotUpdate) return
-
-    e.preventDefault()
-    e.returnValue = 'exiting'
-    kt.window.close().then()
-})

@@ -110,17 +110,19 @@ window.KtReactComponents.GlobalHandler = class KtGlobalHandler extends React.Com
             })
         }
         
+        const windowInfo = (await kt.window.getInfo()).configure
+        const CONST = (await kt.const()).const
         // 拖动条由于设置了drag，导致这部分区域的右键菜单归系统管
         // 所以在拖动栏的右键菜单上关闭窗口需要如下处理，才能保证应用窗口被关闭
         window.addEventListener('beforeunload', async (e) => {
-            if (window.KtReactComponents.status.doingRefresh) return
+            if (window.KtReactComponents.status.doingRefresh) {
+                return 
+            }
             // 控制台不用在前端处理
-            const windowInfo = (await kt.window.getInfo()).configure
-            const CONST = (await kt.const()).const
             if (windowInfo.__wid === CONST.CONTROLLER_APP_NAME) return 
 
             e.preventDefault()
-            e.returnValue = '?'
+            e.returnValue = '您确定吗'
 
             const checkRes = await kt.dialog.showMessageBox({
                 title: '注意',

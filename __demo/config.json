@@ -6,11 +6,11 @@
         "frame": false,
         "resizable": false,
         "transparent": true,
-        "hasShadow": false,
+        "hasShadow": true,
         "alwaysOnTop": true,
 
         "kt_devTools": false,
-        "kt_showWhenStartup": false,
+        "kt_showWhenStartup": true,
         "kt_isolateSessionLevel": "app"
     }
 }
