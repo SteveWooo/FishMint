@@ -121,19 +121,19 @@ window.KtReactComponents.GlobalHandler = class KtGlobalHandler extends React.Com
             // 控制台不用在前端处理
             if (windowInfo.__wid === CONST.CONTROLLER_APP_NAME) return 
 
-            e.preventDefault()
-            e.returnValue = '您确定吗'
+            // e.preventDefault()
+            // e.returnValue = '您确定吗'
 
-            const checkRes = await kt.dialog.showMessageBox({
-                title: '注意',
-                message: '关闭后将会删除本窗口的内容存档，您确定吗',
-                type: 'warning',
-                buttons: ['ok', 'cancel']
-            })
+            // const checkRes = await kt.dialog.showMessageBox({
+            //     title: '注意',
+            //     message: '关闭后将会删除本窗口的内容存档，您确定吗',
+            //     type: 'warning',
+            //     buttons: ['ok', 'cancel']
+            // })
 
-            if (checkRes.result === 0) {
-                await kt.window.close()
-            }
+            // if (checkRes.result === 0) {
+            //     await kt.window.close()
+            // }
         })
     }
 
@@ -148,6 +148,7 @@ window.KtReactComponents.GlobalHandler = class KtGlobalHandler extends React.Com
 window.KtReactComponents.CloseWindowButton = class KtCloseWindowButton extends React.Component {
     constructor(props) {
         super(props)
+        this.clickAble = true
     }
 
     style() {
@@ -162,11 +163,14 @@ window.KtReactComponents.CloseWindowButton = class KtCloseWindowButton extends R
     }
 
     async closeWindow() {
+        if (!this.clickAble) return 
+        this.clickAble = false
         // 控制台不用在前端处理
         const windowInfo = (await kt.window.getInfo()).configure
         const CONST = (await kt.const()).const
         if (windowInfo.__wid === CONST.CONTROLLER_APP_NAME) {
             await kt.window.close()
+            this.clickAble = true
             return 
         }
 
@@ -176,6 +180,7 @@ window.KtReactComponents.CloseWindowButton = class KtCloseWindowButton extends R
             type: 'warning',
             buttons: ['ok', 'cancel']
         })
+        this.clickAble = true
     
         if (checkRes.result === 0) {
             await kt.window.close()
@@ -194,7 +199,7 @@ window.KtReactComponents.CloseWindowButton = class KtCloseWindowButton extends R
         return (
             <div className="div-container" 
                 style={this.style()}
-                onClick={this.closeWindow}
+                onClick={() => {this.closeWindow()}}
             >
                 <svg style={this.iconStyle()} width="24" height="24" viewBox="0 0 24 24" fill={colors.ButtonFontColor} xmlns="http://www.w3.org/2000/svg">
                     <path d="M9.8788 7.05025L7.75748 4.92893C6.97643 4.14788 5.7101 4.14788 4.92905 4.92893C4.148 5.70997 4.148 6.9763 4.92905 7.75735L9.17169 12L4.92905 16.2426C4.148 17.0237 4.148 18.29 4.92905 19.0711C5.7101 19.8521 6.97643 19.8521 7.75747 19.0711L12.0001 14.8284L16.2428 19.0711C17.0238 19.8521 18.2901 19.8521 19.0712 19.0711C19.8522 18.29 19.8522 17.0237 19.0712 16.2426L14.8285 12L19.0712 7.75735C19.8522 6.97631 19.8522 5.70998 19.0712 4.92893C18.2901 4.14788 17.0238 4.14788 16.2428 4.92893L12.0001 9.17157" stroke={colors.ButtonFontColor} stroke-linecap="round" stroke-linejoin="round"/>
@@ -340,109 +345,10 @@ window.KtReactComponents.CmdInputter = class KtCmdInputter extends React.Compone
                     width: '100%',
                     textAlign: 'center'
                 }}>
-                    <img src="../utils/res/images/cat-sit.gif" alt="" />
+                    <img src="/kt_app/utils/res/images/cat-sit.gif" alt="" />
                 </div>
 
-                <audio ref={this.clickAudioRef} src="../utils/res/audios/click.mp3"></audio>
-            </div>
-        )
-    }
-}
-
-/**
- * 给便利贴用的占据全屏的textArea
- */
-
-window.KtReactComponents.NoteTextarea = class KtNoteTextarea extends React.Component {
-    constructor(props) {
-        super(props)
-        this.state = {
-            content: ''
-        }
-
-        this.noteRef = React.createRef()
-
-        // 输入的时候隔几秒就要自动保存一次
-        this.AUTO_SAVE_TIME_GAP = 5; // n秒
-        this.autoSaveInterval = null
-    }
-
-    async componentDidMount() {
-        const res = await kt.db.get({
-            key: 'noteContent'
-        })
-        if (res.status !== 2000) {
-            console.log(res)
-            alert('发生错误辣~建议备份该页笔记后，关闭窗口重开')
-            return 
-        }
-        if (res.value === undefined) {
-            this.noteRef.current.value = '' // 初次打开窗口
-            this.syncData()
-        } else {
-            this.noteRef.current.value = res.value
-        }
-
-        // 注册textarea事件
-        this.noteRef.current.addEventListener('blur', async () => {
-            this.noteRef.current.style.overflow = 'hidden'
-            clearInterval(this.autoSaveInterval)
-            this.syncData()
-        })
-
-        this.noteRef.current.addEventListener('focus', async () => {
-            this.noteRef.current.style.overflow = 'auto'
-            clearInterval(this.autoSaveInterval)
-            this.autoSaveInterval = setInterval(async () => {
-                this.syncData()
-            }, this.AUTO_SAVE_TIME_GAP * 1000)
-        })
-    }
-
-    // 同步本地笔记内容到远程
-    async syncData() {
-        const syncRes = await kt.db.set({
-            key: 'noteContent',
-            value: this.noteRef.current.value
-        })
-
-        if (syncRes.status !== 2000) {
-            alert('发生错误辣~建议备份该页笔记后，关闭窗口重开')
-            return
-        }
-
-        // sync done
-    }
-
-    textareaStyle() {
-        return {
-            fontFamily: "JiangCheng",
-            width: '100%',
-            height: '96%',
-            padding: '0 15px 0 15px',
-            border: 'none'
-        }
-    }
-
-    style() {
-        return {
-            width: '100%',
-            height: '100%',
-            display: 'flex',
-            flexDirection: 'column',
-            justifyContent: 'center',
-            alignItems: 'center'
-        }
-    }
-
-    render() {
-        return (
-            <div style={this.style()}>
-                <textarea
-                    style={this.textareaStyle()} 
-                    className='kt-good-textarea-1' 
-                    ref={this.noteRef}
-                ></textarea>
+                <audio ref={this.clickAudioRef} src="/kt_app/utils/res/audios/click.mp3"></audio>
             </div>
         )
     }

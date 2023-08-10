@@ -1,0 +1,68 @@
+.sunshine-box-shadow {
+    box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.6), -2px -2px 8px rgba(255, 255, 255, 0.4);
+}
+
+.app-container {
+    width: 80px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    user-select: none;
+}
+
+.app-container:hover {
+    background-color: #61616188;
+    box-shadow: 10px 10px 10px #111;
+}
+
+.blurred {
+    backdrop-filter: blur(20px);
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0.5;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+.fade-in {
+    animation: fadeIn 0.2s ease-in forwards;
+}
+
+@keyframes fadeOut {
+    from {
+        opacity: 1;
+    }
+
+    to {
+        opacity: 0;
+    }
+}
+
+.fade-out {
+    animation: fadeOut 0.2s ease-out forwards;
+}
+
+/* 定义关键帧动画 */
+@keyframes slideDown {
+    from {
+        transform: translateY(-20px);
+        box-shadow: -10px -10px 10px #ffffff99;
+    }
+
+    to {
+        transform: translateY(0);
+        box-shadow: 0 0 0;
+    }
+}
+
+/* 应用动画到元素 */
+.slide-down {
+    animation: slideDown 0.4s ease;
+}

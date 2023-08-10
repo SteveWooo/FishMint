@@ -9,7 +9,7 @@
         "hasShadow": false,
         "alwaysOnTop": true,
 
-        "kt_devTools": true,
+        "kt_devTools": false,
         "kt_isolateSessionLevel": "app"
     }
 }

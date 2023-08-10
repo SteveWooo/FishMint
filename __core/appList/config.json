@@ -1,0 +1,16 @@
+{
+    "configure": {
+        "width": 200,
+        "height": 200,
+        "type": "toolbar",
+        "frame": false,
+        "resizable": false,
+        "transparent": true,
+        "hasShadow": true,
+        "alwaysOnTop": false,
+
+        "kt_devTools": true,
+        "kt_showWhenStartup": true,
+        "kt_isolateSessionLevel": "app"
+    }
+}
