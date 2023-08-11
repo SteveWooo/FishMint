@@ -2,7 +2,7 @@
     "configure": {
         "width": 200,
         "height": 200,
-        "type": "normal",
+        "type": "toolbar",
         "frame": false,
         "resizable": false,
         "transparent": true,

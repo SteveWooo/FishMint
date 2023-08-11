@@ -166,8 +166,8 @@
 
 
     
-    <h4 class="name" id=".WindowBrocast">
-        <a class="href-link" href="#.WindowBrocast">#</a>
+    <h4 class="name" id=".windowBrocast">
+        <a class="href-link" href="#.windowBrocast">#</a>
         
             
                 <span class='tag'>static</span>
@@ -175,7 +175,7 @@
         
         <span class="code-name">
             
-                WindowBrocast<span class="signature">(callback)</span><span class="type-signature"></span>
+                windowBrocast<span class="signature">(callback)</span><span class="type-signature"></span>
             
         </span>
     </h4>
@@ -311,7 +311,7 @@
     <h5>Example</h5>
     
     
-        <pre class="prettyprint"><code>window.kt.on.WindowBrocast(async (e, data) => {    console.log('Receive brocast:', data.content, '. From app:', data.from.configure.appDirName)})</code></pre>
+        <pre class="prettyprint"><code>window.kt.on.windowBrocast(async (e, data) => {    console.log('Receive brocast:', data.content, '. From app:', data.from.configure.appDirName)})</code></pre>
     
 
 
@@ -321,8 +321,8 @@
 
 
     
-    <h4 class="name" id=".WindowMoved">
-        <a class="href-link" href="#.WindowMoved">#</a>
+    <h4 class="name" id=".windowHide">
+        <a class="href-link" href="#.windowHide">#</a>
         
             
                 <span class='tag'>static</span>
@@ -330,7 +330,111 @@
         
         <span class="code-name">
             
-                WindowMoved<span class="signature">(callback)</span><span class="type-signature"></span>
+                windowHide<span class="signature">()</span><span class="type-signature"></span>
+            
+        </span>
+    </h4>
+    
+
+    
+    
+    <div class="description">
+        窗口隐藏事件
+    </div>
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+    <dt class="tag-since">Since:</dt>
+    <dd class="tag-since"><ul class="dummy"><li>release-0.0.2</li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Example</h5>
+    
+    
+        <pre class="prettyprint"><code>kt.on.windowHide((() => {  // do somethings}))</code></pre>
+    
+
+
+</div>
+            
+                <div class="member">
+
+
+    
+    <h4 class="name" id=".windowMoved">
+        <a class="href-link" href="#.windowMoved">#</a>
+        
+            
+                <span class='tag'>static</span>
+            
+        
+        <span class="code-name">
+            
+                windowMoved<span class="signature">(callback)</span><span class="type-signature"></span>
             
         </span>
     </h4>
@@ -466,7 +570,7 @@
     <h5>Example</h5>
     
     
-        <pre class="prettyprint"><code>window.kt.on.WindowMoved((e, data) => {    console.log(data.configure.x, data.configure.y) // 移动后的坐标})</code></pre>
+        <pre class="prettyprint"><code>window.kt.on.windowMoved((e, data) => {    console.log(data.configure.x, data.configure.y) // 移动后的坐标})</code></pre>
     
 
 
@@ -476,8 +580,8 @@
 
 
     
-    <h4 class="name" id=".WindowResized">
-        <a class="href-link" href="#.WindowResized">#</a>
+    <h4 class="name" id=".windowResized">
+        <a class="href-link" href="#.windowResized">#</a>
         
             
                 <span class='tag'>static</span>
@@ -485,7 +589,7 @@
         
         <span class="code-name">
             
-                WindowResized<span class="signature">(callback)</span><span class="type-signature"></span>
+                windowResized<span class="signature">(callback)</span><span class="type-signature"></span>
             
         </span>
     </h4>
@@ -621,7 +725,111 @@
     <h5>Example</h5>
     
     
-        <pre class="prettyprint"><code>window.kt.on.WindowResized((e, data) => {    console.log(data.configure.width, data.configure.height) // 缩放后的宽高})</code></pre>
+        <pre class="prettyprint"><code>window.kt.on.windowResized((e, data) => {    console.log(data.configure.width, data.configure.height) // 缩放后的宽高})</code></pre>
+    
+
+
+</div>
+            
+                <div class="member">
+
+
+    
+    <h4 class="name" id=".windowShow">
+        <a class="href-link" href="#.windowShow">#</a>
+        
+            
+                <span class='tag'>static</span>
+            
+        
+        <span class="code-name">
+            
+                windowShow<span class="signature">()</span><span class="type-signature"></span>
+            
+        </span>
+    </h4>
+    
+
+    
+    
+    <div class="description">
+        窗口显示事件
+    </div>
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+    <dt class="tag-since">Since:</dt>
+    <dd class="tag-since"><ul class="dummy"><li>release-0.0.2</li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Example</h5>
+    
+    
+        <pre class="prettyprint"><code>kt.on.windowShow((() => {  // do somethings}))</code></pre>
     
 
 

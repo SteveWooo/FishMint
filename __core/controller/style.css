@@ -1,19 +1,113 @@
 .sunshine-box-shadow {
-    box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.6), -2px -2px 8px rgba(255, 255, 255, 0.4);
+    box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.6), -2px -2px 8px #fee101aa;
+}
+
+.click-through {
+    pointer-events: none;
+}
+
+.left-top-title {
+    position: absolute;
+    left: 100px;
+    top: 100px;
+    z-index: 1;
+    font-size: 90px;
+    color: transparent;
+    text-shadow: 0px 0px 1px #FEE101dd,
+        0px 4px 4px #111111dd;
+}
+
+.mask {
+    width: 100%;
+    height: 100%;
+    background-color: #1d1d1dcc;
+    position: fixed;
+    top: 0;
+    left: 0;
+    pointer-events: auto;
+    z-index: 0;
+}
+
+/* app 块 */
+@keyframes movement {
+    0%,
+    100% {
+        background-size:
+            80vmax 80vmax,
+            100vmax 100vmax,
+            70vmax 70vmax,
+            30vmax 30vmax,
+            110vmax 110vmax;
+        background-position:
+            30vmax -30vmax,
+            40vmax -40vmax,
+            -40vmax -40vmax,
+            -30vmax -90vmax,
+            20vmax 20vmax;
+    }
+
+    25% {
+        background-size:
+            90vmax 90vmax,
+            100vmax 100vmax,
+            70vmax 70vmax,
+            30vmax 30vmax,
+            100vmax 100vmax;
+        background-position:
+            40vmax -40vmax,
+            60vmax -60vmax,
+            -50vmax -50vmax,
+            -20vmax -80vmax,
+            10vmax 10vmax;
+    }
 }
 
 .app-container {
-    width: 80px;
-    height: 60px;
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
     user-select: none;
+    font-size: 60px;
+    pointer-events: all;
+    border-radius: 30px 30px 30px 30px;
+    border: 3px solid #FEE101;
+    background-image:
+        radial-gradient(closest-side, rgba(235, 105, 78, 0.9), rgba(235, 15, 78, 0)),
+        radial-gradient(closest-side, rgba(243, 11, 164, 0.9), rgba(243, 11, 164, 0)),
+        radial-gradient(closest-side, rgba(254, 234, 131, 0.9), rgba(254, 234, 131, 0)),
+        radial-gradient(closest-side, rgba(170, 142, 245, 0.9), rgba(170, 142, 245, 0)),
+        radial-gradient(closest-side, rgba(248, 192, 147, 0.9), rgba(248, 192, 147, 0));
+    background-size:
+        40vmax 40vmax,
+        60vmax 60vmax,
+        60vmax 60vmax,
+        60vmax 60vmax,
+        80vmax 80vmax;
+    background-position:
+        -40vmax -10vmax,
+        10vmax 10vmax,
+        -20vmax -30vmax,
+        40vmax 40vmax,
+        40vmax 10vmax;
+    
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+
+    background-color: #ee99d9;
+    background-repeat: no-repeat;
+
+    color: transparent;
+    text-shadow: 0px 0px 1px #ffffffee,
+        0 4px 8px #111111cc;
+}
+
+.app-container-background-animation {
+    animation: 1s movement linear infinite;;
 }
 
 .app-container:hover {
-    background-color: #61616188;
+    background-color: #eb6ecc;
     box-shadow: 10px 10px 10px #111;
 }
 
@@ -46,23 +140,77 @@
 }
 
 .fade-out {
-    animation: fadeOut 0.2s ease-out forwards;
+    animation: fadeOut 0.4s ease-out forwards;
+}
+
+/* 定义关键帧动画 */
+@keyframes slideRight {
+    from {
+        opacity: 0;
+        transform: translateX(-180px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.slide-right {
+    animation: slideRight 0.3s ease forwards;
+}
+/* 定义关键帧动画 */
+@keyframes slideLeft {
+    from {
+        transform: translateX(0px);
+    }
+
+    to {
+        transform: translateX(-180px);
+    }
+}
+
+.slide-left {
+    animation: slideLeft 0.3s ease forwards;
 }
 
 /* 定义关键帧动画 */
 @keyframes slideDown {
-    from {
-        transform: translateY(-20px);
-        box-shadow: -10px -10px 10px #ffffff99;
+    0% {
+        transform: translateY(-30px);
+        box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.6), -10px -10px 10px #fee10144;
     }
 
-    to {
+    66% {
+        transform: translateY(-10px);
+        box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.6), -10px -10px 10px #fee10199;
+    }
+
+    100% {
         transform: translateY(0);
-        box-shadow: 0 0 0;
+        box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.6), -2px -2px 8px #fee101dd;
     }
 }
 
 /* 应用动画到元素 */
 .slide-down {
-    animation: slideDown 0.4s ease;
+    animation: slideDown 0.8s ease forwards;
+}
+
+/* 定义关键帧动画 */
+@keyframes slideUp {
+    0% {
+        transform: translateY(0px);
+        box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.6), -2px -2px 8px #fee101dd;
+    }
+
+    100% {
+        transform: translateY(-30px);
+        box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.6), -10px -10px 10px #fee10144;
+    }
+}
+
+/* 应用动画到元素 */
+.slide-up {
+    animation: slideUp 0.4s ease forwards;
 }

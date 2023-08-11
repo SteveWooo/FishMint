@@ -64,7 +64,7 @@ class KtRoot extends React.Component {
         const colors = window.KtReactComponents.themes[window.KtReactComponents.usingTheme]
         return (
             <WindowFrame>
-                <GlobalHandler hotUpdate={true} />
+                <GlobalHandler hotUpdate={false} />
                 <DragBar />
                 <div style={{
                     display: 'flex',

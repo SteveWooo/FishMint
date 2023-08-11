@@ -9,6 +9,10 @@ window.KtReactComponents.themes = {
         ItemBorderColor: '#fbbc05',
         ItemFontColor: '#616161',
         WindowBackgroundColor: '#fff'
+    },
+    "dba": {
+        ItemBackgroundColor: '#Fe4690',
+        ItemBorderColor: "FEE101"
     }
 }
 window.KtReactComponents.usingTheme = 'gg'
