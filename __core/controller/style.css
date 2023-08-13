@@ -13,8 +13,18 @@
     z-index: 1;
     font-size: 90px;
     color: transparent;
-    text-shadow: 0px 0px 1px #FEE101dd,
+    text-shadow: 0px 0px 1px rgba(254, 234, 131, 0.9),
         0px 4px 4px #111111dd;
+}
+
+.left-top-icon {
+    position: absolute;
+    left: 130px;
+    top: 35px;
+}
+
+.left-top-icon img {
+    width: 100px;
 }
 
 .mask {
@@ -28,38 +38,23 @@
     z-index: 0;
 }
 
-/* app 块 */
-@keyframes movement {
-    0%,
-    100% {
-        background-size:
-            80vmax 80vmax,
-            100vmax 100vmax,
-            70vmax 70vmax,
-            30vmax 30vmax,
-            110vmax 110vmax;
-        background-position:
-            30vmax -30vmax,
-            40vmax -40vmax,
-            -40vmax -40vmax,
-            -30vmax -90vmax,
-            20vmax 20vmax;
-    }
+.bg-img {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
 
-    25% {
-        background-size:
-            90vmax 90vmax,
-            100vmax 100vmax,
-            70vmax 70vmax,
-            30vmax 30vmax,
-            100vmax 100vmax;
-        background-position:
-            40vmax -40vmax,
-            60vmax -60vmax,
-            -50vmax -50vmax,
-            -20vmax -80vmax,
-            10vmax 10vmax;
-    }
+.bg-img img {
+    display: block;
+    width: 50%;
+    /* height: 50%; */
+    /* object-fit: cover; */
 }
 
 .app-container {
@@ -68,10 +63,11 @@
     justify-content: center;
     cursor: pointer;
     user-select: none;
-    font-size: 60px;
+    font-size: 40px;
     pointer-events: all;
-    border-radius: 30px 30px 30px 30px;
-    border: 3px solid #FEE101;
+    /* border-radius: 30px 30px 30px 30px; */
+    border-radius: 50%;
+    /* border: 3px solid #FEE101; */
     background-image:
         radial-gradient(closest-side, rgba(235, 105, 78, 0.9), rgba(235, 15, 78, 0)),
         radial-gradient(closest-side, rgba(243, 11, 164, 0.9), rgba(243, 11, 164, 0)),
@@ -90,25 +86,26 @@
         -20vmax -30vmax,
         40vmax 40vmax,
         40vmax 10vmax;
-    
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-
     background-color: #ee99d9;
     background-repeat: no-repeat;
+
+    /* background-image: url('./app-container-bg-1-trans-color.png');
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: 100%;  */
+
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
 
     color: transparent;
     text-shadow: 0px 0px 1px #ffffffee,
         0 4px 8px #111111cc;
 }
 
-.app-container-background-animation {
-    animation: 1s movement linear infinite;;
-}
-
 .app-container:hover {
+    /* text-shadow: 0px 0px 1px #ffffffee,
+        0 8px 16px #111111cc; */
     background-color: #eb6ecc;
-    box-shadow: 10px 10px 10px #111;
 }
 
 .blurred {
@@ -159,6 +156,7 @@
 .slide-right {
     animation: slideRight 0.3s ease forwards;
 }
+
 /* 定义关键帧动画 */
 @keyframes slideLeft {
     from {
@@ -213,4 +211,35 @@
 /* 应用动画到元素 */
 .slide-up {
     animation: slideUp 0.4s ease forwards;
+}
+
+/* 长大和变小 */
+@keyframes growBig {
+    0% {
+        transform: scale(0);
+    }
+
+    66% {
+        transform: scale(1.2);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+.grow-big {
+    animation: growBig 0.6s ease forwards;
+}
+
+@keyframes growSmall {
+    0% {
+        transform: scale(0.9);
+    }
+
+    100% {
+        transform: scale(0);
+    }
+}
+.grow-small {
+    animation: growSmall 0.4s ease forwards;
 }
