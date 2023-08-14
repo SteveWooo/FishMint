@@ -10,32 +10,36 @@ class KtRoot extends React.Component {
     }
 
     async componentDidMount() {
+        window.KtReactComponents.usingTheme = 'dba'
         const appListRes = await kt.controller.getAppList()
         // console.log(appListRes)
         this.setState({ 
             appList: appListRes.appList
         })
 
-        const cursorPoint = (await await kt.eScreen.getCursorScreenPoint()).result
-        const screenInfo = (await kt.eScreen.getDisplayMatching({
-            params: [{
-                x: cursorPoint.x,
-                y: cursorPoint.y,
-                width: 1,
-                height: 1
-            }]
-        })).result
-        // console.log(screenInfo)
-        const rect = {
-            width: 1/3 * screenInfo.workArea.width,
-            height: 1/3 * screenInfo.workArea.height
-        }
-        await kt.window.setRect({
-            x: screenInfo.workArea.x + Math.floor(screenInfo.workArea.width / 2 - rect.width / 2),
-            y: Math.floor(screenInfo.workArea.height / 2 - rect.height / 2),
-            width: Math.floor(rect.width),
-            height: Math.floor(rect.height),
-        }) 
+        // const cursorPoint = (await await kt.eScreen.getCursorScreenPoint()).result
+        // const screenInfo = (await kt.eScreen.getDisplayMatching({
+        //     params: [{
+        //         x: cursorPoint.x,
+        //         y: cursorPoint.y,
+        //         width: 1,
+        //         height: 1
+        //     }]
+        // })).result
+        // const rect = {
+        //     width: 1/3 * screenInfo.workArea.width,
+        //     height: 1/3 * screenInfo.workArea.height
+        // }
+        // await kt.window.setRect({ 
+        //     // x: screenInfo.workArea.x + Math.floor(screenInfo.workArea.width / 2 - rect.width / 2),
+        //     // y: Math.floor(screenInfo.workArea.height / 2 - rect.height / 2),
+        //     // width: Math.floor(rect.width),
+        //     // height: Math.floor(rect.height),
+        //     x: 0,
+        //     y: 0,
+        //     width: 300,
+        //     height: 300
+        // }) 
     }
 
     async openApp(appDirName) {
@@ -61,10 +65,10 @@ class KtRoot extends React.Component {
     }
 
     render() {
-        const colors = window.KtReactComponents.themes[window.KtReactComponents.usingTheme]
+        const colors = window.KtReactComponents.getThemeColors()
         return (
             <WindowFrame>
-                <GlobalHandler hotUpdate={false} />
+                <GlobalHandler hotUpdate={window.KtReactComponents.doHotUpdate} />
                 <DragBar />
                 <div style={{
                     display: 'flex',
@@ -79,11 +83,10 @@ class KtRoot extends React.Component {
                         flexWrap: 'wrap',
                         justifyContent: 'space-around',
                         // border: '1px solid red',
-                        paddingTop: '10px',
-                        paddingBottom: '10px',
+                        padding: '50px 0px 0px 0',
                         width: '100%',
                         height: '90%',
-                        overflow: 'auto'
+                        overflow: 'auto',
                     }} className='kt-better-scroll'>
                         {
                             Object.keys(this.state.appList).map(appDirName => {
@@ -93,25 +96,26 @@ class KtRoot extends React.Component {
                                 )
                                 return (
                                     <div style={{
-                                        width: '80px',
-                                        height: '50px',
-                                        // border: '1px solid #111',
-                                        display: 'flex',
-                                        justifyContent: 'center',
-                                        alignItems: 'center',
-                                        flexDirection: 'column'
-                                    }} 
-                                    // onClick={() => this.openApp(app.appDirName)}
-                                    draggable="true"
-                                    onDragStart={(e) => {this.onDragStart(e, app)}} 
-                                    onDragEnd={(e) => {this.onDragEnd(e, app)}}
+                                            width: '120px',
+                                            height: '120px',
+                                            // border: '1px solid #111',
+                                            display: 'flex',
+                                            justifyContent: 'center',
+                                            alignItems: 'center',
+                                            flexDirection: 'column'
+                                        }}
+                                        draggable="true"
+                                        onDragStart={(e) => {this.onDragStart(e, app)}} 
+                                        onDragEnd={(e) => {this.onDragEnd(e, app)}}
                                     >
                                         <img style={{
-                                            width: '30px'
+                                            width: '60px',
+                                            height: '60px'
                                         }} src={app.icon} 
                                         draggable="false"/>
                                         <span style={{
-                                            fontSize: '10px'
+                                            fontSize: '15px',
+                                            color: colors.ItemFontColor
                                         }}>
                                             {appName}
                                         </span>

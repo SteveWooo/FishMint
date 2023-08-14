@@ -12,12 +12,16 @@ window.KtReactComponents.themes = {
     },
     "dba": {
         ItemBackgroundColor: '#Fe4690',
-        ItemBorderColor: "FEE101"
+        ItemBorderColor: "#FEE101",
+        WindowBorderColor: '#f30ba4',
+        WindowBackgroundColor: '#fff',
+        ButtonFontColor: '#feea83',
+        ItemFontColor: '#616161',
     }
 }
 window.KtReactComponents.usingTheme = 'gg'
 window.KtReactComponents.getThemeColors = () => window.KtReactComponents.themes[window.KtReactComponents.usingTheme]
-
+window.KtReactComponents.doHotUpdate = true
 // 一些组件用的状态
 window.KtReactComponents.status = {
     doingRefresh: false

@@ -1,7 +1,9 @@
 {
     "configure": {
-        "width": 200,
-        "height": 200,
+        "width": 450,
+        "height": 600,
+        "x": 100,
+        "y": 100,
         "type": "normal",
         "frame": false,
         "resizable": false,

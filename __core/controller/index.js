@@ -6,6 +6,7 @@ class KtRoot extends React.Component {
         this.state = {
             appList: {},
             isShow: false,
+            showStatus: 'hide',
             appBaseWidth: 0,
             appBaseHeight: 0,
             appCenterX: 0,
@@ -16,13 +17,14 @@ class KtRoot extends React.Component {
         this.clickAudioRef = React.createRef()
         this.activeAudioRef = React.createRef()
         this.inActiveAudioRef = React.createRef()
-        this.maskRef = React.createRef()
+        this.contentRef = React.createRef()
+        this.backgroundRef = React.createRef()
+        this.appContentRef = React.createRef()
     }
 
     async componentDidMount() {
         window.KtReactComponents.usingTheme = 'dba'
         const appListRes = await kt.controller.getAppList()
-        // console.log(appListRes)
         this.setState({
             appList: appListRes.appList
         })
@@ -35,18 +37,7 @@ class KtRoot extends React.Component {
             }
         });
 
-        // 监听window的出现和消失事件
-        // kt.on.windowShow(async (e, args) => {
-        //     await this.stopAllAudio()
-        //     this.activeAudioRef.current.play()
-        //     await this.setPos()
-        //     await this.doShow()
-        // })
-
-        // kt.on.windowHide(async (e, args) => {
-        //     await this.doHide()
-        // })
-
+        // 发起唤醒执行
         kt.on.windowWake(async (e, args) => {
             if (this.state.isShow) {
                 await this.doHide()
@@ -54,6 +45,19 @@ class KtRoot extends React.Component {
             }
 
             await this.doShow()
+        })
+
+        // 做鼠标跟随动画
+        document.addEventListener('mousemove', (e) => {
+            const mouseX = e.clientX;
+            const mouseY = e.clientY;
+            const offsetX = mouseX - this.state.appCenterX
+            const offsetY = mouseY - this.state.appCenterY
+
+            this.appContentRef.current.style.transform =
+                `translate(${-1 * offsetX * 0.02}px, ${-1 * offsetY * 0.02}px)`
+            this.backgroundRef.current.style.transform =
+                `translate(${-1 * offsetX * 0.01}px, ${-1 * offsetY * 0.01}px)`
         })
     }
 
@@ -72,6 +76,11 @@ class KtRoot extends React.Component {
         return
     }
 
+    async playAudio(audioElement) {
+        await this.stopAllAudio()
+        audioElement.play()
+    }
+
     // 根据屏幕大小，设置好基础参数值与窗口大小
     async setPos() {
         const cursorPoint = (await await kt.eScreen.getCursorScreenPoint()).result
@@ -83,7 +92,6 @@ class KtRoot extends React.Component {
                 height: 1
             }]
         })).result
-        // console.log(screenInfo)
         await kt.window.setRect({
             x: screenInfo.bounds.x,
             y: screenInfo.bounds.y,
@@ -95,7 +103,7 @@ class KtRoot extends React.Component {
             // height: 400
         })
 
-        // 设置app框的大小
+        // 设置app框的大小基准
         this.setState({
             appBaseWidth: screenInfo.bounds.width / 10,
             appBaseHeight: screenInfo.bounds.height / 10,
@@ -104,56 +112,36 @@ class KtRoot extends React.Component {
         })
     }
 
-    getStyle() {
-        const colors = window.KtReactComponents.themes[window.KtReactComponents.usingTheme]
-        return {
-            height: '100vh',
-            display: 'flex',
-            flexDirection: 'column',
-            backgroundColor: '#1d1d1dcc',
-            flexWrap: 'wrap',
-            alignItems: 'center',
-            justifyContent: 'center',
-            fontFamily: 'JiangCheng',
-            // backgroundColor: colors.WindowBackgroundColor,
-        }
-    }
-
-    contentStyle() {
-        const colors = window.KtReactComponents.themes[window.KtReactComponents.usingTheme]
-        return {
-            width: '100%',
-            height: '100%',
-            // flexGrow: 1,
-            zIndex: 1,
-            display: 'flex',
-            justifyContent: 'center',
-            flexDirection: 'row',
-            alignItems: 'flex-start'
-        }
-    }
-
+    // 实现界面弹出和收回
     async doHide() {
-        await this.stopAllAudio()
-        this.inActiveAudioRef.current.play()
+        if (this.state.showStatus !== 'show') return
+        await this.playAudio(this.inActiveAudioRef.current)
         this.setState({
-            isShow: false
+            isShow: false,
+            showStatus: 'hidding'
         }, async () => {
             setTimeout(async () => {
+                this.setState({
+                    showStatus: 'hide'
+                })
                 await kt.window.hide()
             }, 200)
         })
     }
-
     async doShow() {
-        await this.stopAllAudio()
-        this.activeAudioRef.current.play()
+        if (this.state.showStatus !== 'hide') return
+        await this.playAudio(this.activeAudioRef.current)
         await this.setPos()
         await kt.window.show()
         this.setState({
-            isShow: true
+            isShow: true,
+            showStatus: 'showing'
         }, () => {
-
+            setTimeout(() => {
+                this.setState({
+                    showStatus: 'show'
+                })
+            }, 200)
         })
     }
 
@@ -172,27 +160,69 @@ class KtRoot extends React.Component {
         const colors = window.KtReactComponents.themes[window.KtReactComponents.usingTheme]
         const isHor = this.state.appBaseWidth > this.state.appBaseHeight
         return (
-            <div style={this.getStyle()}
+            <div
+                style={{
+                    height: '100vh',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    backgroundColor: '#1d1d1dcc',
+                    flexWrap: 'wrap',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    fontFamily: 'JiangCheng',
+                    overflow: 'hidden',
+                }}
                 ref={this.mainBodyRef}
                 onClick={() => { this.clickMask() }}
                 className={`${this.state.isShow ? 'fade-in' : 'fade-out'}`}
             >
-                <GlobalHandler hotUpdate={true} />
+                {/* 通用全局控制器 */}
+                <GlobalHandler hotUpdate={window.KtReactComponents.doHotUpdate} />
+                {/* 标题 */}
                 <div
                     className={`${this.state.isShow ? 'slide-right' : 'slide-left'} left-top-title`}>
                     - FishMint -
                 </div>
-                <div className={`left-top-icon ${this.state.isShow ? 'slide-right' : 'slide-left'}`}>
+                <div className={`left-top-icon ${this.state.isShow ? 'slide-down' : 'slide-up'}`}>
                     <img src="./FishMint.png" />
                 </div>
-                <div style={this.contentStyle()}>
-                    <div style={{
+
+                {/* 内容 */}
+                <div style={{
+                    width: '100%',
+                    height: '100%',
+                    overflow: 'hidden',
+                    zIndex: 1,
+                    display: 'flex',
+                    justifyContent: 'center',
+                    flexDirection: 'row',
+                    alignItems: 'flex-start'
+                }} ref={this.contentRef}>
+                    {/* 背景图 */}
+                    <div className={`bg-img`} >
+                        {/* 用来加动画的 */}
+                        <div ref={this.backgroundRef} style={{
+                            width: '100%',
+                            height: '100%',
+                            display: 'flex',
+                            justifyContent: 'center',
+                            alignItems: 'center'
+                        }}>
+                            <img className={`${this.state.isShow ? 'grow-big' : 'grow-small'}`}
+                                style={{
+                                    width: `${isHor ? '50%' : '90%'}`
+                                }} src="./bg-trans-color.png" />
+                        </div>
+                    </div>
+
+                    {/* 按钮挂件 */}
+                    <div ref={this.appContentRef} style={{
                         width: '100%',
                         height: '100%',
                         display: 'flex'
                     }}>
                         <div
-                            className={`app-container sunshine-box-shadow ${this.state.isShow ? 'slide-down' : 'slide-up'}`}
+                            className={`app-container ${this.state.isShow ? 'grow-big' : 'grow-small'}`}
                             style={{
                                 width: this.state.appBaseWidth * (isHor ? 1 : 2) + 'px',
                                 height: this.state.appBaseWidth * (isHor ? 1 : 2) + 'px',
@@ -205,7 +235,7 @@ class KtRoot extends React.Component {
                         </div>
 
                         <div
-                            className={`app-container sunshine-box-shadow ${this.state.isShow ? 'slide-down' : 'slide-up'}`}
+                            className={`app-container ${this.state.isShow ? 'grow-big' : 'grow-small'}`}
                             style={{
                                 width: this.state.appBaseWidth * (isHor ? 1 : 2) + 'px',
                                 height: this.state.appBaseWidth * (isHor ? 1 : 2) + 'px',
@@ -218,16 +248,7 @@ class KtRoot extends React.Component {
                         </div>
                     </div>
                 </div>
-                {/* <div
-                    ref={this.maskRef}
-                    className="blurred mask"
-                ></div> */}
-                <div className={`bg-img`}>
-                    <img className={`${this.state.isShow ? 'grow-big' : 'grow-small'}`} 
-                        style={{
-                        width: `${isHor ? '50%' : '90%'}`
-                    }} src="./bg-trans-color.png" />
-                </div>
+                {/* 各个音频 */}
                 <audio ref={this.clickAudioRef} src="/kt_app/utils/res/audios/click.mp3"></audio>
                 <audio ref={this.activeAudioRef} src="/kt_app/__core/controller/Capybara_Active.mp3"></audio>
                 <audio ref={this.inActiveAudioRef} src="/kt_app/__core/controller/Capybara_InActive.mp3"></audio>

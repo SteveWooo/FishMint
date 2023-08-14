@@ -1,11 +1,3 @@
-.sunshine-box-shadow {
-    box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.6), -2px -2px 8px #fee101aa;
-}
-
-.click-through {
-    pointer-events: none;
-}
-
 .left-top-title {
     position: absolute;
     left: 100px;
@@ -19,23 +11,12 @@
 
 .left-top-icon {
     position: absolute;
-    left: 130px;
+    left: 140px;
     top: 35px;
 }
 
 .left-top-icon img {
     width: 100px;
-}
-
-.mask {
-    width: 100%;
-    height: 100%;
-    background-color: #1d1d1dcc;
-    position: fixed;
-    top: 0;
-    left: 0;
-    pointer-events: auto;
-    z-index: 0;
 }
 
 .bg-img {
@@ -53,8 +34,13 @@
 .bg-img img {
     display: block;
     width: 50%;
+    user-select: none;
     /* height: 50%; */
     /* object-fit: cover; */
+}
+
+.sunshine-box-shadow {
+    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.6), -1px -1px 10px #fee101aa;
 }
 
 .app-container {
@@ -63,12 +49,11 @@
     justify-content: center;
     cursor: pointer;
     user-select: none;
-    font-size: 40px;
     pointer-events: all;
     /* border-radius: 30px 30px 30px 30px; */
     border-radius: 50%;
     /* border: 3px solid #FEE101; */
-    background-image:
+    /* background-image:
         radial-gradient(closest-side, rgba(235, 105, 78, 0.9), rgba(235, 15, 78, 0)),
         radial-gradient(closest-side, rgba(243, 11, 164, 0.9), rgba(243, 11, 164, 0)),
         radial-gradient(closest-side, rgba(254, 234, 131, 0.9), rgba(254, 234, 131, 0)),
@@ -87,15 +72,12 @@
         40vmax 40vmax,
         40vmax 10vmax;
     background-color: #ee99d9;
-    background-repeat: no-repeat;
+    background-repeat: no-repeat; */
 
-    /* background-image: url('./app-container-bg-1-trans-color.png');
+    background-image: url('./app-container-bg-circle.png');
     background-repeat: no-repeat;
     background-position: center center;
-    background-size: 100%;  */
-
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
+    background-size: 100%;
 
     color: transparent;
     text-shadow: 0px 0px 1px #ffffffee,
@@ -103,13 +85,10 @@
 }
 
 .app-container:hover {
-    /* text-shadow: 0px 0px 1px #ffffffee,
-        0 8px 16px #111111cc; */
-    background-color: #eb6ecc;
-}
-
-.blurred {
-    backdrop-filter: blur(20px);
+    text-shadow: 0px 0px 1px #ffffffee,
+        0 8px 10px #111111cc;
+    /* background-color: #eb6ecc; */
+    scale: 1.1;
 }
 
 @keyframes fadeIn {
@@ -140,7 +119,6 @@
     animation: fadeOut 0.4s ease-out forwards;
 }
 
-/* 定义关键帧动画 */
 @keyframes slideRight {
     from {
         opacity: 0;
@@ -157,7 +135,6 @@
     animation: slideRight 0.3s ease forwards;
 }
 
-/* 定义关键帧动画 */
 @keyframes slideLeft {
     from {
         transform: translateX(0px);
@@ -167,48 +144,41 @@
         transform: translateX(-180px);
     }
 }
-
 .slide-left {
     animation: slideLeft 0.3s ease forwards;
 }
 
-/* 定义关键帧动画 */
 @keyframes slideDown {
     0% {
         transform: translateY(-30px);
-        box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.6), -10px -10px 10px #fee10144;
+        /* box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.6), -10px -10px 10px #fee10144; */
     }
 
     66% {
         transform: translateY(-10px);
-        box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.6), -10px -10px 10px #fee10199;
+        /* box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.6), -10px -10px 10px #fee10199; */
     }
 
     100% {
         transform: translateY(0);
-        box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.6), -2px -2px 8px #fee101dd;
+        /* box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.6), -2px -2px 8px #fee101dd; */
     }
 }
-
-/* 应用动画到元素 */
 .slide-down {
     animation: slideDown 0.8s ease forwards;
 }
 
-/* 定义关键帧动画 */
 @keyframes slideUp {
     0% {
         transform: translateY(0px);
-        box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.6), -2px -2px 8px #fee101dd;
+        /* box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.6), -2px -2px 8px #fee101dd; */
     }
 
     100% {
         transform: translateY(-30px);
-        box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.6), -10px -10px 10px #fee10144;
+        /* box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.6), -10px -10px 10px #fee10144; */
     }
 }
-
-/* 应用动画到元素 */
 .slide-up {
     animation: slideUp 0.4s ease forwards;
 }
@@ -219,7 +189,7 @@
         transform: scale(0);
     }
 
-    66% {
+    80% {
         transform: scale(1.2);
     }
 

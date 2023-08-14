@@ -104,6 +104,7 @@ class KtRoot extends React.Component {
         this.state = {}
 
         // 可以在这里指定下主题色
+        window.KtReactComponents.usingTheme = 'dba'
     }
 
     getStyle() {
@@ -129,7 +130,6 @@ class KtRoot extends React.Component {
             // backgroundColor: '#fff',
             width: '100%',
             flexGrow: 1,
-
             display: 'flex',
             justifyContent: 'center',
             flexDirection: 'row',
@@ -140,7 +140,7 @@ class KtRoot extends React.Component {
     render() {
         return (
             <div style={this.getStyle()}>
-                <GlobalHandler hotUpdate={true} />
+                <GlobalHandler hotUpdate={window.KtReactComponents.doHotUpdate} />
                 <DragBar />
                 <div style={this.contentStyle()}
                     className='div-container'>
