@@ -1,4 +1,4 @@
-const { WindowFrame, DragBar, CmdInputter, NoteTextarea, GlobalHandler } = window.KtReactComponents
+const { WindowFrame, DragBar, CmdInputter, NoteTextarea, GlobalHandler } = window.fmComponents
 
 const OBJ_LIST = {
     CAPYBARA: 'capybara',
@@ -18,7 +18,7 @@ const BOTTOM_GAP = 50
 const LEFT_GAP = 20
 const RIGHT_GAP = 20
 
-class KtRoot extends React.Component {
+class FMRoot extends React.Component {
     constructor(props) {
         super(props)
         this.state = {}
@@ -33,8 +33,8 @@ class KtRoot extends React.Component {
     }
 
     async componentDidMount() {
-        let appInfo = await kt.window.getAppInfo()
-        let windowInfo = await kt.window.getInfo()
+        let appInfo = await fm.window.getAppInfo()
+        let windowInfo = await fm.window.getInfo()
         if (windowInfo.startupArgs && windowInfo.startupArgs.obj === OBJ_LIST.LEAF) {
             this._initLeaf()
         } else {
@@ -67,12 +67,12 @@ class KtRoot extends React.Component {
             obj: OBJ_LIST.CAPYBARA
         })
         // 处理水豚的逻辑
-        kt.on.windowBrocast(async (e, data) => {
+        fm.on.windowBrocast(async (e, data) => {
             if (data.content.event === EVENT_TYPE.MOVED) {
                 this.checkLeafCouldEat()
             }
         })
-        kt.on.windowMoved(async (e, data) => {
+        fm.on.windowMoved(async (e, data) => {
             this.checkLeafCouldEat()
         })
 
@@ -80,8 +80,8 @@ class KtRoot extends React.Component {
         this.doCreateLeaf()
 
         // 修改位置和大小
-        const screenInfo = (await kt.eScreen.getPrimaryDisplay()).result
-        await kt.window.setRect({
+        const screenInfo = (await fm.eScreen.getPrimaryDisplay()).result
+        await fm.window.setRect({
             x: screenInfo.workArea.width - 220,
             y: screenInfo.workArea.height - 300,
             width: 200,
@@ -95,14 +95,14 @@ class KtRoot extends React.Component {
         })
 
         // 随机出现屏幕上方
-        const screenInfo = (await kt.eScreen.getPrimaryDisplay()).result
+        const screenInfo = (await fm.eScreen.getPrimaryDisplay()).result
         let xMax = screenInfo.workArea.width - 200
         let yMax = 300
 
         let x = Math.random() * (xMax - 20) + 20
         let y = Math.random() * (yMax - 20) + 20
 
-        await kt.window.setRect({
+        await fm.window.setRect({
             x: x,
             y: y,
             width: 50,
@@ -110,8 +110,8 @@ class KtRoot extends React.Component {
         })
 
         // 处理叶子的逻辑
-        await kt.on.windowMoved(async (e, data) => {
-            await kt.windowBrocast({
+        await fm.on.windowMoved(async (e, data) => {
+            await fm.windowBrocast({
                 content: {
                     event: EVENT_TYPE.MOVED,
                     obj: OBJ_LIST.LEAF
@@ -121,9 +121,9 @@ class KtRoot extends React.Component {
     }
 
     async doCreateLeaf() {
-        let appInfo = await kt.window.getAppInfo()
+        let appInfo = await fm.window.getAppInfo()
         if (Object.keys(appInfo.windows).length < MAX_LEAF + 1) { 
-            await kt.openApp({
+            await fm.openApp({
                 appDirName: 'github.com.stevewooo/capybara',
                 startupArgs: {
                     obj: OBJ_LIST.LEAF
@@ -139,13 +139,13 @@ class KtRoot extends React.Component {
 
     // 检查是否有叶子可以吃
     async checkLeafCouldEat() {
-        let appWindows = (await kt.window.getAppInfo()).windows
-        let configure = (await kt.window.getInfo()).configure
+        let appWindows = (await fm.window.getAppInfo()).windows
+        let configure = (await fm.window.getInfo()).configure
         for(let __wid in appWindows) {
             if (__wid === configure.__wid) continue 
 
             if (this.areRectanglesColliding(configure, appWindows[__wid].configure)) {
-                kt.closeWindow({
+                fm.closeWindow({
                     __wid: __wid
                 })
             }
@@ -169,7 +169,7 @@ class KtRoot extends React.Component {
                             justifyContent: 'center',
                             pointerEvents: 'none'
                         }} className="kt-dragger">
-                            <img src="/kt_app/favicon.ico" draggable="false" style={{
+                            <img src="/fm_app/favicon.ico" draggable="false" style={{
                                 width: '100%',
                                 height: 'auto'
                             }} />
@@ -196,5 +196,5 @@ class KtRoot extends React.Component {
     }
 }
 
-ReactDOM.render(<KtRoot />, document.getElementById("root"))
-kt.window.show().then()
+ReactDOM.render(<FMRoot />, document.getElementById("root"))
+fm.window.show().then()

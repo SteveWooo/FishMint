@@ -9,7 +9,7 @@
         "hasShadow": true,
         "alwaysOnTop": false,
 
-        "fm_devTools": false,
+        "fm_devTools": true,
         "fm_showWhenStartup": true,
         "fm_isolateSessionLevel": "app"
     }

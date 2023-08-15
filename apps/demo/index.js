@@ -1,6 +1,6 @@
-const { DragBar, WindowFrame, GlobalHandler } = window.KtReactComponents
+const { DragBar, WindowFrame, GlobalHandler } = window.fmComponents
 
-class KtRoot extends React.Component {
+class FMRoot extends React.Component {
     constructor(props) {
         super(props)
     }
@@ -9,7 +9,6 @@ class KtRoot extends React.Component {
         return (
             <WindowFrame>
                 <GlobalHandler hotUpdate={true} />
-                <DragBar />
                 <div style={{
                     display: 'flex',
                     justifyContent: 'center',
@@ -24,4 +23,4 @@ class KtRoot extends React.Component {
     }
 }
 
-ReactDOM.render(<KtRoot />, document.getElementById('root'))
+ReactDOM.render(<FMRoot />, document.getElementById('root'))

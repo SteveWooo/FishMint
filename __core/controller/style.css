@@ -151,17 +151,14 @@
 @keyframes slideDown {
     0% {
         transform: translateY(-30px);
-        /* box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.6), -10px -10px 10px #fee10144; */
     }
 
     66% {
         transform: translateY(-10px);
-        /* box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.6), -10px -10px 10px #fee10199; */
     }
 
     100% {
         transform: translateY(0);
-        /* box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.6), -2px -2px 8px #fee101dd; */
     }
 }
 .slide-down {
@@ -171,12 +168,10 @@
 @keyframes slideUp {
     0% {
         transform: translateY(0px);
-        /* box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.6), -2px -2px 8px #fee101dd; */
     }
 
     100% {
         transform: translateY(-30px);
-        /* box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.6), -10px -10px 10px #fee10144; */
     }
 }
 .slide-up {

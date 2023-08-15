@@ -9,8 +9,8 @@
         "hasShadow": true,
         "alwaysOnTop": true,
 
-        "kt_devTools": true,
-        "kt_showWhenStartup": true,
-        "kt_isolateSessionLevel": "app"
+        "fm_devTools": true,
+        "fm_showWhenStartup": true,
+        "fm_isolateSessionLevel": "app"
     }
 }

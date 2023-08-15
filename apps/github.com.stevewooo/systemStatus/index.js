@@ -1,7 +1,7 @@
-const { DragBar, WindowFrame, GlobalHandler } = window.KtReactComponents
+const { DragBar, WindowFrame, GlobalHandler } = window.fmComponents
 const { LinearProgress } = MaterialUI;
 
-class KtRoot extends React.Component {
+class FMRoot extends React.Component {
     constructor(props) {
         super(props)
 
@@ -18,7 +18,7 @@ class KtRoot extends React.Component {
     }
 
     async componentDidMount() {
-        const res = (await kt.system.getInfo({
+        const res = (await fm.system.getInfo({
             valueObject: {
                 'networkInterfaceDefault': '*'
             }
@@ -30,7 +30,7 @@ class KtRoot extends React.Component {
     }
 
     async updateInfo() {
-        const systemInfoRes = await kt.system.getInfo({
+        const systemInfoRes = await fm.system.getInfo({
             valueObject: {
                 currentLoad: 'currentLoad',
                 mem: 'used total',
@@ -72,7 +72,7 @@ class KtRoot extends React.Component {
         let _doUpdateInfo = async () => {
             clearTimeout(timer)
             timer = null
-            const systemInfo = (await kt.system.getInfo({
+            const systemInfo = (await fm.system.getInfo({
                 valueObject: {
                     currentLoad: 'currentLoad',
                     mem: 'used total',
@@ -117,7 +117,7 @@ class KtRoot extends React.Component {
                 class Panel {
                     constructor(scene) {
                         this.scene = scene
-                        const colors = window.KtReactComponents.getThemeColors()
+                        const colors = window.fmComponents.getThemeColors()
                         this.border = scene.add.graphics()
                         this.line = scene.add.graphics()
                         this.zeroLine = scene.add.graphics()
@@ -216,13 +216,15 @@ class KtRoot extends React.Component {
 
     render() {
         return (
-            <WindowFrame>
-                <GlobalHandler hotUpdate={false} />
-                <DragBar />
+            <WindowFrame closeWarn={false} >
+                <GlobalHandler hotUpdate={true} />
                 <div style={{
+                    width: '100%',
                     display: 'flex',
                     justifyContent: 'flex-start',
-                    flexWrap: 'wrap'
+                    flexDirection: 'row',
+                    flexWrap: 'wrap',
+                    alignItems: 'flex-start'
                 }}>
                     <div style={{
                         width: '100%'
@@ -241,17 +243,19 @@ class KtRoot extends React.Component {
                     <div>
                         ip： {this.state.ip}
                     </div>
+
+                    <div style={{
+                        width: '100%'
+                    }}>
+                        <canvas id="phaserCanvas"></canvas>
+                    </div>
                 </div>
 
-                <div style={{
-                    width: '100%'
-                }}>
-                    <canvas id="phaserCanvas"></canvas>
-                </div>
+                
             </WindowFrame>
         )
     }
 }
 
-ReactDOM.render(<KtRoot />, document.getElementById("root"))
-kt.window.show().then()
+ReactDOM.render(<FMRoot />, document.getElementById("root"))
+fm.window.show().then()

@@ -5,20 +5,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Capybara</title>
     <!-- 一些通用样式，不用也行 -->
-    <link rel="stylesheet" href="/kt_app/utils/components/ktReactStyle.css">
+    <link rel="stylesheet" href="/fm_app/utils/components/FMComponentStyle.css">
+    <link rel="stylesheet" href="/fm_app/utils/cdnjs.cloudflare.com_ajax_libs_animate.css_4.1.1_animate.min.css">
     <link rel="stylesheet" href="./style.css">
 </head>
 <body>
     <div id="root"></div>
     <!-- cdn版react引入，不用也行，自己webpack打，或者vue ng也行 -->
-    <script src="/kt_app/utils/unpkg.com_react@18.2.0_umd_react.production.min.js"></script>
-    <script src="/kt_app/utils/unpkg.com_react-dom@18.2.0_umd_react-dom.production.min.js"></script>
-    <script src="/kt_app/utils/cdn.jsdelivr.net_npm_@babel_standalone@7.15.8_babel.min.js"></script>
+    <script src="/fm_app/utils/unpkg.com_react@18.2.0_umd_react.production.min.js"></script>
+    <script src="/fm_app/utils/unpkg.com_react-dom@18.2.0_umd_react-dom.production.min.js"></script>
+    <script src="/fm_app/utils/cdn.jsdelivr.net_npm_@babel_standalone@7.15.8_babel.min.js"></script>
     <!-- kt前端的工具，不用也行 -->
-    <script src="/kt_app/utils/KtFront.js"></script>
+    <script src="/fm_app/utils/components/FMSdk.js"></script>
     <!-- 给kt写了一些组件，不用也行 -->
-    <script type="text/babel" src="/kt_app/utils/components/KtReact.js"></script>
-    <script src="/kt_app/utils/mui_material@5.14.3_umd_material-ui.production.min.js"></script>
+    <script type="text/babel" src="/fm_app/utils/components/FMComponent.js"></script>
+    <script src="/fm_app/utils/mui_material@5.14.3_umd_material-ui.production.min.js"></script>
     <!-- 入口，不用也行 -->
     <script type="text/babel" src="./index.js"></script>
 </body>

@@ -1,6 +1,6 @@
-const { DragBar, WindowFrame, GlobalHandler } = window.KtReactComponents
+const { DragBar, WindowFrame, GlobalHandler } = window.fmComponents
 
-class KtRoot extends React.Component {
+class FMRoot extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
@@ -10,41 +10,16 @@ class KtRoot extends React.Component {
     }
 
     async componentDidMount() {
-        window.KtReactComponents.usingTheme = 'dba'
-        const appListRes = await kt.controller.getAppList()
-        // console.log(appListRes)
+        window.fmComponents.usingTheme = 'dba'
+        const appListRes = await fm.controller.getAppList()
         this.setState({ 
             appList: appListRes.appList
         })
-
-        // const cursorPoint = (await await kt.eScreen.getCursorScreenPoint()).result
-        // const screenInfo = (await kt.eScreen.getDisplayMatching({
-        //     params: [{
-        //         x: cursorPoint.x,
-        //         y: cursorPoint.y,
-        //         width: 1,
-        //         height: 1
-        //     }]
-        // })).result
-        // const rect = {
-        //     width: 1/3 * screenInfo.workArea.width,
-        //     height: 1/3 * screenInfo.workArea.height
-        // }
-        // await kt.window.setRect({ 
-        //     // x: screenInfo.workArea.x + Math.floor(screenInfo.workArea.width / 2 - rect.width / 2),
-        //     // y: Math.floor(screenInfo.workArea.height / 2 - rect.height / 2),
-        //     // width: Math.floor(rect.width),
-        //     // height: Math.floor(rect.height),
-        //     x: 0,
-        //     y: 0,
-        //     width: 300,
-        //     height: 300
-        // }) 
     }
 
     async openApp(appDirName) {
         this.clickAudioRef.current.play()
-        await kt.openApp({
+        await fm.openApp({
             appDirName: appDirName
         })
     }
@@ -58,31 +33,29 @@ class KtRoot extends React.Component {
             x: e.screenX,
             y: e.screenY
         }
-        await kt.openApp({
+        await fm.openApp({
             appDirName: appInfo.appDirName,
             position: pos
         })
     }
 
     render() {
-        const colors = window.KtReactComponents.getThemeColors()
+        const colors = window.fmComponents.getThemeColors()
         return (
-            <WindowFrame>
-                <GlobalHandler hotUpdate={window.KtReactComponents.doHotUpdate} />
-                <DragBar />
+            <WindowFrame closeWarn={false}>
+                <GlobalHandler hotUpdate={window.fmComponents.doHotUpdate} />
                 <div style={{
                     display: 'flex',
                     justifyContent: 'center',
-                    alignItems: 'center',
                     width: '100%',
-                    flexGrow: 1
+                    // height: '100%'
                 }}>
                     <div style={{
                         display: 'flex',
                         flexDirection: 'row',
                         flexWrap: 'wrap',
-                        justifyContent: 'space-around',
-                        // border: '1px solid red',
+                        justifyContent: 'flex-start',
+                        alignItems: 'flex-start',
                         padding: '50px 0px 0px 0',
                         width: '100%',
                         height: '90%',
@@ -94,11 +67,19 @@ class KtRoot extends React.Component {
                                 const appName = app.appDirName.substring(
                                     app.appDirName.lastIndexOf('/') + 1
                                 )
+                                const animations = [
+                                    'animate__bounce',
+                                    'animate__pulse',
+                                    'animate__headShake',
+                                    'animate__wobble',
+                                    'animate__heartBeat',
+                                    'animate__tada'
+                                ]
+                                const randomAnimateIndex = Math.floor(Math.random() * animations.length)
                                 return (
                                     <div style={{
-                                            width: '120px',
+                                            width: '33%',
                                             height: '120px',
-                                            // border: '1px solid #111',
                                             display: 'flex',
                                             justifyContent: 'center',
                                             alignItems: 'center',
@@ -107,6 +88,7 @@ class KtRoot extends React.Component {
                                         draggable="true"
                                         onDragStart={(e) => {this.onDragStart(e, app)}} 
                                         onDragEnd={(e) => {this.onDragEnd(e, app)}}
+                                        className={`animate__animated ${animations[randomAnimateIndex]}`}
                                     >
                                         <img style={{
                                             width: '60px',
@@ -124,11 +106,11 @@ class KtRoot extends React.Component {
                             })
                         }
                     </div>
-                    <audio ref={this.clickAudioRef} src="/kt_app/utils/res/audios/click.mp3"></audio>
+                    <audio ref={this.clickAudioRef} src="/fm_app/utils/res/audios/click.mp3"></audio>
                 </div>
             </WindowFrame>
         )
     }
 }
 
-ReactDOM.render(<KtRoot />, document.getElementById('root'))
+ReactDOM.render(<FMRoot />, document.getElementById('root'))

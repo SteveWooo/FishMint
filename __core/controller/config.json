@@ -11,9 +11,7 @@
         "hasShadow": true,
         "alwaysOnTop": true,
 
-        "kt_devTools": true,
-        "kt_isolateSession": true,
-        "kt_recordRectInfo": true,
-        "kt_isolateSessionLevel": "app"
+        "fm_devTools": false,
+        "fm_isolateSessionLevel": "app"
     }
 }

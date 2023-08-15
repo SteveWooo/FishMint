@@ -1,16 +1,15 @@
 {
     "configure": {
-        "width": 200,
-        "height": 200,
+        "width": 380,
+        "height": 220,
         "type": "toolbar",
         "frame": false,
-        "resizable": false,
+        "resizable": true,
         "transparent": true,
         "hasShadow": false,
         "alwaysOnTop": true,
 
-        "fm_devTools": false,
-        "fm_showWhenStartup": false,
+        "fm_devTools": true,
         "fm_isolateSessionLevel": "app"
     }
 }

@@ -1,6 +1,6 @@
-const { DragBar, CmdInputter, GlobalHandler } = window.KtReactComponents
+const { DragBar, CmdInputter, GlobalHandler } = window.fmComponents
 
-class KtRoot extends React.Component {
+class FMRoot extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
@@ -23,8 +23,8 @@ class KtRoot extends React.Component {
     }
 
     async componentDidMount() {
-        window.KtReactComponents.usingTheme = 'dba'
-        const appListRes = await kt.controller.getAppList()
+        window.fmComponents.usingTheme = 'dba'
+        const appListRes = await fm.controller.getAppList()
         this.setState({
             appList: appListRes.appList
         })
@@ -38,7 +38,7 @@ class KtRoot extends React.Component {
         });
 
         // 发起唤醒执行
-        kt.on.windowWake(async (e, args) => {
+        fm.on.windowWake(async (e, args) => {
             if (this.state.isShow) {
                 await this.doHide()
                 return
@@ -83,8 +83,8 @@ class KtRoot extends React.Component {
 
     // 根据屏幕大小，设置好基础参数值与窗口大小
     async setPos() {
-        const cursorPoint = (await await kt.eScreen.getCursorScreenPoint()).result
-        const screenInfo = (await kt.eScreen.getDisplayMatching({
+        const cursorPoint = (await await fm.eScreen.getCursorScreenPoint()).result
+        const screenInfo = (await fm.eScreen.getDisplayMatching({
             params: [{
                 x: cursorPoint.x,
                 y: cursorPoint.y,
@@ -92,7 +92,7 @@ class KtRoot extends React.Component {
                 height: 1
             }]
         })).result
-        await kt.window.setRect({
+        await fm.window.setRect({
             x: screenInfo.bounds.x,
             y: screenInfo.bounds.y,
             width: screenInfo.bounds.width,
@@ -124,7 +124,7 @@ class KtRoot extends React.Component {
                 this.setState({
                     showStatus: 'hide'
                 })
-                await kt.window.hide()
+                await fm.window.hide()
             }, 200)
         })
     }
@@ -132,7 +132,7 @@ class KtRoot extends React.Component {
         if (this.state.showStatus !== 'hide') return
         await this.playAudio(this.activeAudioRef.current)
         await this.setPos()
-        await kt.window.show()
+        await fm.window.show()
         this.setState({
             isShow: true,
             showStatus: 'showing'
@@ -150,14 +150,14 @@ class KtRoot extends React.Component {
     }
 
     async openApp(appDirName) {
-        await kt.openApp({
+        await fm.openApp({
             appDirName: appDirName
         })
         await this.clickMask()
     }
 
     render() {
-        const colors = window.KtReactComponents.themes[window.KtReactComponents.usingTheme]
+        const colors = window.fmComponents.themes[window.fmComponents.usingTheme]
         const isHor = this.state.appBaseWidth > this.state.appBaseHeight
         return (
             <div
@@ -177,7 +177,7 @@ class KtRoot extends React.Component {
                 className={`${this.state.isShow ? 'fade-in' : 'fade-out'}`}
             >
                 {/* 通用全局控制器 */}
-                <GlobalHandler hotUpdate={window.KtReactComponents.doHotUpdate} />
+                <GlobalHandler hotUpdate={window.fmComponents.doHotUpdate} />
                 {/* 标题 */}
                 <div
                     className={`${this.state.isShow ? 'slide-right' : 'slide-left'} left-top-title`}>
@@ -249,11 +249,11 @@ class KtRoot extends React.Component {
                     </div>
                 </div>
                 {/* 各个音频 */}
-                <audio ref={this.clickAudioRef} src="/kt_app/utils/res/audios/click.mp3"></audio>
-                <audio ref={this.activeAudioRef} src="/kt_app/__core/controller/Capybara_Active.mp3"></audio>
-                <audio ref={this.inActiveAudioRef} src="/kt_app/__core/controller/Capybara_InActive.mp3"></audio>
+                <audio ref={this.clickAudioRef} src="/fm_app/utils/res/audios/click.mp3"></audio>
+                <audio ref={this.activeAudioRef} src="/fm_app/__core/controller/active.mp3"></audio>
+                <audio ref={this.inActiveAudioRef} src="/fm_app/__core/controller/inActive.mp3"></audio>
             </div>
         )
     }
 }
-ReactDOM.render(<KtRoot />, document.getElementById("root"))
+ReactDOM.render(<FMRoot />, document.getElementById("root"))

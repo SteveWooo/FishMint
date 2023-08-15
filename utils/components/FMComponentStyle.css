@@ -1,0 +1,143 @@
+@font-face {
+    font-family: JiangCheng;
+    src: url('../res/fonts/jiangchengCircle.ttf') format('truetype');
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    background: transparent;
+    /* font-family: JiangCheng; */
+}
+
+/* 无frame下，加上这个类的dom才能被作为边框拖动整个窗口 */
+.kt-dragger {
+    -webkit-app-region: drag;
+}
+
+/* 一些用来装东西的div通用样式 */
+.div-container:hover {
+    cursor: default;
+}
+
+/* 给textarea用的通用样式 */
+.kt-good-textarea-1 { 
+    resize: none;
+    box-sizing: border-box;
+    padding-right: 15px;
+    overflow: hidden;
+}
+
+.kt-good-textarea-1:focus {
+    outline: none;
+}
+
+.kt-good-textarea-1::-webkit-scrollbar {
+    width: 3px;
+    background-color: #D8D8C0;
+}
+
+.kt-good-textarea-1::-webkit-scrollbar-thumb {
+    border-radius: 1px;
+    -moz-border-radius: 1px;
+    -webkit-border-radius: 1px;
+    background-color: #4B3434;
+}
+
+.kt-good-textarea-1::-webkit-scrollbar-track {
+    background-color: transparent;
+}
+
+/* 命令专用输出框的样式 */
+.kt-cmd-output {
+    resize: none;
+    box-sizing: border-box;
+}
+
+.kt-cmd-output::-webkit-scrollbar {
+    width: 8px;
+    background-color: #D8D8C0;
+}
+
+.kt-cmd-output:focus {
+    outline: none;
+}
+
+.kt-cmd-output::-webkit-scrollbar-thumb {
+    border-radius: 3px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    background-color: #4B3434;
+}
+
+.kt-cmd-output::-webkit-scrollbar-track {
+    background-color: transparent;
+}
+
+/* 好看的滚动条 */
+.better-scroll {
+    resize: none;
+    box-sizing: border-box;
+}
+
+.better-scroll::-webkit-scrollbar {
+    width: 2px;
+    background-color: #D8D8C066;
+}
+
+.better-scroll:focus {
+    outline: none;
+}
+
+.better-scroll::-webkit-scrollbar-thumb {
+    border-radius: 3px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    background-color: #4B343466;
+}
+
+.better-scroll::-webkit-scrollbar-track {
+    background-color: transparent;
+}
+
+/* .cube {
+    position: relative;
+    width: 8px;
+    margin: 0 2px 0 2px;
+    height: 120px;
+    perspective: 600px;
+    background: red;
+    animation: cubeAnimation 1s infinite alternate;
+}
+
+.front,
+.back {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #3498db;
+}
+
+@keyframes cubeAnimation {
+    0% {
+      transform: translateY(-50%) scaleY(1);
+    }
+    100% {
+      transform: translateY(-50%) scaleY(0.5);
+    }
+}
+
+@keyframes cubeAnimation-1 {
+    0% {
+      transform: translateY(-50%) scaleY(1);
+    }
+    100% {
+      transform: translateY(-50%) scaleY(0.5);
+    }
+}
+
+.ani-1 {
+    animation: cubeAnimation-1;
+} */
