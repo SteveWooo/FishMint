@@ -9,7 +9,7 @@
         "resizable": false,
         "transparent": true,
         "hasShadow": true,
-        "alwaysOnTop": false,
+        "alwaysOnTop": true,
 
         "fm_devTools": false,
         "fm_showWhenStartup": true,

@@ -21,7 +21,7 @@ window.fmComponents.themes = {
 }
 window.fmComponents.usingTheme = 'dba'
 window.fmComponents.getThemeColors = () => window.fmComponents.themes[window.fmComponents.usingTheme]
-window.fmComponents.doHotUpdate = true
+window.fmComponents.doHotUpdate = false
 // 一些组件用的状态
 window.fmComponents.status = {
     doingRefresh: false
@@ -45,9 +45,9 @@ window.fmComponents.DragBar = class KtDragBar extends React.Component {
             backgroundColor: colors.WindowBorderColor,
             display: 'flex',
             justifyContent: 'flex-start',
-            borderRadius: '10px 0px 0 0',
-            borderBottom: '1px solid ' + colors.WindowBorderColor,
-            borderTop: '1px solid ' + colors.WindowBorderColor
+            borderRadius: `0px 0px 0px 0px`,
+            // borderBottom: '1px solid ' + colors.WindowBorderColor,
+            // borderTop: '1px solid ' + colors.WindowBorderColor
         }
     }
 
@@ -55,14 +55,24 @@ window.fmComponents.DragBar = class KtDragBar extends React.Component {
         const { CloseWindowButton, RefreshButton } = window.fmComponents
         return (
             <div style={this.style()}>
-                <div style={{width: '80%'}} className="kt-dragger">
+                <div style={{
+                    width: '80%'
+                }} className="kt-dragger">
 
                 </div>
                 <div className="div-container" style={{width: '10%'}}>
-                    <RefreshButton />
+                    {
+                        this.props.refreshButton ? (
+                            <RefreshButton />
+                        ) : null
+                    }
                 </div>
                 <div style={{width: '10%'}}>
-                    <CloseWindowButton closeWarn={this.props.closeWarn} />
+                    {
+                        this.props.closeButton ? (
+                            <CloseWindowButton closeWarn={this.props.closeWarn} />
+                        ) : null
+                    }
                 </div>
             </div>
         )
@@ -77,17 +87,18 @@ window.fmComponents.WindowFrame = class KtWindowFrame extends React.Component {
     getStyle() {
         const colors = window.fmComponents.getThemeColors()
         return {
-            height: '99vh',
+            height: '98vh',
             borderBottom: '2px solid ' + colors.WindowBorderColor,
             borderLeft: '2px solid ' + colors.WindowBorderColor,
             borderRight: '2px solid ' + colors.WindowBorderColor,
-            // borderTop: '2px solid ' + colors.WindowBorderColor,
-            borderRadius: '13px 0px 10px 10px',
+            borderTop: '2px solid ' + colors.WindowBorderColor,
+            borderRadius: '10px 10px 10px 10px',
             display: 'flex',
             flexDirection: 'column',
             // flexWrap: 'wrap',
             alignItems: 'flex-start',
             fontFamily: 'JiangCheng',
+            overflow: 'hidden',
             backgroundColor: colors.WindowBackgroundColor,
         }
     }

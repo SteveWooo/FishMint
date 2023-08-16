@@ -7,10 +7,11 @@
         "resizable": false,
         "transparent": true,
         "hasShadow": true,
-        "alwaysOnTop": false,
+        "alwaysOnTop": true,
 
         "fm_devTools": true,
         "fm_showWhenStartup": true,
+        "fm_closeWarn": false,
         "fm_isolateSessionLevel": "app"
     }
 }

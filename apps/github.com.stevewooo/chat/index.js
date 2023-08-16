@@ -46,12 +46,11 @@ class FMRoot extends React.Component {
                 value: []
             })
         }
-
         this.setState({
             router: 'chat',
             record: recordData.value || []
         }, () => {
-            this.scrollToBottom()
+            this.scrollToBottom() 
         })
         return
     }
@@ -79,24 +78,37 @@ class FMRoot extends React.Component {
             waitting: true,
             chatInputValue: '',
             record: recordTemp
+        }, () => {
+            this.scrollToBottom()
         })
 
         // do ask
-        const res = await fm.openai.chatCompletion({
-            apiKey: (await fm.db.get({ key: 'openaiKey', field: 'app' })).value,
-            messages: [{
-                role: 'user',
-                content: content
-            }],
-            max_token: 512,
-            proxy: "http://127.0.0.1:1081"
+        const res = await fm.net.http.request({
+            method: 'post',
+            url: 'https://api.openai.com/v1/chat/completions',
+            headers: {
+                'Content-Type': 'Application/json',
+                'Authorization': `Bearer ${(await fm.db.get({ key: 'openaiKey', field: 'app' })).value}`
+            },
+            body: JSON.stringify({
+                model: 'gpt-3.5-turbo',
+                messages: [{
+                    role: 'user',
+                    content: content,
+                }],
+                max_tokens: 512
+            }),
+            proxy: 'http://127.0.0.1:1081'
         })
 
         // 处理返回结果
         this.setState({
             waitting: false,
+        }, () => {
+            this.scrollToBottom()
         })
-        if (res.status !== 2000) {
+        // console.log(res)
+        if (res.status !== 2000 || res.httpStatusCode !== 200) {
             await fm.dialog.showErrorBox({
                 message: res.message
             })
@@ -104,8 +116,8 @@ class FMRoot extends React.Component {
         }
 
         // 返回成功
-        if (Array.isArray(res.result.choices)) {
-            const responseMessage = res.result.choices[0].message.content
+        if (Array.isArray(res.json.choices)) {
+            const responseMessage = res.json.choices[0].message.content
             // 更新聊天记录
             let record = this.state.record
             record.push({
@@ -123,6 +135,8 @@ class FMRoot extends React.Component {
 
             this.setState({
                 record: record
+            }, () => {
+                this.scrollToBottom()
             })
 
             return
@@ -148,7 +162,7 @@ class FMRoot extends React.Component {
         const colors = window.fmComponents.getThemeColors()
         return (
             <WindowFrame>
-                <GlobalHandler hotUpdate={true} />
+                <GlobalHandler hotUpdate={window.fmComponents.doHotUpdate} />
 
                 {/* 聊天 */}
                 {
@@ -157,17 +171,17 @@ class FMRoot extends React.Component {
                             width: '99%',
                             height: '100%',
                             display: 'flex',
-                            justifyContent: 'flex-start',
+                            justifyContent: 'flex-end',
                             flexDirection: 'column',
-                            alignItems: 'flex-start',
+                            alignItems: 'flex-end',
                         }}>
                             <div style={{
                                 width: '100%',
                                 overflowY: 'auto',
                                 overflowX: 'hidden',
-                                flexGrow: 1,
+                                // flexGrow: 1,
                                 display: 'flex',
-                                flexDirection: 'column',
+                                flexDirection: 'row',
                                 justifyContent: 'flex-start',
                                 alignItems: 'flex-start',
                                 flexWrap: 'wrap',
@@ -194,23 +208,30 @@ class FMRoot extends React.Component {
                                     })
                                 }
                             </div>
-                            <Input
-                                style={{
-                                    width: '90%',
-                                    marginLeft: '5%',
-                                    marginBottom: '10px',
-                                    height: '30px',
-                                    fontSize: '12px',
-                                }}
-                                placeholder={this.state.waitting ? 'waiiting...' : 'Send a message'}
-                                value={this.state.chatInputValue}
-                                onChange={e => {
-                                    if (this.state.waitting) return 
-                                    this.setState({
-                                        chatInputValue: e.target.value
-                                    })
-                                }}
-                                onKeyPress={(e) => { e.key === 'Enter' && this.onSubmitChat() }} />
+                            <div style={{
+                                width: '100%',
+                                display: 'flex',
+                                flexDirection: 'row',
+                                justifyContent: 'center'
+                            }}>
+                                <Input
+                                    style={{
+                                        width: '90%',
+                                        marginLeft: '0%',
+                                        marginBottom: '10px',
+                                        height: '30px',
+                                        fontSize: '12px',
+                                    }}
+                                    placeholder={this.state.waitting ? 'waiiting...' : 'Send a message'}
+                                    value={this.state.chatInputValue}
+                                    onChange={e => {
+                                        if (this.state.waitting) return 
+                                        this.setState({
+                                            chatInputValue: e.target.value
+                                        })
+                                    }}
+                                    onKeyPress={(e) => { e.key === 'Enter' && this.onSubmitChat() }} />
+                            </div>
                         </div>
                     ) : null
                 }
