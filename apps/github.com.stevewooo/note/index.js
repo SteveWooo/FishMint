@@ -1,4 +1,4 @@
-const { DragBar, CmdInputter, GlobalHandler } = window.fmComponents
+const { DragBar, CmdInputter, GlobalHandler, WindowFrame } = window.fmComponents
 
 /**
  * 给便利贴用的占据全屏的textArea
@@ -69,7 +69,7 @@ class NoteTextarea extends React.Component {
             fontFamily: "JiangCheng",
             width: '100%',
             height: '96%',
-            padding: '0 15px 0 15px',
+            padding: '5px 15px 5px 15px',
             border: 'none'
         }
     }
@@ -79,9 +79,9 @@ class NoteTextarea extends React.Component {
             width: '100%',
             height: '100%',
             display: 'flex',
-            flexDirection: 'column',
+            flexDirection: 'row',
             justifyContent: 'center',
-            alignItems: 'center'
+            alignItems: 'center',
         }
     }
 
@@ -108,28 +108,28 @@ class FMRoot extends React.Component {
         window.fmComponents.usingTheme = 'dba'
     }
 
-    getStyle() {
-        const colors = window.fmComponents.getThemeColors()
-        return {
-            height: '99vh',
-            borderBottom: '2px solid ' + colors.WindowBorderColor,
-            borderLeft: '2px solid ' + colors.WindowBorderColor,
-            borderRight: '2px solid ' + colors.WindowBorderColor,
-            // borderTop: '2px solid ' + colors.WindowBorderColor,
-            borderRadius: '13px 0px 10px 10px',
-            display: 'flex',
-            flexDirection: 'column',
-            flexWrap: 'wrap',
-            alignItems: 'flex-start',
-            fontFamily: 'JiangCheng',
-            backgroundColor: colors.WindowBackgroundColor,
-        }
-    }
+    // getStyle() {
+    //     const colors = window.fmComponents.getThemeColors()
+    //     return {
+    //         height: '99vh',
+    //         borderBottom: '2px solid ' + colors.WindowBorderColor,
+    //         borderLeft: '2px solid ' + colors.WindowBorderColor,
+    //         borderRight: '2px solid ' + colors.WindowBorderColor,
+    //         // borderTop: '2px solid ' + colors.WindowBorderColor,
+    //         borderRadius: '13px 0px 10px 10px',
+    //         display: 'flex',
+    //         flexDirection: 'column',
+    //         flexWrap: 'wrap',
+    //         alignItems: 'flex-start',
+    //         fontFamily: 'JiangCheng',
+    //         backgroundColor: colors.WindowBackgroundColor,
+    //     }
+    // }
 
     contentStyle() {
         return {
             width: '100%',
-            flexGrow: 1,
+            height: '98%',
             display: 'flex',
             justifyContent: 'center',
             flexDirection: 'row',
@@ -139,14 +139,13 @@ class FMRoot extends React.Component {
 
     render() {
         return (
-            <div style={this.getStyle()}>
+            <WindowFrame>
                 <GlobalHandler hotUpdate={window.fmComponents.doHotUpdate} />
-                <DragBar />
                 <div style={this.contentStyle()}
                     className='div-container'>
                     <NoteTextarea/>
                 </div>
-            </div>
+            </WindowFrame>
         )
     }
 }

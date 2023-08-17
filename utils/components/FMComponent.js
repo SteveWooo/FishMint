@@ -117,10 +117,10 @@ window.fmComponents.WindowFrame = class KtWindowFrame extends React.Component {
                     width: '100%',
                     height: '100%',
                     overflow: 'auto',
-                    display: 'flex',
-                    justifyContent: 'center',
-                    flexDirection: 'row',
-                    flexWrap: 'wrap'
+                    // display: 'flex',
+                    // justifyContent: 'center',
+                    // flexDirection: 'row',
+                    // flexWrap: 'wrap'
                 }}>
                     { this.props.children }
                 </div>

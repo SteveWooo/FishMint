@@ -39,6 +39,7 @@ class FMRoot extends React.Component {
 
         // 发起唤醒执行
         fm.on.windowWake(async (e, args) => {
+            // console.log('do show')
             if (this.state.isShow) {
                 await this.doHide()
                 return

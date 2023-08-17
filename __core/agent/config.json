@@ -2,6 +2,8 @@
     "configure": {
         "width": 200,
         "height": 200,
+        "x": 100,
+        "y": 100,
         "type": "toolbar",
         "frame": false,
         "resizable": false,
@@ -11,7 +13,7 @@
 
         "fm_devTools": true,
         "fm_showWhenStartup": true,
-        "fm_closeWarn": false,
+        "fm_closeWarn": true,
         "fm_isolateSessionLevel": "app"
     }
 }

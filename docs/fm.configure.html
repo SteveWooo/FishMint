@@ -5,7 +5,7 @@
   
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title> secp256k1</title>
+  <title> configure</title>
 
   <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
@@ -74,7 +74,7 @@
             <div class="content">
                 <header class="page-title">
                     <p>Namespace</p>
-                    <h1>secp256k1</h1>
+                    <h1>configure</h1>
                 </header>
                 
 
@@ -86,7 +86,7 @@
 <header>
     
         <h2>
-            <span class="ancestors"><a href="fm.html">fm</a><a href="fm.crypto.html">.crypto</a>.</span>secp256k1</h2>
+            <span class="ancestors"><a href="fm.html">fm</a>.</span>configure</h2>
         
     
 </header>
@@ -95,7 +95,7 @@
     <div class="container-overview">
     
         
-            <div class="description">secp256k1曲线工具</div>
+            <div class="description">封装基座的配置项目接口</div>
         
 
         
@@ -166,8 +166,8 @@
 
 
     
-    <h4 class="name" id=".genKeys">
-        <a class="href-link" href="#.genKeys">#</a>
+    <h4 class="name" id=".get">
+        <a class="href-link" href="#.get">#</a>
         
             
                 <span class='tag'>async</span>
@@ -177,7 +177,7 @@
         
         <span class="code-name">
             
-                genKeys<span class="signature">()</span><span class="type-signature"> &rarr; {<a href="global.html#GenericResponse">GenericResponse</a>|String|String}</span>
+                get<span class="signature">()</span><span class="type-signature"> &rarr; {GenericReponse|Object}</span>
             
         </span>
     </h4>
@@ -186,7 +186,7 @@
     
     
     <div class="description">
-        生成secp256k1的公密钥对
+        获取基座配置项
     </div>
     
 
@@ -270,7 +270,7 @@
     <div class='column is-5 has-text-left'>
         <label>Type: </label>
         
-<code class="param-type"><a href="global.html#GenericResponse">GenericResponse</a></code>
+<code class="param-type">GenericReponse</code>
 
 
     </div>
@@ -282,31 +282,13 @@
 
 <div class="columns">
     
-    <div class='param-desc column is-7'>res.privateKey - hex 密钥</div>
+    <div class='param-desc column is-7'>res.configure - 基座配置信息</div>
     
     
     <div class='column is-5 has-text-left'>
         <label>Type: </label>
         
-<code class="param-type">String</code>
-
-
-    </div>
-    
-</div>
-
-                
-                    
-
-<div class="columns">
-    
-    <div class='param-desc column is-7'>res.publicKey - hex 公钥</div>
-    
-    
-    <div class='column is-5 has-text-left'>
-        <label>Type: </label>
-        
-<code class="param-type">String</code>
+<code class="param-type">Object</code>
 
 
     </div>
@@ -320,21 +302,14 @@
 
 
 
-    <h5>Example</h5>
-    
-    
-        <pre class="prettyprint"><code>let keys = await kt.crypto.secp256k1.genKeys()</code></pre>
-    
-
-
 </div>
             
                 <div class="member">
 
 
     
-    <h4 class="name" id=".getPublicKey">
-        <a class="href-link" href="#.getPublicKey">#</a>
+    <h4 class="name" id=".relaunch">
+        <a class="href-link" href="#.relaunch">#</a>
         
             
                 <span class='tag'>async</span>
@@ -344,7 +319,7 @@
         
         <span class="code-name">
             
-                getPublicKey<span class="signature">(args)</span><span class="type-signature"> &rarr; {<a href="global.html#GenericResponse">GenericResponse</a>|String}</span>
+                relaunch<span class="signature">()</span><span class="type-signature"> &rarr; {GenericReponse}</span>
             
         </span>
     </h4>
@@ -353,7 +328,131 @@
     
     
     <div class="description">
-        通过secp256k1的密钥，生成公钥
+        重启基座，应用配置
+    </div>
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+    <dt class="tag-since">Since:</dt>
+    <dd class="tag-since"><ul class="dummy"><li>release-0.0.2</li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class='columns method-parameter'>
+        <div class="column is-2"><label>Returns:</label></div>
+        <div class="column is-10">
+            
+                    
+
+<div class="columns">
+    
+    <div class='param-desc column is-7'>res - 通用返回</div>
+    
+    
+    <div class='column is-5 has-text-left'>
+        <label>Type: </label>
+        
+<code class="param-type">GenericReponse</code>
+
+
+    </div>
+    
+</div>
+
+                
+        </div>
+    </div>
+
+
+
+
+</div>
+            
+                <div class="member">
+
+
+    
+    <h4 class="name" id=".set">
+        <a class="href-link" href="#.set">#</a>
+        
+            
+                <span class='tag'>async</span>
+            
+                <span class='tag'>static</span>
+            
+        
+        <span class="code-name">
+            
+                set<span class="signature">(key, value)</span><span class="type-signature"> &rarr; {GenericReponse|Object}</span>
+            
+        </span>
+    </h4>
+    
+
+    
+    
+    <div class="description">
+        设置基座配置
     </div>
     
 
@@ -391,13 +490,13 @@
             
 <tr class="deep-level-0">
   
-      <td class="name"><code>args</code></td>
+      <td class="name"><code>key</code></td>
   
 
   <td class="type">
   
       
-<code class="param-type">Object</code>
+<code class="param-type">string</code>
 
 
   
@@ -407,21 +506,22 @@
 
   
 
-  <td class="description last">入参对象</td>
+  <td class="description last">配置项</td>
 </tr>
 
+
+        
+
+            
+<tr class="deep-level-0">
   
-  
-    
-<tr class="deep-level-1">
-  
-      <td class="name"><code>privateKey</code></td>
+      <td class="name"><code>value</code></td>
   
 
   <td class="type">
   
       
-<code class="param-type">String</code>
+<code class="param-type">*</code>
 
 
   
@@ -431,10 +531,8 @@
 
   
 
-  <td class="description last">hex 字符串格式密钥</td>
+  <td class="description last">配置值</td>
 </tr>
-
-  
 
 
         
@@ -514,7 +612,7 @@
     <div class='column is-5 has-text-left'>
         <label>Type: </label>
         
-<code class="param-type"><a href="global.html#GenericResponse">GenericResponse</a></code>
+<code class="param-type">GenericReponse</code>
 
 
     </div>
@@ -526,264 +624,15 @@
 
 <div class="columns">
     
-    <div class='param-desc column is-7'>res.publicKey hex 格式字符串公钥</div>
+    <div class='param-desc column is-7'>res.configure - 基座配置信息</div>
     
     
     <div class='column is-5 has-text-left'>
         <label>Type: </label>
         
-<code class="param-type">String</code>
-
-
-    </div>
-    
-</div>
-
-                
-        </div>
-    </div>
-
-
-
-
-    <h5>Example</h5>
-    
-    
-        <pre class="prettyprint"><code>let publicKey = await kt.crypto.secp256k1.getPublicKey({    privateKey: keys.privateKey})</code></pre>
-    
-
-
-</div>
-            
-                <div class="member">
-
-
-    
-    <h4 class="name" id=".sign">
-        <a class="href-link" href="#.sign">#</a>
-        
-            
-                <span class='tag'>async</span>
-            
-                <span class='tag'>static</span>
-            
-        
-        <span class="code-name">
-            
-                sign<span class="signature">(args)</span><span class="type-signature"> &rarr; {<a href="global.html#GenericResponse">GenericResponse</a>|String}</span>
-            
-        </span>
-    </h4>
-    
-
-    
-    
-    <div class="description">
-        利用密钥对一个字符串进行签名
-    </div>
-    
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-<div class="table-container">
-    <table class="params table">
-        <thead>
-        <tr>
-            
-            <th>Name</th>
-            
-
-            <th>Type</th>
-
-            
-
-            
-
-            <th class="last">Description</th>
-        </tr>
-        </thead>
-
-        <tbody>
-        
-
-            
-<tr class="deep-level-0">
-  
-      <td class="name"><code>args</code></td>
-  
-
-  <td class="type">
-  
-      
 <code class="param-type">Object</code>
 
 
-  
-  </td>
-
-  
-
-  
-
-  <td class="description last">入参对象</td>
-</tr>
-
-  
-  
-    
-<tr class="deep-level-1">
-  
-      <td class="name"><code>message</code></td>
-  
-
-  <td class="type">
-  
-      
-<code class="param-type">String</code>
-
-
-  
-  </td>
-
-  
-
-  
-
-  <td class="description last">需要签名的输入字符串</td>
-</tr>
-
-  
-    
-<tr class="deep-level-1">
-  
-      <td class="name"><code>privateKey</code></td>
-  
-
-  <td class="type">
-  
-      
-<code class="param-type">String</code>
-
-
-  
-  </td>
-
-  
-
-  
-
-  <td class="description last">hex 字符串密钥</td>
-</tr>
-
-  
-
-
-        
-        </tbody>
-    </table>
-</div>
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-    <dt class="tag-since">Since:</dt>
-    <dd class="tag-since"><ul class="dummy"><li>release-0.0.2</li></ul></dd>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    <div class='columns method-parameter'>
-        <div class="column is-2"><label>Returns:</label></div>
-        <div class="column is-10">
-            
-                    
-
-<div class="columns">
-    
-    <div class='param-desc column is-7'>res - 通用返回</div>
-    
-    
-    <div class='column is-5 has-text-left'>
-        <label>Type: </label>
-        
-<code class="param-type"><a href="global.html#GenericResponse">GenericResponse</a></code>
-
-
-    </div>
-    
-</div>
-
-                
-                    
-
-<div class="columns">
-    
-    <div class='param-desc column is-7'>res.signature hex 签名结果</div>
-    
-    
-    <div class='column is-5 has-text-left'>
-        <label>Type: </label>
-        
-<code class="param-type">String</code>
-
-
     </div>
     
 </div>
@@ -793,285 +642,6 @@
     </div>
 
 
-
-
-    <h5>Example</h5>
-    
-    
-        <pre class="prettyprint"><code>const msg = "hello"const sign = await kt.crypto.secp256k1.sign({    privateKey: keys.privateKey,    message: msg})</code></pre>
-    
-
-
-</div>
-            
-                <div class="member">
-
-
-    
-    <h4 class="name" id=".verify">
-        <a class="href-link" href="#.verify">#</a>
-        
-            
-                <span class='tag'>async</span>
-            
-                <span class='tag'>static</span>
-            
-        
-        <span class="code-name">
-            
-                verify<span class="signature">(args)</span><span class="type-signature"> &rarr; {<a href="global.html#GenericResponse">GenericResponse</a>|Boolean}</span>
-            
-        </span>
-    </h4>
-    
-
-    
-    
-    <div class="description">
-        验证签名是否来自于这个publicKey
-    </div>
-    
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-<div class="table-container">
-    <table class="params table">
-        <thead>
-        <tr>
-            
-            <th>Name</th>
-            
-
-            <th>Type</th>
-
-            
-
-            
-
-            <th class="last">Description</th>
-        </tr>
-        </thead>
-
-        <tbody>
-        
-
-            
-<tr class="deep-level-0">
-  
-      <td class="name"><code>args</code></td>
-  
-
-  <td class="type">
-  
-      
-<code class="param-type">Object</code>
-
-
-  
-  </td>
-
-  
-
-  
-
-  <td class="description last">入参对象</td>
-</tr>
-
-  
-  
-    
-<tr class="deep-level-1">
-  
-      <td class="name"><code>signature</code></td>
-  
-
-  <td class="type">
-  
-      
-<code class="param-type">String</code>
-
-
-  
-  </td>
-
-  
-
-  
-
-  <td class="description last">hex 字符串签名串</td>
-</tr>
-
-  
-    
-<tr class="deep-level-1">
-  
-      <td class="name"><code>message</code></td>
-  
-
-  <td class="type">
-  
-      
-<code class="param-type">String</code>
-
-
-  
-  </td>
-
-  
-
-  
-
-  <td class="description last">加密前的字符串</td>
-</tr>
-
-  
-    
-<tr class="deep-level-1">
-  
-      <td class="name"><code>publicKey</code></td>
-  
-
-  <td class="type">
-  
-      
-<code class="param-type">String</code>
-
-
-  
-  </td>
-
-  
-
-  
-
-  <td class="description last">hex 字符串公钥</td>
-</tr>
-
-  
-
-
-        
-        </tbody>
-    </table>
-</div>
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-    <dt class="tag-since">Since:</dt>
-    <dd class="tag-since"><ul class="dummy"><li>release-0.0.2</li></ul></dd>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    <div class='columns method-parameter'>
-        <div class="column is-2"><label>Returns:</label></div>
-        <div class="column is-10">
-            
-                    
-
-<div class="columns">
-    
-    <div class='param-desc column is-7'>res - 通用返回，其中status只要调用成功都会2000</div>
-    
-    
-    <div class='column is-5 has-text-left'>
-        <label>Type: </label>
-        
-<code class="param-type"><a href="global.html#GenericResponse">GenericResponse</a></code>
-
-
-    </div>
-    
-</div>
-
-                
-                    
-
-<div class="columns">
-    
-    <div class='param-desc column is-7'>res.verify - 是否验证通过</div>
-    
-    
-    <div class='column is-5 has-text-left'>
-        <label>Type: </label>
-        
-<code class="param-type">Boolean</code>
-
-
-    </div>
-    
-</div>
-
-                
-        </div>
-    </div>
-
-
-
-
-    <h5>Example</h5>
-    
-    
-        <pre class="prettyprint"><code>const msg = "hello"const verify = await kt.crypto.secp256k1.verify({    message: msg,    publicKey: keys.publicKey,    signature: sign.signature})</code></pre>
-    
 
 
 </div>

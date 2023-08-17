@@ -13,6 +13,7 @@
 
         "fm_devTools": false,
         "fm_showWhenStartup": true,
+        "fm_closeWarn": true,
         "fm_isolateSessionLevel": "app"
     }
 }

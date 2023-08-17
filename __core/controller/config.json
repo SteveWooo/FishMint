@@ -11,7 +11,7 @@
         "hasShadow": true,
         "alwaysOnTop": true,
 
-        "fm_devTools": false,
+        "fm_devTools": true,
         "fm_isolateSessionLevel": "app"
     }
 }

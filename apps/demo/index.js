@@ -8,7 +8,7 @@ class FMRoot extends React.Component {
     render() {
         return (
             <WindowFrame>
-                <GlobalHandler hotUpdate={true} />
+                <GlobalHandler />
                 <div style={{
                     display: 'flex',
                     justifyContent: 'center',

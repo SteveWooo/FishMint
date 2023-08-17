@@ -1,7 +1,9 @@
 {
     "configure": {
-        "width": 200,
-        "height": 200,
+        "width": 600,
+        "height": 400,
+        "x": 200,
+        "y": 200,
         "type": "toolbar",
         "frame": false,
         "resizable": false,

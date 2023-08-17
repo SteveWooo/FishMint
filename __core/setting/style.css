@@ -1,0 +1,19 @@
+nav a {
+    text-decoration: none;
+    color: #111;
+    padding: 10px 20px 10px 20px;
+    width: 80px;
+    text-align: center;
+    line-height: 30px;
+    height: 30px;
+    font-size: 20px;
+}
+
+nav a:hover {
+    background-color: #eee;
+}
+
+.active-link {
+    color: #333;
+    border-bottom: 1px solid #f30ba4 ;
+}

@@ -217,7 +217,7 @@ class FMRoot extends React.Component {
     render() {
         return (
             <WindowFrame closeWarn={false} >
-                <GlobalHandler hotUpdate={true} />
+                <GlobalHandler/>
                 <div style={{
                     width: '100%',
                     display: 'flex',

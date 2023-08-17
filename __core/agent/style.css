@@ -1,0 +1,17 @@
+.search-button {
+    width: 50%;
+    height: 36px;
+    font-size: 14px;
+    cursor: default;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.search-button:hover {
+    color: #f30ba4 ;
+}
+
+.sunshine-box-shadow {
+    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.9), -1px -1px 8px #fee101aa;
+}
