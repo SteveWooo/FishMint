@@ -9,7 +9,7 @@
 
 ## ‍快速开始
 
-- 下载基座：进入 [下载页面](https://github.com/SteveWooo/FishMint/releases) 解压，双击可执行程序即可启动基座
+- 下载基座：进入 [下载页面](https://github.com/SteveWooo/FishMint/releases) 下载对应平台的绿色安装包，解压，双击可执行程序即可启动基座
 - 按下 Alt+` 即可召唤出控制面板
 - 进入挂件库后，将你想要的挂件拖出桌面即可使用
 - 右键挂件界面，可以退出挂件、或进入挂件的源码目录，尽情修改
