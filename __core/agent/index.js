@@ -66,7 +66,7 @@ class FMRoot extends React.Component {
     async doShow() {
         if (this.state.showStatus !== 'hide') return
         // 取消鼠标无视
-        await fm.eWindow.__ktCall({
+        await fm.eWindow.__call({
             functionName: 'setIgnoreMouseEvents',
             params: [false]
         })
@@ -93,12 +93,12 @@ class FMRoot extends React.Component {
                 dragedText: dragedText,
                 isGettingSelected: false
             })
-        }, 310)
+        }, 520)
     }
     async doHide() {
         if (this.state.showStatus !== 'show') return
         // 无视所有鼠标操作
-        await fm.eWindow.__ktCall({
+        await fm.eWindow.__call({
             functionName: 'setIgnoreMouseEvents',
             params: [true]
         })

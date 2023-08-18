@@ -184,8 +184,11 @@ class FMRoot extends React.Component {
                     className={`${this.state.isShow ? 'slide-right' : 'slide-left'} left-top-title`}>
                     - FishMint -
                 </div>
-                <div className={`left-top-icon ${this.state.isShow ? 'slide-down' : 'slide-up'}`}>
-                    <img src="./FishMint.png" />
+                <div className={`studio-icon ${this.state.isShow ? 'slide-down' : 'slide-up'}`} style={{
+                    right: `${this.state.appBaseWidth / 3}px`,
+                    bottom: `${this.state.appBaseHeight * 0}px`
+                }}>
+                    <img src="./FishMint.png" /> 鱼昕草™工作室. All Rights Reserved.
                 </div>
 
                 {/* 内容 */}

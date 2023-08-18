@@ -9,13 +9,17 @@
         0px 4px 4px #111111dd;
 }
 
-.left-top-icon {
+.studio-icon {
     position: absolute;
-    left: 140px;
-    top: 35px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    color: transparent;
+    text-shadow: 0px 0px 1px rgba(254, 234, 131, 0.6),
+        0px 4px 4px #111111dd;
 }
 
-.left-top-icon img {
+.studio-icon img {
     width: 100px;
 }
 

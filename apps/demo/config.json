@@ -1,19 +1,22 @@
 {
-    "configure": {
-        "width": 200,
-        "height": 200,
+    "browserWindowOptions": {
         "x": 100,
         "y": 100,
+        "width": 380,
+        "height": 220,
         "type": "toolbar",
-        "frame": false,
+        "frame": true,
         "resizable": false,
-        "transparent": true,
-        "hasShadow": true,
-        "alwaysOnTop": true,
-
-        "fm_devTools": false,
-        "fm_showWhenStartup": true,
-        "fm_closeWarn": true,
-        "fm_isolateSessionLevel": "app"
+        "transparent": false,
+        "hasShadow": false,
+        "alwaysOnTop": true
+    },
+    "configure": {
+        "devTools": false,
+        "isolateSessionLevel": "app",
+        "webSecurity": true,
+        "recordRectInfo": true,
+        "showWhenStartup": true,
+        "closeWarn": true
     }
 }

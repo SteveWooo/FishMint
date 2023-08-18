@@ -1,5 +1,5 @@
 {
-    "configure": {
+    "browserWindowOptions": {
         "width": 600,
         "height": 400,
         "x": 200,
@@ -9,10 +9,13 @@
         "resizable": false,
         "transparent": true,
         "hasShadow": true,
-        "alwaysOnTop": false,
-
-        "fm_devTools": false,
-        "fm_showWhenStartup": true,
-        "fm_isolateSessionLevel": "app"
+        "alwaysOnTop": false
+    },
+    "configure": {
+        "devTools": false,
+        "isolateSessionLevel": "app",
+        "webSecurity": true,
+        "showWhenStartup": true,
+        "closeWarn": true
     }
 }

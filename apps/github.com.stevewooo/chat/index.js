@@ -107,7 +107,7 @@ class FMRoot extends React.Component {
         }, () => {
             this.scrollToBottom()
         })
-        // console.log(res)
+        console.log(res)
         if (res.status !== 2000 || res.httpStatusCode !== 200) {
             await fm.dialog.showErrorBox({
                 message: res.message
@@ -240,14 +240,15 @@ class FMRoot extends React.Component {
                 {
                     this.state.router === 'init' ? (
                         <div style={{
-                            width: '90%',
+                            width: '100%',
                             display: 'flex',
+                            flexDirection: 'row',
                             justifyContent: 'center',
                             flexWrap: 'wrap'
                         }}>
                             <Input
                                 style={{
-                                    width: '100%'
+                                    width: '90%'
                                 }}
                                 value={this.state.apiKeyValue}
                                 onChange={e => {

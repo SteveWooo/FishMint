@@ -1,5 +1,5 @@
 {
-    "configure": {
+    "browserWindowOptions": {
         "width": 380,
         "height": 220,
         "type": "toolbar",
@@ -7,9 +7,15 @@
         "resizable": true,
         "transparent": true,
         "hasShadow": false,
-        "alwaysOnTop": true,
-
-        "fm_devTools": true,
-        "fm_isolateSessionLevel": "app"
+        "alwaysOnTop": true
+    },
+    "configure": {
+        "devTools": false,
+        "isolateSessionLevel": "app",
+        "webSecurity": true,
+        "showWhenStartup": true,
+        "closeWarn": true,
+        "appDirName": "DO_NOT_EDIT_THIS_PARAMETER",
+"__wid": "DO_NOT_EDIT_THIS_PARAMETER"
     }
 }
