@@ -7,7 +7,7 @@ class FMRoot extends React.Component {
 
     render() {
         return (
-            <WindowFrame>
+            <WindowFrame closeButton={true}>
                 <GlobalHandler />
                 <div style={{
                     display: 'flex',

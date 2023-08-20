@@ -42,7 +42,7 @@ class FMRoot extends React.Component {
     render() {
         const colors = window.fmComponents.getThemeColors()
         return (
-            <WindowFrame closeWarn={false}>
+            <WindowFrame closeWarn={false} closeButton={true}>
                 <GlobalHandler hotUpdate={window.fmComponents.doHotUpdate} />
                 <div style={{
                     display: 'flex',

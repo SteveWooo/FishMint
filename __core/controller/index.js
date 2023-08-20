@@ -245,10 +245,23 @@ class FMRoot extends React.Component {
                                 height: this.state.appBaseWidth * (isHor ? 1 : 2) + 'px',
                                 position: 'absolute',
                                 top: this.state.appCenterY + this.state.appBaseHeight * (isHor ? 1 : 1) + 'px',
-                                left: this.state.appCenterX - this.state.appBaseWidth * (isHor ? 3 : 4) + "px",
+                                left: this.state.appCenterX - this.state.appBaseWidth * (isHor ? 3 : 4) + 'px',
                                 fontSize: `${this.state.appBaseWidth * (isHor ? 0.2 : 0.5)}px`
                             }} onClick={() => { this.openApp("__core/setting") }}>
                             设置
+                        </div>
+
+                        <div
+                            className={`app-container ${this.state.isShow ? 'grow-big' : 'grow-small'}`}
+                            style={{
+                                width: this.state.appBaseWidth * (isHor ? 1 : 2) + 'px',
+                                height: this.state.appBaseWidth * (isHor ? 1 : 2) + 'px',
+                                position: 'absolute',
+                                top: this.state.appCenterY - this.state.appBaseHeight * (isHor ? 2 : 1) + 'px',
+                                right: this.state.appCenterX - this.state.appBaseWidth * (isHor ? 2 : 4) + 'px',
+                                fontSize: `${this.state.appBaseWidth * (isHor ? 0.2 : 0.5)}px`
+                            }} onClick={() => { this.openApp("__core/factory") }}>
+                            工坊
                         </div>
                     </div>
                 </div>
