@@ -106,8 +106,6 @@ class FMRoot extends React.Component {
                             <FactoryPanel />
                         </div>
                     </div>
-
-                    
                 </div>
             </WindowFrame>
         )

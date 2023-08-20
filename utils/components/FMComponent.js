@@ -87,7 +87,7 @@ window.fmComponents.WindowFrame = class KtWindowFrame extends React.Component {
     getStyle() {
         const colors = window.fmComponents.getThemeColors()
         return {
-            height: '98vh',
+            height: 'calc(100vh - 4px)',
             borderBottom: '2px solid ' + colors.WindowBorderColor,
             borderLeft: '2px solid ' + colors.WindowBorderColor,
             borderRight: '2px solid ' + colors.WindowBorderColor,
@@ -109,19 +109,16 @@ window.fmComponents.WindowFrame = class KtWindowFrame extends React.Component {
             <div style={this.getStyle()}>
                 {/* drag bar */}
                 <div style={{
-                    width: '100%'
+                    width: '100%',
+                    height: '25px',
                 }}>
                     <DragBar {...this.props} />
                 </div>
                 <div style={{
                     width: '100%',
-                    height: '100%',
+                    flexGrow: 1,
                     overflow: 'auto',
                     display: 'block',
-                    // display: 'flex',
-                    // justifyContent: 'center',
-                    // flexDirection: 'row',
-                    // flexWrap: 'wrap'
                 }}>
                     { this.props.children }
                 </div>
