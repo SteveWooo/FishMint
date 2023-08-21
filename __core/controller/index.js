@@ -125,7 +125,10 @@ class FMRoot extends React.Component {
                 this.setState({
                     showStatus: 'hide'
                 })
-                await fm.window.hide()
+                // await fm.window.hide()
+                await fm.eWindow.__call({
+                    functionName: 'minimize'
+                })
             }, 200)
         })
     }
@@ -134,6 +137,9 @@ class FMRoot extends React.Component {
         await this.playAudio(this.activeAudioRef.current)
         await this.setPos()
         await fm.window.show()
+        await fm.eWindow.__call({
+            functionName: 'restore'
+        })
         this.setState({
             isShow: true,
             showStatus: 'showing'
@@ -228,12 +234,12 @@ class FMRoot extends React.Component {
                         <div
                             className={`app-container ${this.state.isShow ? 'grow-big' : 'grow-small'}`}
                             style={{
-                                width: this.state.appBaseWidth * (isHor ? 1 : 2) + 'px',
-                                height: this.state.appBaseWidth * (isHor ? 1 : 2) + 'px',
+                                width: this.state.appBaseWidth * (isHor ? 1.1 : 2.1) + 'px',
+                                height: this.state.appBaseWidth * (isHor ? 1.1 : 2.1) + 'px',
                                 position: 'absolute',
                                 left: `${this.state.appCenterX - this.state.appBaseWidth * 2}px`,
                                 top: `${this.state.appCenterY - this.state.appBaseHeight * (isHor ? 3 : 2)}px`,
-                                fontSize: `${this.state.appBaseWidth * (isHor ? 0.2 : 0.5)}px`
+                                fontSize: `${this.state.appBaseWidth * (isHor ? 0.2 : 0.45)}px`
                             }} onClick={(e) => { e.stopPropagation(); this.openApp("__core/appList") }}>
                             挂件库
                         </div>
@@ -246,7 +252,7 @@ class FMRoot extends React.Component {
                                 position: 'absolute',
                                 top: this.state.appCenterY + this.state.appBaseHeight * (isHor ? 1 : 1) + 'px',
                                 left: this.state.appCenterX - this.state.appBaseWidth * (isHor ? 3 : 4) + 'px',
-                                fontSize: `${this.state.appBaseWidth * (isHor ? 0.2 : 0.5)}px`
+                                fontSize: `${this.state.appBaseWidth * (isHor ? 0.2 : 0.45)}px`
                             }} onClick={() => { this.openApp("__core/setting") }}>
                             设置
                         </div>
@@ -259,7 +265,7 @@ class FMRoot extends React.Component {
                                 position: 'absolute',
                                 top: this.state.appCenterY - this.state.appBaseHeight * (isHor ? 2 : 1) + 'px',
                                 right: this.state.appCenterX - this.state.appBaseWidth * (isHor ? 2 : 4) + 'px',
-                                fontSize: `${this.state.appBaseWidth * (isHor ? 0.2 : 0.5)}px`
+                                fontSize: `${this.state.appBaseWidth * (isHor ? 0.2 : 0.45)}px`
                             }} onClick={() => { this.openApp("__core/factory") }}>
                             工坊
                         </div>

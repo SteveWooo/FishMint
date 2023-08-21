@@ -18,6 +18,30 @@
             }
             return params[key];
         }
+        // 动态载入js文件
+        define(fileArray) {
+            return new Promise(resolve => {
+                if (!Array.isArray(fileArray)) {
+                    resolve()
+                    return 
+                }
+
+                const promises = []
+                for(let i = 0; i < fileArray.length; i++) {
+                    promises.push(new Promise(_resolve => {
+                        const script = document.createElement('script')
+                        // script.type = 'text/babel'
+                        script.src = fileArray[i]
+                        script.onload = _resolve
+                        document.body.appendChild(script)
+                    }))
+                }
+
+                Promise.all(promises).then(() => {
+                    resolve()
+                })
+            })
+        }
     }
     window.fmSdk = new FMSdk();
 })()
