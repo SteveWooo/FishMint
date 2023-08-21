@@ -44,16 +44,19 @@ class AppList extends React.Component {
                     display: 'flex',
                     flexWrap: 'wrap',
                     width: '100%',
-                    height: '30px',
-                    background: '#f4f4f4',
-                    padding: '0 10px',
+                    // background: '#ddd',
+                    height: '50px',
                     justifyContent: 'flex-start',
-                    alignItems: 'flex-start',
-                    padding: '10px 0 10px 10px',
+                    alignItems: 'center',
                     color: '#666',
                     cursor: 'default',
+                    borderBottom: '1px solid #ccc',
+                    // boxShadow: '0px 2px 1px #ccc'
                 }}>
-                    Apps
+                    <div style={{
+                        padding: '0px 0 0px 20px',
+                        lineHeight: '50px'
+                    }}> Apps</div>
                 </div>
                 {/* 列表 */}
                 <div style={{

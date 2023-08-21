@@ -111,7 +111,7 @@ class FMRoot extends React.Component {
                         <div style={{
                             width: '20%',
                             height: '100%',
-                            backgroundColor: '#f5f5f5'
+                            // backgroundColor: '#f5f5f5'
                         }}>
                             <AppList selectApp={(info) => {this.selectApp(info)}} />
                         </div>
@@ -120,7 +120,7 @@ class FMRoot extends React.Component {
                         <div style={{
                             width: '80%',
                             height: '100%',
-                            backgroundColor: '#5f5f5f'
+                            // backgroundColor: '#fff'
                         }}>
                             <FactoryPanel ref={this.factoryPanelRef} currentAppInfo={this.state.currentAppInfo} />
                         </div>
