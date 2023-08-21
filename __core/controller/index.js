@@ -125,10 +125,10 @@ class FMRoot extends React.Component {
                 this.setState({
                     showStatus: 'hide'
                 })
-                // await fm.window.hide()
-                await fm.eWindow.__call({
-                    functionName: 'minimize'
-                })
+                await fm.window.hide()
+                // await fm.eWindow.__call({
+                //     functionName: 'minimize'
+                // })
             }, 200)
         })
     }
@@ -137,14 +137,14 @@ class FMRoot extends React.Component {
         await this.playAudio(this.activeAudioRef.current)
         await this.setPos()
         await fm.window.show()
-        await fm.eWindow.__call({
-            functionName: 'restore'
-        })
+        // await fm.eWindow.__call({
+        //     functionName: 'restore'
+        // })
         this.setState({
             isShow: true,
             showStatus: 'showing'
-        }, () => {
-            setTimeout(() => {
+        }, async () => {
+            setTimeout(async () => {
                 this.setState({
                     showStatus: 'show'
                 })
