@@ -166,6 +166,7 @@ class FMRoot extends React.Component {
     render() {
         const colors = window.fmComponents.themes[window.fmComponents.usingTheme]
         const isHor = this.state.appBaseWidth > this.state.appBaseHeight
+        console.log(this.state.appBaseHeight)
         return (
             <div
                 style={{
@@ -187,14 +188,23 @@ class FMRoot extends React.Component {
                 <GlobalHandler hotUpdate={window.fmComponents.doHotUpdate} />
                 {/* 标题 */}
                 <div
-                    className={`${this.state.isShow ? 'slide-right' : 'slide-left'} left-top-title`}>
+                    className={`${this.state.isShow ? 'slide-right' : 'slide-left'} left-top-title`}
+                    style={{
+                        left: `${this.state.appBaseWidth * 0.4}px`,
+                        top: `${this.state.appBaseHeight * 0.4}px`,
+                        fontSize: `${this.state.appBaseWidth * (isHor ? 0.2 : 0.45)}px`
+                    }}>
                     - FishMint -
                 </div>
                 <div className={`studio-icon ${this.state.isShow ? 'slide-down' : 'slide-up'}`} style={{
                     right: `${this.state.appBaseWidth / 3}px`,
-                    bottom: `${this.state.appBaseHeight * 0}px`
+                    bottom: `${this.state.appBaseHeight * 0.5}px`,
+                    fontSize: `${this.state.appBaseWidth * (isHor ? 0.1 : 0.2)}px`
                 }}>
-                    <img src="./FishMint.png" /> 鱼昕草™工作室. All Rights Reserved.
+                    <img src="./FishMint.png" style={{
+                        width: `${this.state.appBaseWidth * 0.4}px`,
+                        height: `${this.state.appBaseWidth * 0.4}px`
+                    }} /> 鱼昕草™工作室. All Rights Reserved.
                 </div>
 
                 {/* 内容 */}
