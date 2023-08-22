@@ -5,18 +5,31 @@ class AppList extends React.Component {
         super(p)
         this.state = {
             appList: {},
-            activeAppDirName: ''
+            activeAppDirName: '',
+            i18n: {}
         }
     }
 
     async componentDidMount() {
+        const res = await fm.const()
+        this.setState({
+            i18n: res.i18n
+        })
         this.updateList()
+
+        fm.on.staticFileChange(async () => {
+            this.updateList()
+        })
     }
 
     async updateList() {
         const appList = (await fm.controller.getAppList()).appList
         this.setState({
             appList: appList
+        }, () => {
+            // for debug
+            const app = appList[Object.keys(appList)[0]]
+            this.selectApp(app)
         })
     }
 
@@ -79,22 +92,24 @@ class AppList extends React.Component {
                                     height: '35px',
                                     fontSize: '14px',
                                     display: 'flex',
-                                    flexWrap: 'wrap',
+                                    flexWrap: 'nowrap',
                                     cursor: 'pointer',
-                                    alignItems: 'center'
+                                    alignItems: 'center',
+                                    overflow: 'hidden'
                                 }} className={`${info.appDirName === this.state.activeAppDirName ? 'active-app animate__animated animate__pulse' : ''}`}
                                 title={`${info.appDirName}`} onClick={() => {
                                     this.selectApp(info)
                                 }}>
                                     <img src={info.icon} style={{
                                         width: '25px',
-                                        height: '25px'
+                                        height: '25px',
+                                        marginLeft: '5px'
                                     }} />
                                     <div style={{
-                                        paddingLeft: '5px',
+                                        paddingLeft: '10px',
                                         height: '35px',
                                         lineHeight: '35px',
-                                        flexGrow: 1
+                                        flexGrow: 1,
                                     }} className={`hvr-forward`}>
                                         {appName}
                                     </div>
@@ -117,6 +132,8 @@ class AppList extends React.Component {
                     fontSize: '18px',
                     color: '#666',
                     cursor: 'pointer'
+                }} onClick={async () => {
+                    await fm.controller.createApp({template: 'demo'})
                 }}>
                     +
                 </div>

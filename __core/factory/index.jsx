@@ -61,7 +61,7 @@ class FMRoot extends React.Component {
                                 alignItems: 'center',
                                 flexGrow: 1,
                                 color: 'transparent',
-                                textShadow: '0px 0px 1px #111, 1px 1px 1px #11111177',
+                                textShadow: '0px 0px 1px #111, 0px 0px 2px #111 ',
                             }}>
                                 <img src="./favicon.ico" style={{
                                     width: '40px',

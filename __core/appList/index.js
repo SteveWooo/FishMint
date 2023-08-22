@@ -11,6 +11,13 @@ class FMRoot extends React.Component {
 
     async componentDidMount() {
         window.fmComponents.usingTheme = 'dba'
+        this.updateList()
+        fm.on.staticFileChange(async () => {
+            this.updateList()
+        })
+    }
+
+    async updateList() {
         const appListRes = await fm.controller.getAppList()
         this.setState({
             appList: appListRes.appList
