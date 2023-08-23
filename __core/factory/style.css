@@ -5,9 +5,39 @@
 }
 
 .launch-app-button {
-    background: #66db38;
+    background: #fdff94;
 }
 
 .stop-app-button {
 
+}
+
+/* 模板列表出现、消失 */
+@keyframes templateListShow {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+@keyframes templateListHide {
+    0% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+.template-list-show {
+    animation: templateListShow 0.3s ease forwards
+}
+
+.template-list-hide {
+    animation: templateListHide 0.3s ease forwards
+}
+
+/* 配置菜单按钮列 */
+.configure-menu-item {
+    width: 50%;
 }
