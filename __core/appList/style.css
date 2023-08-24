@@ -13,3 +13,11 @@
 .kt-better-scroll::-webkit-scrollbar-track {
     background-color: transparent;
 }
+
+div.draggable {
+    cursor: none;
+}
+div.-moz-drag-over {
+    cursor: pointer;
+    border: 1px solid #111
+}

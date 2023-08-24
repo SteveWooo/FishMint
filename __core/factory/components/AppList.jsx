@@ -34,12 +34,13 @@ class AppList extends React.Component {
             templates: templates
         }, () => {
             // for debug
-            const app = appList[Object.keys(appList)[0]]
-            this.selectApp(app)
+            // const app = appList[Object.keys(appList)[0]]
+            // this.selectApp(app)
         })
     }
 
     async selectApp(appInfo) {
+        // console.log(appInfo)
         this.setState({
             activeAppDirName: appInfo.appDirName
         })
@@ -56,10 +57,26 @@ class AppList extends React.Component {
         })
         if (res.result !== 0) return 
 
-        console.log('createing')
-        await fm.controller.createApp({
+        const newAppRes = await fm.controller.createApp({
             template: template.name
         })
+
+        if (newAppRes.status !== 2000) {
+            await fm.dialog.showErrorBox({
+                message: newAppRes.message
+            })
+            return 
+        }
+        await fm.controller.openExplorer({
+            appDirName: newAppRes.appDirName
+        })
+
+        // 创建完毕后，切换app
+        setTimeout(() => {
+            const newAppInfo = this.state.appList[newAppRes.appDirName]
+            if (!newAppInfo) return 
+            this.selectApp(newAppInfo)
+        }, 200)
     }
 
     async hideTemplateSelectMenu() {
@@ -225,7 +242,7 @@ class AppList extends React.Component {
                 }} onClick={() => {
                     this.showTemplateSelectMenu()
                 }}>
-                    {this.state.i18n['capp-createApp']}
+                    + {this.state.i18n['capp-createApp']}
                 </div>
             </div>
         )

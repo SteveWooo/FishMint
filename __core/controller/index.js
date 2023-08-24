@@ -163,6 +163,12 @@ class FMRoot extends React.Component {
         await this.clickMask()
     }
 
+    // 唤醒app列表
+    async wakeAppList() {
+        await fm.controller.wakeAppListPage()
+        await this.clickMask()
+    }
+
     render() {
         const colors = window.fmComponents.themes[window.fmComponents.usingTheme]
         const isHor = this.state.appBaseWidth > this.state.appBaseHeight
@@ -250,7 +256,7 @@ class FMRoot extends React.Component {
                                 left: `${this.state.appCenterX - this.state.appBaseWidth * 2}px`,
                                 top: `${this.state.appCenterY - this.state.appBaseHeight * (isHor ? 3 : 2)}px`,
                                 fontSize: `${this.state.appBaseWidth * (isHor ? 0.2 : 0.45)}px`
-                            }} onClick={(e) => { e.stopPropagation(); this.openApp("__core/appList") }}>
+                            }} onClick={(e) => { e.stopPropagation(); this.wakeAppList() }}>
                             挂件库
                         </div>
 

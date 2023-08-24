@@ -7,13 +7,25 @@ class FMRoot extends React.Component {
         this.state = {
             router: 'welcome',
             HotUpdate: false,
-            currentAppInfo: ''
+            currentAppInfo: null,
+            i18n: []
         }
 
         this.factoryPanelRef = React.createRef()
     }
 
     async componentDidMount() {
+        const res = await fm.const()
+        this.setState({
+            i18n: res.i18n,
+        })
+        this.updateKToolConfigure()
+        fm.on.staticFileChange(() => {
+            this.updateKToolConfigure()
+        })
+    }
+
+    async updateKToolConfigure() {
         const config = (await fm.configure.get()).configure
         this.setState({
             HotUpdate: config.HotUpdate
@@ -28,7 +40,7 @@ class FMRoot extends React.Component {
 
     render() {
         return (
-            <WindowFrame closeButton={true}>
+            <WindowFrame closeButton={true} closeWarn={false}>
                 <GlobalHandler />
                 <div style={{
                     display: 'flex',
@@ -79,8 +91,8 @@ class FMRoot extends React.Component {
                                 color: 'transparent',
                                 fontSize: '14px',
                                 textShadow: '0px 0px 1px #111111, 1px 1px 1px #11111177',
-                            }}>
-                                热更新
+                            }} title={`${this.state.i18n['capp-hotUpdateTips']}`}>
+                                {this.state.i18n['capp-hotUpdate']}
                                 <Android12Switch
                                     checked={this.state.HotUpdate}
                                     color="warning"
@@ -122,7 +134,9 @@ class FMRoot extends React.Component {
                             height: '100%',
                             // backgroundColor: '#fff'
                         }}>
-                            <FactoryPanel ref={this.factoryPanelRef} currentAppInfo={this.state.currentAppInfo} />
+                            <FactoryPanel ref={this.factoryPanelRef} 
+                                selectApp={(info) => {this.selectApp(info)}}
+                                currentAppInfo={this.state.currentAppInfo} />
                         </div>
                     </div>
                 </div>

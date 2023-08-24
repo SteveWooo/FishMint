@@ -1,5 +1,5 @@
 const { DragBar, WindowFrame, GlobalHandler } = window.fmComponents
-const { Button, TextField, Switch, styled, alpha } = window.MaterialUI
+const { Button, TextField, Switch, Snackbar, styled, alpha } = window.MaterialUI
 const { pink } = window.MaterialUI.colors
 
 class FactoryPanel extends React.Component {
@@ -8,11 +8,21 @@ class FactoryPanel extends React.Component {
         this.state = {
             currentAppInfo: null,
             configJSON: null,
+            // appName 修改
+            showEditAppNameIcon: false,
             isEditingAppDirName: false, // 是否正在编辑标题
             editingAppDirName: '', // 正在编辑的标题
             editingAppDirNameError: false, // 正在编辑的标题是否出错
+            // browserWindow 修改
+            browserWindowConfigureString: '',
+            isBrowserWindowConfigureError: '',
             i18n: {},
-            appList: {}
+            appList: {},
+
+            // toast
+            toastIsDoneSyncConfigure: false,
+            toastNotDoneSyncConfigure: false,
+            toastNotDoneSyncConfigureMessage: ''
         }
     }
 
@@ -39,36 +49,110 @@ class FactoryPanel extends React.Component {
     // 与基座同步配置
     // 同步配置需要传入配置参数，由 onStaticFile 来触发app配置更新，再更新state
     async syncConfig(configJSON) {
-        await fm.controller.setAppConfig({
+        const res = await fm.controller.setAppConfig({
             appDirName: this.state.currentAppInfo.appDirName,
             configJSON: configJSON
         })
+
+        if (res.status === 2000) {
+            this.setState({
+                toastIsDoneSyncConfigure: true
+            })
+        }
+
     }
 
     // 更新app列表，用来做排重
-    async updateAppList() {
+    async updateAppList(cb) {
         const appList = (await fm.controller.getAppList()).appList
         this.setState({
             appList: appList
+        }, () => {
+            typeof cb === 'function' && cb()
         })
     }
 
     // 更新 app 配置
     async updateAppInfo() {
         const currentAppInfo = this.props.currentAppInfo
+        if (currentAppInfo === null) {
+            this.props.selectApp && this.props.selectApp(null)
+            this.setState({
+                currentAppInfo: currentAppInfo
+            })
+            return 
+        }
         const appConfig = await fm.controller.getAppConfig({
             appDirName: currentAppInfo.appDirName
         })
+        if (appConfig.status !== 2000) {
+            this.props.selectApp && this.props.selectApp(null)
+            return 
+        }
         const configJSON = appConfig.configJSON
+        const browserWindowConfigureString = this.getBrowserWindowConfigString(configJSON)
         this.setState({
             currentAppInfo: currentAppInfo,
-            configJSON: configJSON
+            configJSON: configJSON,
+            browserWindowConfigureString: browserWindowConfigureString
         })
     }
 
-    // 检查重名
+    // ===== browserWindow配置数据流：
+    // 基座 - 更新到configJSON - 解析设置到bwString绑定到textfield - 检查输入 - 更新到configJSON - 同步到基座
+    // browserWindow配置 - 构建显示的字符串
+    getBrowserWindowConfigString(configJSON) {
+        if (!configJSON) {
+            return ''
+        }
+        let browserWindowConfig = JSON.stringify(configJSON.browserWindowOptions, null, 4)
+        return browserWindowConfig
+    }
+
+    // browserWindow配置 - 输入
+    onBrowserWindowConfigureChange(e) {
+        const val = e.target.value
+        const check = this.checkBrowserWindowConfig(val)
+        this.setState({
+            browserWindowConfigureString: val,
+            isBrowserWindowConfigureError: check === false
+        })
+    }
+
+    // browserWindow配置 - 检查
+    checkBrowserWindowConfig(configString) {
+        try {
+            let json = JSON.parse(configString)
+            return json
+        } catch (e) {
+            return false
+        }
+    }
+
+    // browserWindow配置 - onBlur
+    onBrowserWindowConfigureTextfieldBlur() {
+        let val = this.state.browserWindowConfigureString
+        const json = this.checkBrowserWindowConfig(val)
+        if (!json) {
+            this.setState({
+                isBrowserWindowConfigureError: true
+            })
+            return
+        }
+
+        let configJSON = this.state.configJSON
+        configJSON.browserWindowOptions = json
+        this.setState({
+            configJSON: configJSON
+        }, () => {
+            this.syncConfig(configJSON)
+        })
+    }
+
+    // 改名 - 检查重名
     async checkAppName(inputAppName) {
         if (!this.state.isEditingAppDirName) return
+        if (!this.state.currentAppInfo) return 
         // 检查是否出错
         const appDirPrefix = this.state.currentAppInfo.appDirName.substring(
             0, this.state.currentAppInfo.appDirName.lastIndexOf('/')
@@ -86,7 +170,7 @@ class FactoryPanel extends React.Component {
         })
     }
 
-    // 关闭名称修改框框
+    // 改名 - 关闭名称修改框框
     async closeAppNameEditFrame() {
         this.setState({
             isEditingAppDirName: false,
@@ -94,7 +178,7 @@ class FactoryPanel extends React.Component {
         })
     }
 
-    // 打开名称修改框
+    // 改名 - 打开名称修改框
     async openAppNameEditFrame() {
         this.setState({
             isEditingAppDirName: true,
@@ -103,7 +187,7 @@ class FactoryPanel extends React.Component {
         })
     }
 
-    // 提交 app 名称更改
+    // 改名 - 提交 app 名称更改
     async submitAppNameChange(newAppName) {
         if (!newAppName || newAppName === '') {
             await fm.dialog.showErrorBox({
@@ -111,12 +195,18 @@ class FactoryPanel extends React.Component {
             })
             return
         }
+        const appDirName = this.state.currentAppInfo.appDirName
+        // this.props.selectApp && this.props.selectApp(null)
         const res = await fm.controller.setAppName({
-            appDirName: this.state.currentAppInfo.appDirName,
+            appDirName: appDirName,
             newAppName: newAppName
         })
         if (res.status === 2000) {
             this.closeAppNameEditFrame()
+            // 小等一会儿
+            this.updateAppList(() => {
+                this.props.selectApp && this.props.selectApp(this.state.appList[res.appDirName])
+            })
             return
         }
 
@@ -136,10 +226,11 @@ class FactoryPanel extends React.Component {
 
         if (dialogRes.result !== 0) return
 
+        this.props.selectApp && this.props.selectApp(null)
         const res = await fm.controller.deleteApp({
             appDirName: appDirName
         })
-
+        
         if (res.status !== 2000) {
             await fm.dialog.showErrorBox({
                 message: res.message
@@ -147,7 +238,7 @@ class FactoryPanel extends React.Component {
             return
         }
 
-        location.reload()
+        // location.reload()
     }
 
     render() {
@@ -233,29 +324,40 @@ class FactoryPanel extends React.Component {
                                         alignItems: 'center',
                                         paddingLeft: '20px',
                                         textShadow: '0px 0px 1px #f30ba4, 0px 0px 10px #feea83, 0px 0px 10px #feea83'
+                                    }} onMouseOver={() => {
+                                        this.setState({
+                                            showEditAppNameIcon: true
+                                        })
+                                    }} onMouseLeave={() => {
+                                        this.setState({
+                                            showEditAppNameIcon: false
+                                        })
                                     }}>
                                         <div style={{
                                             overflow: 'hidden',
                                             height: '35px'
                                         }}>
                                             {
+                                                this.state.currentAppInfo && 
                                                 this.state.currentAppInfo.appDirName.substring(
                                                     this.state.currentAppInfo.appDirName.lastIndexOf('/') + 1
                                                 )
                                             }
                                         </div>
-                                        <div style={{
-                                            display: 'flex',
-                                            alignItems: 'center',
-                                            marginLeft: '10px',
-                                            cursor: 'pointer',
-                                        }} onClick={() => {
-                                            this.openAppNameEditFrame()
-                                        }} className={`hvr-skew-forward`}>
-                                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path stroke="#999" d="M20 21H4L8 19L18.4056 6.70242C18.7416 6.30539 18.7171 5.71713 18.3494 5.34937L16.7685 3.76848C16.3548 3.3548 15.6759 3.38304 15.298 3.82965L5 16L4 19" stroke-linecap="round" stroke-linejoin="round" />
-                                            </svg>
-                                        </div>
+                                        {
+                                            this.state.showEditAppNameIcon ? <div style={{
+                                                display: 'flex',
+                                                alignItems: 'center',
+                                                marginLeft: '5px',
+                                                cursor: 'pointer',
+                                            }} onClick={() => {
+                                                this.openAppNameEditFrame()
+                                            }} className={`hvr-skew-forward`}>
+                                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <path stroke="#666" d="M20 21H4L8 19L18.4056 6.70242C18.7416 6.30539 18.7171 5.71713 18.3494 5.34937L16.7685 3.76848C16.3548 3.3548 15.6759 3.38304 15.298 3.82965L5 16L4 19" stroke-linecap="round" stroke-linejoin="round" />
+                                                </svg>
+                                            </div> : null
+                                        }
                                     </div>
                                 ) : null
                             }
@@ -266,7 +368,8 @@ class FactoryPanel extends React.Component {
                                         height: '60px',
                                         display: 'flex',
                                         alignItems: `center`,
-                                        alignContent: 'center'
+                                        alignContent: 'center',
+                                        paddingLeft: '20px'
                                     }}>
                                         <TextField
                                             color="success"
@@ -343,7 +446,20 @@ class FactoryPanel extends React.Component {
                                     appDirName: this.state.currentAppInfo.appDirName
                                 })
                             }} className={`hvr-skew-forward`}>
-                                {this.state.i18n['capp-sourceCodeDir']} {this.state.currentAppInfo.appDirName}
+                                {/* {this.state.i18n['capp-sourceCodeDir']} {this.state.currentAppInfo.appDirName} */}
+                                <svg version="1.1" id="icons" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
+                                    width="24px" height="18px" viewBox="0 0 48 42" enable-background="new 0 0 48 42" >
+                                    <g id="Icon_18_">
+                                        <g>
+                                            <path fill="none" stroke="#999" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="
+			M2,9v28.657C2,38.169,2.448,40,3,40h42c0.552,0,1-1.831,1-2.343V8.949C46,8.437,45.552,9,45,9H20"/>
+                                            <path fill="none" stroke="#999" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="
+			M19,7.999l-2.909-4.94c0-0.344-0.439-0.06-0.937-0.06H2.515C2.017,3,2,2.449,2,2.793V8"/>
+                                        </g>
+                                        <line fill="none" stroke="#999" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" x1="23" y1="2" x2="43" y2="2" />
+                                    </g>
+                                </svg>
+
                             </div>
                         </div>
 
@@ -401,7 +517,8 @@ class FactoryPanel extends React.Component {
                                 display: 'flex',
                                 flexDirection: 'row',
                                 flexWrap: 'wrap',
-                                alignItems: 'center'
+                                alignItems: 'center',
+                                fontSize: '14px'
                             }}>
                                 <div style={{
                                 }} className={`configure-menu-item `}>
@@ -420,6 +537,71 @@ class FactoryPanel extends React.Component {
 
                             </div>
                         </div>
+
+                        {/* Browser View配置项 */}
+                        <div style={{
+                            width: '80%',
+                            display: 'flex',
+                            marginTop: '20px'
+                        }}>
+                            <ConfigureTextField
+                                label={`${this.state.i18n['capp-browserWindowConfigure']}`}
+                                multiline
+                                fullWidth
+                                color="warning"
+                                helperText={`${this.state.isBrowserWindowConfigureError ?
+                                    this.state.i18n['capp-browserWindowConfigureInputError'] :
+                                    this.state.i18n['capp-browserWindowConfigureInputHelp']
+                                    }`}
+                                rows={14}
+                                onBlur={() => { this.onBrowserWindowConfigureTextfieldBlur() }}
+                                error={this.state.isBrowserWindowConfigureError}
+                                value={this.state.browserWindowConfigureString}
+                                onChange={e => { this.onBrowserWindowConfigureChange(e) }}
+                            />
+                        </div>
+                        <div style={{
+                            width: '20%'
+                        }}></div>
+
+
+                        {/* 提示配置已同步的 Toast */}
+                        <Snackbar
+                            anchorOrigin={{
+                                vertical: "bottom",
+                                horizontal: "right"
+                            }}
+                            open={this.state.toastIsDoneSyncConfigure}
+                            autoHideDuration={1500}
+                            onClose={(event, reason) => {
+                                if (reason === 'clickaway') {
+                                    return;
+                                }
+                                this.setState({
+                                    toastIsDoneSyncConfigure: false
+                                })
+                            }}
+                            message={`${this.state.i18n['capp-doneSyncConfigure']}`}
+                        />
+
+                        {/* 提示同步失败的Toast */}
+                        <Snackbar
+                            anchorOrigin={{
+                                vertical: "bottom",
+                                horizontal: "right"
+                            }}
+                            open={this.state.toastNotDoneSyncConfigure}
+                            autoHideDuration={1500}
+                            onClose={(event, reason) => {
+                                if (reason === 'clickaway') {
+                                    return;
+                                }
+                                this.setState({
+                                    toastNotDoneSyncConfigure: false
+                                })
+                            }}
+                            message={`${this.state.toastNotDoneSyncConfigureMessage}`}
+                        />
                     </div>
                 )}
             </div>
@@ -438,4 +620,18 @@ const ConfigureSwitch = styled(Switch)(({ theme }) => ({
     '& .MuiSwitch-switchBase.Mui-checked + .MuiSwitch-track': {
         backgroundColor: pink[600],
     },
+}));
+
+
+const ConfigureTextField = styled(TextField)(({ theme }) => ({
+    '& .MuiFormLabel-root': {
+        fontFamily: 'JiangCheng'
+    },
+    '& .MuiInputBase-input': {
+        fontFamily: 'JiangCheng',
+        color: '#444'
+    },
+    '& textarea:invalid': {
+        boxShadow: 'none'
+    }
 }));

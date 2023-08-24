@@ -2,17 +2,17 @@
     "browserWindowOptions": {
         "width": 450,
         "height": 600,
-        "x": 100,
-        "y": 100,
-        "type": "normal",
+        "x": 0,
+        "y": 0,
+        "type": "toolbar",
         "frame": false,
         "resizable": false,
         "transparent": true,
         "hasShadow": true,
-        "alwaysOnTop": false
+        "alwaysOnTop": true
     },
     "configure": {
-        "devTools": false,
+        "devTools": true,
         "isolateSessionLevel": "app",
         "webSecurity": true,
         "showWhenStartup": true,
