@@ -17,6 +17,7 @@ class FMRoot extends React.Component {
         window.fmComponents.usingTheme = 'dba'
         this.updateList()
         fm.on.staticFileChange(async () => {
+            this.doHide()
             this.updateList()
         })
 
@@ -168,11 +169,12 @@ class FMRoot extends React.Component {
                     this.state.showDragTips ? <div style={{
                         position: 'absolute',
                         left: '400px',
-                        top: 'calc(10vh)'
+                        top: 'calc(10vh)',
+                        opacity: '0.5'
                     }}>
                         <img style={{
                             width: '200px',
-                            height: '200px'
+                            height: '200px',
                         }} src="./dragTips.png" />
                         <div style={{
                             color: 'transparent',
@@ -264,7 +266,7 @@ class FMRoot extends React.Component {
                                     <img style={{
                                         width: '60px',
                                         height: '60px',
-                                        boxShadow: `${this.state.showDragTips ? '0px 0px 4px 4px #feea8322' : ''}`
+                                        // boxShadow: `${this.state.showDragTips ? '0px 0px 4px 4px #feea8322' : ''}`
                                     }} draggable="false" src={app.icon}
                                         className={`animate__animated ${this.state.showDragTips ? 'animate__heartBeat' : ''}`} />
                                     <div style={{

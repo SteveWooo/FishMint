@@ -29,6 +29,14 @@ class AppList extends React.Component {
     async updateList() {
         const appList = (await fm.controller.getAppList()).appList
         const templates = (await fm.staticService.getTemplates()).templates
+        const CONST = (await fm.const()).const
+        // 处理下appList
+        for (const appDirName in appList) {
+            if (appDirName.indexOf(CONST.FACTORY_APP_PREFIX) !== 0) {
+                delete appList[appDirName]
+            }
+        }
+
         this.setState({
             appList: appList,
             templates: templates
@@ -55,7 +63,7 @@ class AppList extends React.Component {
             message: this.state.i18n['capp-isGoingToCreateAnApp'] + template.name,
             buttons: ['OK', 'Cancel']
         })
-        if (res.result !== 0) return 
+        if (res.result !== 0) return
 
         const newAppRes = await fm.controller.createApp({
             template: template.name
@@ -65,7 +73,7 @@ class AppList extends React.Component {
             await fm.dialog.showErrorBox({
                 message: newAppRes.message
             })
-            return 
+            return
         }
         await fm.controller.openExplorer({
             appDirName: newAppRes.appDirName
@@ -74,7 +82,7 @@ class AppList extends React.Component {
         // 创建完毕后，切换app
         setTimeout(() => {
             const newAppInfo = this.state.appList[newAppRes.appDirName]
-            if (!newAppInfo) return 
+            if (!newAppInfo) return
             this.selectApp(newAppInfo)
         }, 200)
     }
@@ -82,7 +90,7 @@ class AppList extends React.Component {
     async hideTemplateSelectMenu() {
         this.setState({ templateListStatus: 'hidding' }, () => {
             setTimeout(() => {
-                if (this.state.templateListStatus !== 'hidding') return 
+                if (this.state.templateListStatus !== 'hidding') return
                 this.setState({ templateListStatus: 'hide' })
             }, 300)
         })
@@ -91,7 +99,7 @@ class AppList extends React.Component {
     async showTemplateSelectMenu() {
         this.setState({ templateListStatus: 'showing' }, () => {
             setTimeout(() => {
-                if (this.state.templateListStatus !== 'showing') return 
+                if (this.state.templateListStatus !== 'showing') return
                 this.setState({ templateListStatus: 'show' })
             }, 300)
         })
@@ -177,73 +185,87 @@ class AppList extends React.Component {
                     }
                 </div>
 
-                {/* 模板选择栏 */}
+                {/* 新建app */}
                 <div style={{
                     width: 'calc(100% - 4px)',
                 }} onMouseLeave={() => {
-                    this.hideTemplateSelectMenu()
+                    if (['show', 'showing'].includes(this.state.templateListStatus)) {
+                        
+                        this.hideTemplateSelectMenu()
+                    }
                 }}>
-                    {
-                        ['showing', 'show', 'hidding'].includes(this.state.templateListStatus) ? (
-                            <div style={{
-                                width: '100%',
-                                // borderTop: '1px solid #f30ba4 ',
-                                // borderRight: '1px solid #f30ba4 ',
-                                borderRadius: '0 5px 0 0 ',
-                                boxShadow: '1px -1px 4px #f30ba4'
-                            }} className={`${['show', 'showing'].includes(this.state.templateListStatus) ? 
-                                'template-list-show' : 'template-list-hide'}`}>
-                                <div style={{
-                                    fontSize: '14px',
-                                    padding: '10px 5px 5px 5px',
-                                }}>
-                                    {this.state.i18n['capp-chooseYourTemplate']}
-                                </div>
-
+                    {/* 模板选择栏 */}
+                    <div style={{
+                        width: 'calc(100% - 4px)',
+                    }}>
+                        {
+                            ['showing', 'show', 'hidding'].includes(this.state.templateListStatus) ? (
                                 <div style={{
                                     width: '100%',
-                                    height: '150px',
-                                    overflowX: 'hidden',
-                                    overflowY: 'auto'
-                                }} className={`better-scroll`}>
-                                    {
-                                        this.state.templates.map((item, index) => {
-                                            return (
-                                                <div style={{
-                                                    fontWeight: 'bold'
-                                                }}>
-                                                    <CusMenuItem onClick={() => {
-                                                        this.hideTemplateSelectMenu()
-                                                        this.createAppByTemplate(item)
-                                                    }}>{item.name}</CusMenuItem>
-                                                </div>
-                                            )
-                                        })
-                                    }
+                                    // borderTop: '1px solid #f30ba4 ',
+                                    // borderRight: '1px solid #f30ba4 ',
+                                    borderRadius: '0 5px 0 0 ',
+                                    boxShadow: '1px -1px 4px #f30ba4'
+                                }} className={`${['show', 'showing'].includes(this.state.templateListStatus) ?
+                                    'template-list-show' : 'template-list-hide'}`}>
+                                    <div style={{
+                                        fontSize: '14px',
+                                        padding: '10px 5px 5px 5px',
+                                    }}>
+                                        {this.state.i18n['capp-chooseYourTemplate']}
+                                    </div>
+
+                                    <div style={{
+                                        width: '100%',
+                                        height: '150px',
+                                        overflowX: 'hidden',
+                                        overflowY: 'auto'
+                                    }} className={`better-scroll`}>
+                                        {
+                                            this.state.templates.map((item, index) => {
+                                                return (
+                                                    <div style={{
+                                                        fontWeight: 'bold'
+                                                    }}>
+                                                        <CusMenuItem onClick={() => {
+                                                            this.hideTemplateSelectMenu()
+                                                            this.createAppByTemplate(item)
+                                                        }}>{item.name}</CusMenuItem>
+                                                    </div>
+                                                )
+                                            })
+                                        }
+                                    </div>
                                 </div>
-                            </div>
-                        ) : null
-                    }
-                </div>
+                            ) : null
+                        }
+                    </div>
 
 
-                {/* 操作栏 */}
-                <div style={{
-                    width: 'calc(100% - 4px)',
-                    height: '30px',
-                    backgroundColor: '',
-                    boxShadow: '0px -1px 4px #ccc',
-                    display: 'flex',
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                    fontSize: '12px',
-                    color: '#666',
-                    cursor: 'pointer',
-                }} onClick={() => {
-                    this.showTemplateSelectMenu()
-                }}>
-                    + {this.state.i18n['capp-createApp']}
+                    {/* 操作栏 */}
+                    <div style={{
+                        width: 'calc(100% - 4px)',
+                        height: '30px',
+                        backgroundColor: '',
+                        boxShadow: '0px -1px 4px #ccc',
+                        display: 'flex',
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                        fontSize: '12px',
+                        color: '#666',
+                        cursor: 'pointer',
+                    }} onClick={() => {
+                        if (['show', 'showing'].includes(this.state.templateListStatus)) {
+                            this.hideTemplateSelectMenu()
+                        }
+                        if (['hide', 'hidding'].includes(this.state.templateListStatus)) {
+                            this.showTemplateSelectMenu()
+                        }
+                    }}>
+                        + {this.state.i18n['capp-createApp']}
+                    </div>
                 </div>
+
             </div>
         )
     }

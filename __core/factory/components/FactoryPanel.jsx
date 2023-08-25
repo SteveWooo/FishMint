@@ -42,6 +42,9 @@ class FactoryPanel extends React.Component {
 
     async componentDidUpdate(prevProps) {
         if (this.props.currentAppInfo !== prevProps.currentAppInfo) {
+            this.setState({
+                isEditingAppDirName: false
+            })
             this.updateAppInfo()
         }
     }

@@ -1,5 +1,5 @@
 const { DragBar, WindowFrame, GlobalHandler } = window.fmComponents
-const { Switch, styled } = window.MaterialUI
+const { Switch, TextField, styled } = window.MaterialUI
 
 class FMRoot extends React.Component {
     constructor(props) {
@@ -21,8 +21,12 @@ class FMRoot extends React.Component {
         })
         this.updateKToolConfigure()
         fm.on.staticFileChange(() => {
-            this.updateKToolConfigure()
+            // this.updateKToolConfigure()
         })
+
+        fm.on.baseConfigureUpdate(() => {
+            this.updateKToolConfigure()
+        }) 
     }
 
     async updateKToolConfigure() {
@@ -125,7 +129,8 @@ class FMRoot extends React.Component {
                             height: '100%',
                             // backgroundColor: '#f5f5f5'
                         }}>
-                            <AppList selectApp={(info) => {this.selectApp(info)}} />
+                            <AppList 
+                                selectApp={(info) => {this.selectApp(info)}} />
                         </div>
 
                         {/* 操作面板 */}
@@ -139,6 +144,9 @@ class FMRoot extends React.Component {
                                 currentAppInfo={this.state.currentAppInfo} />
                         </div>
                     </div>
+
+                    {/* 蒙版 */}
+
                 </div>
             </WindowFrame>
         )
