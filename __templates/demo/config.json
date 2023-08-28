@@ -17,6 +17,7 @@
         "webSecurity": true,
         "recordRectInfo": true,
         "showWhenStartup": true,
-        "closeWarn": true
+        "closeWarn": true,
+        "disableContextMenu": false
     }
 }

@@ -130,7 +130,8 @@ class FMRoot extends React.Component {
                             // backgroundColor: '#f5f5f5'
                         }}>
                             <AppList 
-                                selectApp={(info) => {this.selectApp(info)}} />
+                                selectApp={(info) => {this.selectApp(info)}}
+                                currentAppInfo={this.state.currentAppInfo} />
                         </div>
 
                         {/* 操作面板 */}

@@ -537,7 +537,32 @@ class FactoryPanel extends React.Component {
                                         this.syncConfig(configJSON)
                                     }} />
                                 </div>
+                            </div>
 
+                            {/* 禁用右键弹窗配置 */}
+                            {/* 控制台配置 */}
+                            <div style={{
+                                width: '50%',
+                                display: 'flex',
+                                flexDirection: 'row',
+                                flexWrap: 'wrap',
+                                alignItems: 'center',
+                                fontSize: '14px'
+                            }}>
+                                <div style={{
+                                }} className={`configure-menu-item `}>
+                                    {this.state.i18n['capp-disableContextMenu']}
+                                </div>
+                                <div style={{
+                                }} className={`configure-menu-item `}>
+                                    <ConfigureSwitch checked={
+                                        this.state.configJSON && this.state.configJSON.configure.disableContextMenu === true
+                                    } onChange={async (e) => {
+                                        const configJSON = this.state.configJSON;
+                                        configJSON.configure.disableContextMenu = e.target.checked;
+                                        this.syncConfig(configJSON)
+                                    }} />
+                                </div>
                             </div>
                         </div>
 

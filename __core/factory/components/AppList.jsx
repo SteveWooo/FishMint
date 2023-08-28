@@ -26,6 +26,17 @@ class AppList extends React.Component {
         })
     }
 
+    async componentDidUpdate(prevProps) {
+        if (this.props.currentAppInfo !== prevProps.currentAppInfo) {
+            if (this.props.currentAppInfo === null ) {
+                return 
+            }
+            this.setState({
+                activeAppDirName: this.props.currentAppInfo.appDirName
+            })
+        }
+    }
+
     async updateList() {
         const appList = (await fm.controller.getAppList()).appList
         const templates = (await fm.staticService.getTemplates()).templates

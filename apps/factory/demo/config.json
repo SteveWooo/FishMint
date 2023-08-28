@@ -1,1 +1,23 @@
-{"browserWindowOptions":{"x":100,"y":100,"width":400,"height":400,"type":"toolbar","frame":false,"resizable":false,"transparent":true,"hasShadow":false,"alwaysOnTop":true},"configure":{"devTools":true,"isolateSessionLevel":"app","webSecurity":true,"recordRectInfo":true,"showWhenStartup":true,"closeWarn":true}}
+{
+    "browserWindowOptions": {
+        "x": 100,
+        "y": 100,
+        "width": 400,
+        "height": 400,
+        "type": "toolbar",
+        "frame": false,
+        "resizable": false,
+        "transparent": true,
+        "hasShadow": false,
+        "alwaysOnTop": true
+    },
+    "configure": {
+        "devTools": true,
+        "isolateSessionLevel": "app",
+        "webSecurity": true,
+        "recordRectInfo": true,
+        "showWhenStartup": true,
+        "closeWarn": true,
+        "disableContextMenu": false
+    }
+}

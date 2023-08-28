@@ -5,6 +5,10 @@ class FMRoot extends React.Component {
         super(props)
     }
 
+    async componentDidMount() {
+        
+    }
+
     render() {
         return (
             <WindowFrame closeButton={true}>
@@ -12,9 +16,10 @@ class FMRoot extends React.Component {
                 <div style={{
                     display: 'flex',
                     justifyContent: 'center',
-                    alignItems: 'center',
+                    alignItems: 'flex-start',
+                    alignContent: 'center',
                     width: '100%',
-                    flexGrow: 1
+                    height: '100%'
                 }}>
                     Hello 
                 </div>

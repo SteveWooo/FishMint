@@ -42,6 +42,13 @@
                 })
             })
         }
+        sleep(ms) {
+            return new Promise(r => {
+                setTimeout(() => {
+                    r()
+                }, ms)
+            })
+        }
     }
     window.fmSdk = new FMSdk();
 })()
