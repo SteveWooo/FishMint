@@ -17,7 +17,9 @@ class FMRoot extends React.Component {
                     display: 'flex',
                     justifyContent: 'center',
                     alignItems: 'flex-start',
-                    alignContent: 'center',
+                    alignContent: 'flex-start',
+                    flexDirection: 'row',
+                    flexWrap: 'wrap',
                     width: '100%',
                     height: '100%'
                 }}>
