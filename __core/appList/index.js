@@ -36,6 +36,11 @@ class FMRoot extends React.Component {
     async doShow() {
         if (this.state.showStatus !== 'hide') return
         await this.setPos()
+        // 设置一下最顶层
+        await fm.eWindow.__call({
+            functionName: 'setAlwaysOnTop',
+            params: [true]
+        })
         await fm.window.show()
         this.setState({
             isShow: true,
