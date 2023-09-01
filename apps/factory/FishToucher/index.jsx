@@ -13,6 +13,18 @@ const EVENT_TYPE = {
     FISH_HAPPY: 'fishHappy',
 }
 
+const ICE_SERVERS = [
+    { urls: 'stun:stun1.l.google.com:19302' },
+    { urls: 'stun:stun2.l.google.com:19302' },
+    { urls: 'stun:stun3.l.google.com:19302' },
+    { urls: 'stun:stun4.l.google.com:19302' },
+    { urls: 'stun:stun.ideasip.com' },
+    { urls: 'stun:stun.schlund.de' },
+    { urls: 'stun:stunserver.org' },
+    { urls: 'stun:stun.voiparound.com' },
+    { urls: 'stun:stun.voipbuster.com' },
+]
+
 const PEERJS_SERVER = {
     host: 'deadfishcrypto.tpddns.cn',
     port: 20000
@@ -36,6 +48,7 @@ class Fish extends React.Component {
         }
 
         this.fishRef = React.createRef()
+        this.resetTimeout = null
     }
 
     async componentDidMount() {
@@ -87,8 +100,9 @@ class Fish extends React.Component {
             })
         })
 
-        // 临时的
-        setTimeout(() => {
+        // 清理状态
+        clearTimeout(this.resetTimeout)
+        this.resetTimeout = setTimeout(() => {
             this.setState({
                 fishStatus: FISH_STATUS.NORMAL
             })
@@ -145,7 +159,7 @@ class FMRoot extends React.Component {
             ...PEERJS_SERVER,
             path: '/FishMint',
             config: {
-
+                iceServers: ICE_SERVERS
             }
         })
         // 管理被连接
@@ -208,7 +222,10 @@ class FMRoot extends React.Component {
             typeof res.json.peerInfo.chanelID !== 'string' ||
             res.json.peerInfo.chanelID === ''
         ) {
-            await fm.db.set('chanelID', '')
+            await fm.db.set({
+                key: 'chanelID',
+                value: ''
+            })
             return
         }
         await fm.db.set({
@@ -222,6 +239,9 @@ class FMRoot extends React.Component {
     // 根据设定的chanel，查询所有chanel内容，然后发起连接
     async doConn() {
         // 获取chanel内的所有node列表
+        if (!this.state.inputtingChanelID || this.state.inputtingChanelID === '') {
+            return
+        }
         const option = {
             url: BASE_URL + '/api/peerjs/getByChanel?chanelID=' + this.state.inputtingChanelID,
             method: 'get'
@@ -329,7 +349,7 @@ class FMRoot extends React.Component {
                         width: '100%',
                         fontSize: '10px'
                     }}>
-                        peerID: {this.state.peerID === '' ? 'loading....' : this.state.peerID}
+                        {/* peerID: {this.state.peerID === '' ? 'loading....' : this.state.peerID} */}
                     </div>
 
                     <div style={{
@@ -341,6 +361,7 @@ class FMRoot extends React.Component {
                     }}>
                         Chanel:
                         <TextField
+                            variant="standard"
                             size='small'
                             value={this.state.inputtingChanelID}
                             onChange={(e) => {
