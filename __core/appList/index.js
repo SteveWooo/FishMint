@@ -55,6 +55,7 @@ class FMRoot extends React.Component {
     }
 
     async doHide() {
+        console.log('doing hide')
         if (this.state.showStatus !== 'show') return
         this.setState({
             isShow: false,

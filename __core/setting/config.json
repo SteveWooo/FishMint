@@ -12,7 +12,7 @@
         "alwaysOnTop": false
     },
     "configure": {
-        "devTools": true,
+        "devTools": false,
         "isolateSessionLevel": "app",
         "webSecurity": true,
         "showWhenStartup": true,

@@ -26,7 +26,26 @@ class FMRoot extends React.Component {
 
         fm.on.baseConfigureUpdate(() => {
             this.updateKToolConfigure()
-        }) 
+        })
+
+        //test 
+        // const resp = await fm.net.http.request({
+        //     method: 'post',
+        //     url: 'http://192.168.0.108:3001/v1/chat/completions',
+        //     headers: {
+        //         'Content-Type': 'Application/json',
+        //     },
+        //     body: JSON.stringify({
+        //         model: 'CodeLlama-7b-Instruct-hf',
+        //         messages: [{
+        //             role: 'user',
+        //             content: `[INST] Write code to solve the following coding problem that obeys the constraints and passes the example test cases. Please wrap your code answer using \`\`\`:
+        //             用javascript写一个函数，计算100位斐波那契数列的结果。这个js函数要写在一个html页面内
+        //             [/INST]`,
+        //         }]
+        //     })
+        // })
+        // console.log(resp.json.choices[0].message.content)
     }
 
     async updateKToolConfigure() {
