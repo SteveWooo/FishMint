@@ -1,5 +1,4 @@
-# <div align="center">FishMint</div>
-
+<h2 align="center">FishMint</h2>
 <div align="center">
   <img src="./favicon.ico" width="120" height="120" />
   <br />
@@ -7,21 +6,29 @@
   <br />
 </div>
 
+## 关于
+FishMint 是一个桌面挂件开发工具，你可以一边使用本项目开源的挂件，一边使用 Html JS CSS 来构建你的桌面挂件，同时也能使用 NodeJS 技术栈写业务逻辑。
+
+FishMint 是基于 Electron 开发的一个工具，专注于桌面挂件、小工具、美化桌面、美丽废物的开发，如果你正在寻找一些能快速搭建桌面小应用的平台，请考虑使用 FishMint。
+
+## 💻环境要求
+Windows
+
+目前正在完善 MacOS 版本
+
 ## ‍快速开始
 
-- 下载基座：进入 [下载页面](https://github.com/SteveWooo/FishMint/releases) 下载对应平台的绿色安装包，解压，双击可执行程序即可启动基座
+- 下载基座：进入 [下载页面](https://github.com/SteveWooo/FishMint/releases) 
 - 按下 Alt+` 即可召唤出控制面板
 - 进入挂件库后，将你想要的挂件拖出桌面即可使用
 - 右键挂件界面，可以退出挂件、或进入挂件的源码目录，尽情修改
-- 托盘区图标，右击也可以对挂件进程进行管理
+- 托盘区图标右击可以对挂件进程进行管理
 
 ## ♥获取本项目最新挂件库
 进入程序目录，将 FishMint 目录删除，然后克隆本项目到原本 FishMint 的位置即可。
 
 ## 开机启动
-因为 ~~懒了~~ 尽量不想动你的注册表，外加担心你写的工程会因为基座版本发生诡异的冲突，所以自动更新、开机启动功能就不集成到内核了
-
-各个系统开机自启方式很多，指向程序包解压出来的可执行程序 FishMint 即可。以下是windows的开机自启步骤：
+各个系统开机自启方式很多，指向程序包解压出来的可执行程序 FishMint.exe 即可。以下是windows的开机自启步骤：
 
 - win+r，输入：shell:startup
 - 创建一个快捷方式，指向程序包的可执行程序
@@ -55,10 +62,6 @@ let res = await fm.window.getInfo()
 欢迎提pr贡献app
 
 ## 生态&兼容
-
-FishMint 目前坚持 Web3 理念，不做中心化的生态：包括插件商城、统一云存储等，我们希望每个挂件都是自己 + AI 做给自己用，FishMint 只是在保留开发灵活的基础上，提供让大部分人能迅速做一个 PC 挂件的能力。
-
-在保留社区免费版的基础上，将来会以买断制方式出售专业版 FishMint 基座；并可以商讨定制化需求，交付更安全的基座与定制化挂件、服务器等。
 
 相关社区中挂件的兼容方式：
 - 在index.html中，请规范地引入css与js文件。FishMint 没有破坏浏览器原生加载模式。
