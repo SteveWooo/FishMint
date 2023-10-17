@@ -17,7 +17,7 @@ class FMRoot extends React.Component {
         window.fmComponents.usingTheme = 'dba'
         this.updateList()
         fm.on.staticFileChange(async () => {
-            this.doHide()
+            // this.doHide()
             this.updateList()
         })
 
@@ -55,7 +55,7 @@ class FMRoot extends React.Component {
     }
 
     async doHide() {
-        console.log('doing hide')
+        // console.log('doing hide')
         if (this.state.showStatus !== 'show') return
         this.setState({
             isShow: false,

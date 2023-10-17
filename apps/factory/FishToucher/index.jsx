@@ -27,7 +27,7 @@ const ICE_SERVERS = [
 
 const PEERJS_SERVER = {
     host: 'deadfishcrypto.tpddns.cn',
-    port: 20000
+    port: 20000 
 }
 // const BASE_URL = 'http://localhost:2000'
 const BASE_URL = 'http://deadfishcrypto.tpddns.cn:20000'
