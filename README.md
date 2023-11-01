@@ -82,7 +82,7 @@ let res = await fm.window.getInfo()
 本项目目前依赖了以下第三方开源项目：
 
 - 基本：electron、electron-builder、express
-- 网络：axios、request
+- 网络：axios、request、bonjour
 - 系统、数据库：systeminformation、LevelDB、robotjs、node-corn
 - 密码学：secp256k1
 - 前端：react、babel、elementUI、animation.css、hover.css
