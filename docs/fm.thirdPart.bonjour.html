@@ -5,7 +5,7 @@
   
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title> http</title>
+  <title> bonjour</title>
 
   <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
@@ -74,7 +74,7 @@
             <div class="content">
                 <header class="page-title">
                     <p>Namespace</p>
-                    <h1>http</h1>
+                    <h1>bonjour</h1>
                 </header>
                 
 
@@ -86,7 +86,7 @@
 <header>
     
         <h2>
-            <span class="ancestors"><a href="fm.html">fm</a><a href="fm.net.html">.net</a>.</span>http</h2>
+            <span class="ancestors"><a href="fm.html">fm</a><a href="fm.thirdPart.html">.thirdPart</a>.</span>bonjour</h2>
         
     
 </header>
@@ -95,7 +95,7 @@
     <div class="container-overview">
     
         
-            <div class="description">http(s)接口</div>
+            <div class="description">bonjour库</div>
         
 
         
@@ -166,16 +166,18 @@
 
 
     
-    <h4 class="name" id=".httpRequest">
-        <a class="href-link" href="#.httpRequest">#</a>
+    <h4 class="name" id=".find">
+        <a class="href-link" href="#.find">#</a>
         
+            
+                <span class='tag'>async</span>
             
                 <span class='tag'>static</span>
             
         
         <span class="code-name">
             
-                httpRequest<span class="signature">()</span><span class="type-signature"> &rarr; {<a href="global.html#GenericResponse">GenericResponse</a>|Number|String|Object|String}</span>
+                find<span class="signature">()</span><span class="type-signature"> &rarr; {<a href="global.html#GenericResponse">GenericResponse</a>|*}</span>
             
         </span>
     </h4>
@@ -184,7 +186,7 @@
     
     
     <div class="description">
-        发起一个http请求，会跨域的哟</br>
+        查询mDns上的服务
     </div>
     
 
@@ -222,57 +224,7 @@
             
 <tr class="deep-level-0">
   
-      <td class="name"><code>args.url</code></td>
-  
-
-  <td class="type">
-  
-      
-<code class="param-type">string</code>
-
-
-  
-  </td>
-
-  
-
-  
-
-  <td class="description last">请求url</td>
-</tr>
-
-
-        
-
-            
-<tr class="deep-level-0">
-  
-      <td class="name"><code>args.method</code></td>
-  
-
-  <td class="type">
-  
-      
-<code class="param-type">string</code>
-
-
-  
-  </td>
-
-  
-
-  
-
-  <td class="description last">请求方法。默认GET</td>
-</tr>
-
-
-        
-
-            
-<tr class="deep-level-0">
-  
-      <td class="name"><code>args.headers</code></td>
+      <td class="name"><code>args.options</code></td>
   
 
   <td class="type">
@@ -288,7 +240,7 @@
 
   
 
-  <td class="description last">额外请求头</td>
+  <td class="description last">查询入参，详情请参考 https://www.npmjs.com/package/bonjour</td>
 </tr>
 
 
@@ -297,13 +249,13 @@
             
 <tr class="deep-level-0">
   
-      <td class="name"><code>args.body</code></td>
+      <td class="name"><code>args.timeout</code></td>
   
 
   <td class="type">
   
       
-<code class="param-type">String</code>
+<code class="param-type">Number</code>
 
 
   
@@ -313,32 +265,7 @@
 
   
 
-  <td class="description last">请求体。请注意是String类型字段</td>
-</tr>
-
-
-        
-
-            
-<tr class="deep-level-0">
-  
-      <td class="name"><code>args.extraRequestParam</code></td>
-  
-
-  <td class="type">
-  
-      
-<code class="param-type">Object</code>
-
-
-  
-  </td>
-
-  
-
-  
-
-  <td class="description last">其他请求参数字段，会以最高优先级附带覆盖到 request 库的请求参数上</td>
+  <td class="description last">搜索服务的时间，单位毫秒，默认1000。会返回在timeout时间内扫描到的所有mdns服务</td>
 </tr>
 
 
@@ -413,7 +340,7 @@
 
 <div class="columns">
     
-    <div class='param-desc column is-7'>- 通用返回</div>
+    <div class='param-desc column is-7'>- res 通用返回</div>
     
     
     <div class='column is-5 has-text-left'>
@@ -431,67 +358,13 @@
 
 <div class="columns">
     
-    <div class='param-desc column is-7'>res.httpStatusCode - http状态码</div>
+    <div class='param-desc column is-7'>- res.resul</div>
     
     
     <div class='column is-5 has-text-left'>
         <label>Type: </label>
         
-<code class="param-type">Number</code>
-
-
-    </div>
-    
-</div>
-
-                
-                    
-
-<div class="columns">
-    
-    <div class='param-desc column is-7'>res.data - 文本形式的返回</div>
-    
-    
-    <div class='column is-5 has-text-left'>
-        <label>Type: </label>
-        
-<code class="param-type">String</code>
-
-
-    </div>
-    
-</div>
-
-                
-                    
-
-<div class="columns">
-    
-    <div class='param-desc column is-7'>res.json - 如果请求结果是json，则返回json结构的数据</div>
-    
-    
-    <div class='column is-5 has-text-left'>
-        <label>Type: </label>
-        
-<code class="param-type">Object</code>
-
-
-    </div>
-    
-</div>
-
-                
-                    
-
-<div class="columns">
-    
-    <div class='param-desc column is-7'>res.message - 请求错误信息</div>
-    
-    
-    <div class='column is-5 has-text-left'>
-        <label>Type: </label>
-        
-<code class="param-type">String</code>
+<code class="param-type">*</code>
 
 
     </div>
@@ -508,7 +381,207 @@
     <h5>Example</h5>
     
     
-        <pre class="prettyprint"><code>// GET请求const res = await kt.net.http.request({    url: 'https://www.yourapi.com/path',    method: 'GET',})// POST请求const res = await kt.net.http.request({    url: 'https://www.yourapi.com/path'，    method: 'POST',    headers: {        'Content-Type': 'Application/json'    },    body: JSON.stringify({ 'Hello': 'KTool' }),    extraRequestParam: {        timeout: 5000    }})</code></pre>
+        <pre class="prettyprint"><code>const result = await fm.thirdPart.bonjour.find({  options: {     type: "http",  },  timeout: 1000})</code></pre>
+    
+
+
+</div>
+            
+                <div class="member">
+
+
+    
+    <h4 class="name" id=".publish">
+        <a class="href-link" href="#.publish">#</a>
+        
+            
+                <span class='tag'>async</span>
+            
+                <span class='tag'>static</span>
+            
+        
+        <span class="code-name">
+            
+                publish<span class="signature">()</span><span class="type-signature"> &rarr; {<a href="global.html#GenericResponse">GenericResponse</a>|*}</span>
+            
+        </span>
+    </h4>
+    
+
+    
+    
+    <div class="description">
+        向mDns发布一个服务
+    </div>
+    
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+<div class="table-container">
+    <table class="params table">
+        <thead>
+        <tr>
+            
+            <th>Name</th>
+            
+
+            <th>Type</th>
+
+            
+
+            
+
+            <th class="last">Description</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        
+
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>args.options</code></td>
+  
+
+  <td class="type">
+  
+      
+<code class="param-type">Object</code>
+
+
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last">发布入参，详情请参考 https://www.npmjs.com/package/bonjour</td>
+</tr>
+
+
+        
+        </tbody>
+    </table>
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+    <dt class="tag-since">Since:</dt>
+    <dd class="tag-since"><ul class="dummy"><li>release-0.0.2</li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class='columns method-parameter'>
+        <div class="column is-2"><label>Returns:</label></div>
+        <div class="column is-10">
+            
+                    
+
+<div class="columns">
+    
+    <div class='param-desc column is-7'>- res 通用返回</div>
+    
+    
+    <div class='column is-5 has-text-left'>
+        <label>Type: </label>
+        
+<code class="param-type"><a href="global.html#GenericResponse">GenericResponse</a></code>
+
+
+    </div>
+    
+</div>
+
+                
+                    
+
+<div class="columns">
+    
+    <div class='param-desc column is-7'>- res.result 透传</div>
+    
+    
+    <div class='column is-5 has-text-left'>
+        <label>Type: </label>
+        
+<code class="param-type">*</code>
+
+
+    </div>
+    
+</div>
+
+                
+        </div>
+    </div>
+
+
+
+
+    <h5>Example</h5>
+    
+    
+        <pre class="prettyprint"><code>const status = await fm.thirdPart.bonjour.publish({    options: {        name: "test",        type: "http",        port: 8080    }})</code></pre>
     
 
 
