@@ -12,12 +12,12 @@
         "alwaysOnTop": true
     },
     "configure": {
-        "devTools": false,
+        "devTools": true,
         "isolateSessionLevel": "app",
         "webSecurity": true,
         "recordRectInfo": true,
         "showWhenStartup": true,
         "closeWarn": true,
-        "disableContextMenu": false
+        "disableContextMenu": true
     }
 }

@@ -22,22 +22,40 @@ class FactoryPanel extends React.Component {
             // toast
             toastIsDoneSyncConfigure: false,
             toastNotDoneSyncConfigure: false,
-            toastNotDoneSyncConfigureMessage: ''
+            toastNotDoneSyncConfigureMessage: '',
+
+            // ide state
+            ideLoading: false,
+            ideJSFile: '',
+            ideHTMLFile: '',
+            ideStyleFile: '',
+        }
+
+        // ide对象
+        this.editors = {
+            created: false,
+            js: null
         }
     }
 
     async componentDidMount() {
-        const res = await fm.const()
+        const ConstDta = await fm.const()
         this.setState({
-            i18n: res.i18n,
+            i18n: ConstDta.i18n,
         })
 
+        // 保持更新app列表
         this.updateAppList()
         fm.on.staticFileChange(async () => {
             this.updateAppInfo()
             this.updateAppList()
             this.checkAppName(this.state.editingAppDirName)
         })
+
+        // 初始化ide
+        if (this.editors.created === false) {
+            this._createIde()
+        }
     }
 
     async componentDidUpdate(prevProps) {
@@ -48,6 +66,79 @@ class FactoryPanel extends React.Component {
             this.updateAppInfo()
         }
     }
+
+    // ========== IDE ==========
+    async _createIde() {
+        this.setState({
+            ideLoading: true
+        })
+        this.editors.created = true
+        require.config({ paths: { 'vs': 'https://unpkg.com/monaco-editor/min/vs' } });
+        require(['vs/editor/editor.main'], () => {
+            this.setState({
+                ideLoading: false
+            })
+            // 在这里初始化编辑器
+            let editorElement = document.getElementById('ideEditor')
+            this.editors.js = monaco.editor.create(editorElement, {
+                language: 'javascript',
+                theme: 'vs-dark',
+                automaticLayout: true
+            });
+            // 监听键盘事件
+            editorElement.addEventListener('keydown', function (event) {
+                // 如果按下了 Ctrl 键
+                if (event.ctrlKey) {
+                    // 检查是否按下了 'S' 键
+                    if (event.key === 's' || event.key === 'S') {
+                        // 阻止默认行为，即禁止保存页面
+                        event.preventDefault();
+
+                        // 在这里执行您的保存操作
+                        console.log('Ctrl+S pressed. Save the code!');
+                    }
+                }
+            });
+            // 初始化完成后，载入一次数据
+            this._loadIde();
+            // 监听文件变动
+            this.editors.js.onDidChangeModelContent((event) => {
+                // 在此处理代码变化事件
+                // console.log("Code changed:", this.editors.js.getValue());
+            });
+        });
+    }
+
+    async _destroyIde() {
+        if (this.editors.created === false) return
+        this.editors.created = false
+    }
+
+    // 将项目信息载入到ide中
+    async _loadIde() {
+        if (this.state.currentAppInfo === null) return
+        this._updateIdeFile()
+    }
+
+    // 从本地获取最新的工程文件
+    async _updateIdeFile() {
+        // 获取文件
+        const threeFileRes = await fm.staticService.getThreeFiles({
+            appDirName: this.state.currentAppInfo.appDirName
+        })
+        if (threeFileRes.status !== 2000) {
+            await fm.dialog.showErrorBox({
+                message: threeFileRes.message
+            })
+            return;
+        }
+        const files = threeFileRes.files;
+        if (this.editors.js) {
+            this.editors.js.setValue(files.js)
+        }
+    }
+
+    // ========== 配置部分 ==========
 
     // 与基座同步配置
     // 同步配置需要传入配置参数，由 onStaticFile 来触发app配置更新，再更新state
@@ -62,7 +153,6 @@ class FactoryPanel extends React.Component {
                 toastIsDoneSyncConfigure: true
             })
         }
-
     }
 
     // 更新app列表，用来做排重
@@ -82,15 +172,17 @@ class FactoryPanel extends React.Component {
             this.props.selectApp && this.props.selectApp(null)
             this.setState({
                 currentAppInfo: currentAppInfo
+            }, () => {
+                this._loadIde();
             })
-            return 
+            return
         }
         const appConfig = await fm.controller.getAppConfig({
             appDirName: currentAppInfo.appDirName
         })
         if (appConfig.status !== 2000) {
             this.props.selectApp && this.props.selectApp(null)
-            return 
+            return
         }
         const configJSON = appConfig.configJSON
         const browserWindowConfigureString = this.getBrowserWindowConfigString(configJSON)
@@ -98,6 +190,8 @@ class FactoryPanel extends React.Component {
             currentAppInfo: currentAppInfo,
             configJSON: configJSON,
             browserWindowConfigureString: browserWindowConfigureString
+        }, () => {
+            this._loadIde();
         })
     }
 
@@ -155,7 +249,7 @@ class FactoryPanel extends React.Component {
     // 改名 - 检查重名
     async checkAppName(inputAppName) {
         if (!this.state.isEditingAppDirName) return
-        if (!this.state.currentAppInfo) return 
+        if (!this.state.currentAppInfo) return
         // 检查是否出错
         const appDirPrefix = this.state.currentAppInfo.appDirName.substring(
             0, this.state.currentAppInfo.appDirName.lastIndexOf('/')
@@ -174,11 +268,16 @@ class FactoryPanel extends React.Component {
     }
 
     // 改名 - 关闭名称修改框框
-    async closeAppNameEditFrame() {
-        this.setState({
-            isEditingAppDirName: false,
-            editingAppDirNameError: false
+    closeAppNameEditFrame() {
+        return new Promise(r => {
+            this.setState({
+                isEditingAppDirName: false,
+                editingAppDirNameError: false
+            }, () => {
+                r()
+            })
         })
+
     }
 
     // 改名 - 打开名称修改框
@@ -205,7 +304,7 @@ class FactoryPanel extends React.Component {
             newAppName: newAppName
         })
         if (res.status === 2000) {
-            this.closeAppNameEditFrame()
+            await this.closeAppNameEditFrame()
             // 小等一会儿
             this.updateAppList(() => {
                 this.props.selectApp && this.props.selectApp(this.state.appList[res.appDirName])
@@ -233,7 +332,7 @@ class FactoryPanel extends React.Component {
         const res = await fm.controller.deleteApp({
             appDirName: appDirName
         })
-        
+
         if (res.status !== 2000) {
             await fm.dialog.showErrorBox({
                 message: res.message
@@ -248,20 +347,21 @@ class FactoryPanel extends React.Component {
         return (
             // 大容器：
             <div style={{
-                width: '100%',
+                width: '90%',
                 height: '100%',
                 display: 'flex',
-                flexDirection: 'row',
-                flexWrap: 'wrap',
+                flexDirection: 'column',
+                flexWrap: 'no-wrap',
                 justifyContent: 'flex-start',
                 alignContent: 'flex-start',
-                alignItems: 'center'
+                alignItems: 'center',
+                marginBottom: '20px'
             }}>
                 {/* 欢迎页 */}
                 {!this.state.currentAppInfo && (
                     <div style={{
                         width: '100%',
-                        height: '100%',
+                        height: '50%',
                         display: 'flex',
                         justifyContent: 'center',
                         alignContent: 'center',
@@ -275,6 +375,8 @@ class FactoryPanel extends React.Component {
                 {this.state.currentAppInfo && (
                     <div style={{
                         width: '100%',
+                        minWidth: '500px',
+                        height: 'auto',
                         display: 'flex',
                         flexWrap: 'wrap',
                         padding: '20px 20px 20px 20px'
@@ -282,6 +384,8 @@ class FactoryPanel extends React.Component {
                         {/* 图标 */}
                         <div style={{
                             width: '20%',
+                            minWidth: '100px',
+                            maxWidth: '200px',
                             height: '100px',
                             display: 'flex',
                             flexDirection: 'column',
@@ -341,7 +445,7 @@ class FactoryPanel extends React.Component {
                                             height: '35px'
                                         }}>
                                             {
-                                                this.state.currentAppInfo && 
+                                                this.state.currentAppInfo &&
                                                 this.state.currentAppInfo.appDirName.substring(
                                                     this.state.currentAppInfo.appDirName.lastIndexOf('/') + 1
                                                 )
@@ -424,8 +528,8 @@ class FactoryPanel extends React.Component {
                                             }
                                             <div style={{
                                                 cursor: 'pointer',
-                                            }} onClick={() => {
-                                                this.closeAppNameEditFrame()
+                                            }} onClick={async () => {
+                                                await this.closeAppNameEditFrame()
                                             }} title={`${this.state.i18n['capp-cancel']}`}>
                                                 <svg width="24" height="24" viewBox="0 0 24 24" fill="#f08b06 " xmlns="http://www.w3.org/2000/svg">
                                                     <path stroke="#f33d46" d="M9.8788 7.05025L7.75748 4.92893C6.97643 4.14788 5.7101 4.14788 4.92905 4.92893C4.148 5.70997 4.148 6.9763 4.92905 7.75735L9.17169 12L4.92905 16.2426C4.148 17.0237 4.148 18.29 4.92905 19.0711C5.7101 19.8521 6.97643 19.8521 7.75747 19.0711L12.0001 14.8284L16.2428 19.0711C17.0238 19.8521 18.2901 19.8521 19.0712 19.0711C19.8522 18.29 19.8522 17.0237 19.0712 16.2426L14.8285 12L19.0712 7.75735C19.8522 6.97631 19.8522 5.70998 19.0712 4.92893C18.2901 4.14788 17.0238 4.14788 16.2428 4.92893L12.0001 9.17157" stroke-linecap="round" stroke-linejoin="round" />
@@ -508,6 +612,8 @@ class FactoryPanel extends React.Component {
                         {/* 配置列表 */}
                         <div style={{
                             width: '100%',
+                            maxWidth: '800px',
+                            minWidth: '500px',
                             display: 'flex',
                             flexDirection: 'column',
                             overflow: 'hidden',
@@ -570,7 +676,7 @@ class FactoryPanel extends React.Component {
                         <div style={{
                             width: '80%',
                             display: 'flex',
-                            marginTop: '20px'
+                            marginTop: '20px',
                         }}>
                             <ConfigureTextField
                                 label={`${this.state.i18n['capp-browserWindowConfigure']}`}
@@ -581,7 +687,7 @@ class FactoryPanel extends React.Component {
                                     this.state.i18n['capp-browserWindowConfigureInputError'] :
                                     this.state.i18n['capp-browserWindowConfigureInputHelp']
                                     }`}
-                                rows={14}
+                                rows={12}
                                 onBlur={() => { this.onBrowserWindowConfigureTextfieldBlur() }}
                                 error={this.state.isBrowserWindowConfigureError}
                                 value={this.state.browserWindowConfigureString}
@@ -591,7 +697,6 @@ class FactoryPanel extends React.Component {
                         <div style={{
                             width: '20%'
                         }}></div>
-
 
                         {/* 提示配置已同步的 Toast */}
                         <Snackbar
@@ -632,6 +737,19 @@ class FactoryPanel extends React.Component {
                         />
                     </div>
                 )}
+
+                {/* 专门放ide的地方 */}
+                {/* ide */}
+                <div style={{
+                    width: '100%',
+                    // marginTop: '20px',
+                    flexGrow: 1,
+                    display: this.state.currentAppInfo ? 'flex' : 'none',
+                }} id="ideEditor">
+                    {
+                        this.state.ideLoading === true ? 'loading ... ' : null
+                    }
+                </div>
             </div>
         )
     }
@@ -657,9 +775,12 @@ const ConfigureTextField = styled(TextField)(({ theme }) => ({
     },
     '& .MuiInputBase-input': {
         fontFamily: 'JiangCheng',
-        color: '#444'
+        color: '#444',
+        fontSize: '10px',
+        lineHeight: '12px'
     },
     '& textarea:invalid': {
         boxShadow: 'none'
-    }
+    },
+
 }));

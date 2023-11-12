@@ -2,11 +2,11 @@
     "browserWindowOptions": {
         "x": 200,
         "y": 100,
-        "width": 800,
-        "height": 800,
+        "width": 1400,
+        "height": 1100,
         "type": "normal",
         "frame": false,
-        "resizable": false,
+        "resizable": true,
         "transparent": true,
         "hasShadow": false,
         "alwaysOnTop": false

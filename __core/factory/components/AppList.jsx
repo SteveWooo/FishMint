@@ -86,9 +86,9 @@ class AppList extends React.Component {
             })
             return
         }
-        await fm.controller.openExplorer({
-            appDirName: newAppRes.appDirName
-        })
+        // await fm.controller.openExplorer({
+        //     appDirName: newAppRes.appDirName
+        // })
 
         // 创建完毕后，切换app
         setTimeout(() => {

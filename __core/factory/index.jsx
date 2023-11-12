@@ -20,10 +20,6 @@ class FMRoot extends React.Component {
             i18n: res.i18n,
         })
         this.updateKToolConfigure()
-        fm.on.staticFileChange(() => {
-            // this.updateKToolConfigure()
-        })
-
         fm.on.baseConfigureUpdate(() => {
             this.updateKToolConfigure()
         })
@@ -46,6 +42,8 @@ class FMRoot extends React.Component {
         //     })
         // })
         // console.log(resp.json.choices[0].message.content)
+        // test:
+        // this.selectApp({ appDirName: "apps/factory/demo" })
     }
 
     async updateKToolConfigure() {
@@ -135,16 +133,17 @@ class FMRoot extends React.Component {
                     {/* 内容 */}
                     <div style={{
                         width: '100%',
+                        minWidth: '1200px',
                         height: 'calc(100% - 50px)',
                         display: 'flex',
                         flexDirection: 'row',
-                        flexWrap: 'wrap',
+                        flexWrap: 'no-wrap',
                         alignItems: 'flex-start',
                         justifyContent: 'flex-start',
                     }}>
                         {/* app列表 */}
                         <div style={{
-                            width: '20%',
+                            width: '200px',
                             height: '100%',
                             // backgroundColor: '#f5f5f5'
                         }}>
@@ -155,8 +154,10 @@ class FMRoot extends React.Component {
 
                         {/* 操作面板 */}
                         <div style={{
-                            width: '80%',
+                            width: 'calc(100vw - 210px)',
+                            minWidth: '800px',
                             height: '100%',
+                            padding: '0 0 0 20px'
                             // backgroundColor: '#fff'
                         }}>
                             <FactoryPanel ref={this.factoryPanelRef} 
