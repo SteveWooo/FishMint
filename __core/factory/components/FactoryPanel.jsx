@@ -36,10 +36,14 @@ class FactoryPanel extends React.Component {
             created: false,
             js: null
         }
+
+        // 存储常量
+        this.CONST = {}
     }
 
     async componentDidMount() {
         const ConstDta = await fm.const()
+        this.CONST = ConstDta.const
         this.setState({
             i18n: ConstDta.i18n,
         })
@@ -86,7 +90,7 @@ class FactoryPanel extends React.Component {
                 automaticLayout: true
             });
             // 监听键盘事件
-            editorElement.addEventListener('keydown', function (event) {
+            editorElement.addEventListener('keydown', async (event) => {
                 // 如果按下了 Ctrl 键
                 if (event.ctrlKey) {
                     // 检查是否按下了 'S' 键
@@ -95,7 +99,27 @@ class FactoryPanel extends React.Component {
                         event.preventDefault();
 
                         // 在这里执行您的保存操作
-                        console.log('Ctrl+S pressed. Save the code!');
+                        // console.log('Ctrl+S pressed. Save the code!');
+                        const jsFile = this.editors.js.getValue()
+                        const targetFiles = {
+                            js: jsFile
+                        }
+
+                        const saveRes = await fm.staticService.writeThreeFiles({
+                            appDirName: this.state.currentAppInfo.appDirName,
+                            files: targetFiles
+                        })
+
+                        if (saveRes.status === this.CONST.STATUS.SUCCESS) {
+                            this.setState({
+                                toastIsDoneSyncConfigure: true
+                            })
+                        } else {
+                            this.setState({
+                                toastNotDoneSyncConfigure: false,
+                                toastNotDoneSyncConfigureMessage: saveRes.message
+                            })
+                        }
                     }
                 }
             });
@@ -361,7 +385,7 @@ class FactoryPanel extends React.Component {
                 {!this.state.currentAppInfo && (
                     <div style={{
                         width: '100%',
-                        height: '50%',
+                        height: '300px',
                         display: 'flex',
                         justifyContent: 'center',
                         alignContent: 'center',
@@ -376,7 +400,7 @@ class FactoryPanel extends React.Component {
                     <div style={{
                         width: '100%',
                         minWidth: '500px',
-                        height: 'auto',
+                        height: '500px',
                         display: 'flex',
                         flexWrap: 'wrap',
                         padding: '20px 20px 20px 20px'
@@ -740,15 +764,19 @@ class FactoryPanel extends React.Component {
 
                 {/* 专门放ide的地方 */}
                 {/* ide */}
+
                 <div style={{
                     width: '100%',
-                    // marginTop: '20px',
-                    flexGrow: 1,
+                    height: 'calc(100vh - 700px)',
                     display: this.state.currentAppInfo ? 'flex' : 'none',
-                }} id="ideEditor">
-                    {
-                        this.state.ideLoading === true ? 'loading ... ' : null
-                    }
+                }}>
+                    <div style={{
+                        width: '100%',
+                    }} id="ideEditor">
+                        {
+                            this.state.ideLoading === true ? 'loading ... ' : null
+                        }
+                    </div>
                 </div>
             </div>
         )
