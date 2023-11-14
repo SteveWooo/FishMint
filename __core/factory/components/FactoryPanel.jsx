@@ -1,5 +1,5 @@
 const { DragBar, WindowFrame, GlobalHandler } = window.fmComponents
-const { Button, TextField, Switch, Snackbar, styled, alpha } = window.MaterialUI
+const { Button, TextField, Switch, Snackbar, styled, alpha, Select, MenuItem } = window.MaterialUI
 const { pink } = window.MaterialUI.colors
 
 class FactoryPanel extends React.Component {
@@ -29,12 +29,15 @@ class FactoryPanel extends React.Component {
             ideJSFile: '',
             ideHTMLFile: '',
             ideStyleFile: '',
+            ideEditing: 'JS'
         }
 
         // ide对象
         this.editors = {
             created: false,
-            js: null
+            js: null,
+            html: null,
+            css: null
         }
 
         // 存储常量
@@ -77,20 +80,31 @@ class FactoryPanel extends React.Component {
             ideLoading: true
         })
         this.editors.created = true
-        require.config({ paths: { 'vs': 'https://unpkg.com/monaco-editor/min/vs' } });
+        // require.config({ paths: { 'vs': 'https://unpkg.com/monaco-editor/min/vs' } });
         require(['vs/editor/editor.main'], () => {
             this.setState({
                 ideLoading: false
             })
             // 在这里初始化编辑器
-            let editorElement = document.getElementById('ideEditor')
-            this.editors.js = monaco.editor.create(editorElement, {
+            let editorElementJS = document.getElementById('ideEditor-js')
+            let editorElementHTML = document.getElementById('ideEditor-html')
+            let editorElementCSS = document.getElementById('ideEditor-css')
+            this.editors.js = monaco.editor.create(editorElementJS, {
                 language: 'javascript',
                 theme: 'vs-dark',
                 automaticLayout: true
             });
-            // 监听键盘事件
-            editorElement.addEventListener('keydown', async (event) => {
+            this.editors.html = monaco.editor.create(editorElementHTML, {
+                language: 'html',
+                theme: 'vs-dark',
+                automaticLayout: true
+            });
+            this.editors.css = monaco.editor.create(editorElementCSS, {
+                language: 'css',
+                theme: 'vs-dark',
+                automaticLayout: true
+            });
+            const handleKeyDown = async (event) => {
                 // 如果按下了 Ctrl 键
                 if (event.ctrlKey) {
                     // 检查是否按下了 'S' 键
@@ -100,35 +114,25 @@ class FactoryPanel extends React.Component {
 
                         // 在这里执行您的保存操作
                         // console.log('Ctrl+S pressed. Save the code!');
-                        const jsFile = this.editors.js.getValue()
-                        const targetFiles = {
-                            js: jsFile
-                        }
-
-                        const saveRes = await fm.staticService.writeThreeFiles({
-                            appDirName: this.state.currentAppInfo.appDirName,
-                            files: targetFiles
-                        })
-
-                        if (saveRes.status === this.CONST.STATUS.SUCCESS) {
-                            this.setState({
-                                toastIsDoneSyncConfigure: true
-                            })
-                        } else {
-                            this.setState({
-                                toastNotDoneSyncConfigure: false,
-                                toastNotDoneSyncConfigureMessage: saveRes.message
-                            })
-                        }
+                        this._saveIdeFile()
                     }
                 }
+            }
+            // 监听键盘事件
+            editorElementJS.addEventListener('keydown', async (event) => {
+                handleKeyDown(event)
+            });
+            editorElementHTML.addEventListener('keydown', async (event) => {
+                handleKeyDown(event)
+            });
+            editorElementCSS.addEventListener('keydown', async (event) => {
+                handleKeyDown(event)
             });
             // 初始化完成后，载入一次数据
             this._loadIde();
             // 监听文件变动
             this.editors.js.onDidChangeModelContent((event) => {
                 // 在此处理代码变化事件
-                // console.log("Code changed:", this.editors.js.getValue());
             });
         });
     }
@@ -142,6 +146,33 @@ class FactoryPanel extends React.Component {
     async _loadIde() {
         if (this.state.currentAppInfo === null) return
         this._updateIdeFile()
+    }
+
+    async _saveIdeFile() {
+        const jsFile = this.editors.js.getValue()
+        const htmlFile = this.editors.html.getValue()
+        const cssFile = this.editors.css.getValue()
+        const targetFiles = {
+            js: jsFile,
+            html: htmlFile,
+            css: cssFile
+        }
+
+        const saveRes = await fm.staticService.writeThreeFiles({
+            appDirName: this.state.currentAppInfo.appDirName,
+            files: targetFiles
+        })
+
+        if (saveRes.status === this.CONST.STATUS.SUCCESS) {
+            this.setState({
+                toastIsDoneSyncConfigure: true
+            })
+        } else {
+            this.setState({
+                toastNotDoneSyncConfigure: false,
+                toastNotDoneSyncConfigureMessage: saveRes.message
+            })
+        }
     }
 
     // 从本地获取最新的工程文件
@@ -159,6 +190,12 @@ class FactoryPanel extends React.Component {
         const files = threeFileRes.files;
         if (this.editors.js) {
             this.editors.js.setValue(files.js)
+        }
+        if (this.editors.html) {
+            this.editors.html.setValue(files.html)
+        }
+        if (this.editors.css) {
+            this.editors.css.setValue(files.css)
         }
     }
 
@@ -371,7 +408,7 @@ class FactoryPanel extends React.Component {
         return (
             // 大容器：
             <div style={{
-                width: '90%',
+                width: '96%',
                 height: '100%',
                 display: 'flex',
                 flexDirection: 'column',
@@ -399,35 +436,37 @@ class FactoryPanel extends React.Component {
                 {this.state.currentAppInfo && (
                     <div style={{
                         width: '100%',
-                        minWidth: '500px',
-                        height: '500px',
+                        height: 'auto',
                         display: 'flex',
                         flexWrap: 'wrap',
-                        padding: '20px 20px 20px 20px'
+                        padding: '20px 0px 20px 20px'
                     }}>
                         {/* 图标 */}
                         <div style={{
-                            width: '20%',
-                            minWidth: '100px',
-                            maxWidth: '200px',
-                            height: '100px',
-                            display: 'flex',
-                            flexDirection: 'column',
-                            justifyContent: 'center',
-                            alignItems: 'center',
-                            alignContent: 'center',
-                            // background: '#e1e'
-                            // border: '1px solid #eee',
-                            borderRadius: '10px 0px 10px 0px',
-                            boxShadow: '2px 2px 4px #f30ba4, -2px -2px 4px #feea83'
-                        }} className={`hvr-grow`}>
-                            <img style={{
-                                width: '90px',
-                                height: '90px',
-                                userSelect: 'none',
-                            }}
-                                src={this.state.currentAppInfo.icon}
-                                title={`${this.state.i18n['capp-setIconTips']}`} />
+                            width: '20%'
+                        }}>
+                            <div style={{
+                                minWidth: '100px',
+                                maxWidth: '200px',
+                                height: '100px',
+                                display: 'flex',
+                                flexDirection: 'column',
+                                justifyContent: 'center',
+                                alignItems: 'center',
+                                alignContent: 'center',
+                                // background: '#e1e'
+                                // border: '1px solid #eee',
+                                borderRadius: '10px 0px 10px 0px',
+                                boxShadow: '2px 2px 4px #f30ba4, -2px -2px 4px #feea83'
+                            }} className={`hvr-grow`}>
+                                <img style={{
+                                    width: '90px',
+                                    height: '90px',
+                                    userSelect: 'none',
+                                }}
+                                    src={this.state.currentAppInfo.icon}
+                                    title={`${this.state.i18n['capp-setIconTips']}`} />
+                            </div>
                         </div>
 
                         {/* app信息 */}
@@ -600,12 +639,11 @@ class FactoryPanel extends React.Component {
                             display: 'flex',
                             flexDirection: 'row',
                             alignItems: 'center',
-                            justifyContent: 'center',
+                            justifyContent: 'flex-end',
                         }}>
                             {/* 按钮1 */}
                             <div style={{
-                                width: '50%',
-                                textAlign: 'left',
+                                width: '40px',
                                 cursor: 'pointer'
                             }} onClick={async () => {
                                 await fm.openApp({
@@ -618,8 +656,7 @@ class FactoryPanel extends React.Component {
                             </div>
                             {/* 按钮2 */}
                             <div style={{
-                                width: '50%',
-                                textAlign: 'left',
+                                width: '40px',
                                 cursor: 'pointer'
                             }} onClick={async () => {
                                 await fm.controller.closeApp({
@@ -632,12 +669,13 @@ class FactoryPanel extends React.Component {
                                 </svg>
                             </div>
                         </div>
+                        {/* <div style={{ width: '20%' }}></div> */}
 
                         {/* 配置列表 */}
                         <div style={{
                             width: '100%',
                             maxWidth: '800px',
-                            minWidth: '500px',
+                            minWidth: '200px',
                             display: 'flex',
                             flexDirection: 'column',
                             overflow: 'hidden',
@@ -695,10 +733,141 @@ class FactoryPanel extends React.Component {
                                 </div>
                             </div>
                         </div>
+                    </div>
+                )}
 
+                {/* 提示配置已同步的 Toast */}
+                <Snackbar
+                    anchorOrigin={{
+                        vertical: "bottom",
+                        horizontal: "right"
+                    }}
+                    open={this.state.toastIsDoneSyncConfigure}
+                    autoHideDuration={1500}
+                    onClose={(event, reason) => {
+                        if (reason === 'clickaway') {
+                            return;
+                        }
+                        this.setState({
+                            toastIsDoneSyncConfigure: false
+                        })
+                    }}
+                    message={`${this.state.i18n['capp-doneSyncConfigure']}`}
+                />
+
+                {/* 提示同步失败的Toast */}
+                <Snackbar
+                    anchorOrigin={{
+                        vertical: "bottom",
+                        horizontal: "right"
+                    }}
+                    open={this.state.toastNotDoneSyncConfigure}
+                    autoHideDuration={1500}
+                    onClose={(event, reason) => {
+                        if (reason === 'clickaway') {
+                            return;
+                        }
+                        this.setState({
+                            toastNotDoneSyncConfigure: false
+                        })
+                    }}
+                    message={`${this.state.toastNotDoneSyncConfigureMessage}`}
+                />
+
+                {/* 专门放ide的地方 */}
+                {/* ide */}
+
+                <div style={{
+                    padding: '0 0 0 20px',
+                    width: '100%',
+                    height: 'calc(100vh - 350px)',
+                    display: this.state.currentAppInfo ? 'flex' : 'none',
+                    flexWrap: 'wrap',
+                    justifyContent: 'flex-start',
+                    // alignContent: 'flex-start'
+                }}>
+                    <div style={{
+                        width: '100%',
+                        height: '40px',
+                        display: 'flex'
+                    }}>
+                        <div style={{
+                            width: '80%'
+                        }}>
+                            <span style={{
+                                marginRight: '10px',
+                                fontSize: '14px'
+                            }}>
+                                {this.state.i18n['capp-sourceCode']}
+                            </span>
+                            <IdeSelect style={{
+                                height: '35px'
+                            }} onChange={(e) => {
+                                this.setState({
+                                    ideEditing: e.target.value
+                                })
+                            }} value={this.state.ideEditing}>
+                                <IdeSelectItem value={'JS'}>JS</IdeSelectItem>
+                                <IdeSelectItem value={'HTML'}>HTML</IdeSelectItem>
+                                <IdeSelectItem value={'CSS'}>CSS</IdeSelectItem>
+                                <IdeSelectItem value={'WINDOW_CONFIGURE'}>Window Configure</IdeSelectItem>
+                            </IdeSelect>
+                        </div>
+
+                        {/* 保存按钮 */}
+                        <div style={{
+                            width: '20%',
+                            display: 'flex',
+                            justifyContent: 'flex-end',
+                            alignItems: 'center'
+                        }} onClick={() => {
+                            this._saveIdeFile()
+                        }}>
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                height="24px"
+                                viewBox="0 0 24 24"
+                                width="24px" fill="#888">
+                                <path d="M0 0h24v24H0z" fill="none" /><path d="M17 3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V7l-4-4zm-5 16c-1.66 0-3-1.34-3-3s1.34-3 3-3 3 1.34 3 3-1.34 3-3 3zm3-10H5V5h10v4z" />
+                            </svg>
+                        </div>
+
+                    </div>
+                    <div style={{
+                        width: '100%',
+                        display: this.state.ideEditing === 'JS' ? 'flex' : 'none',
+                    }} id="ideEditor-js">
+                        {
+                            this.state.ideLoading === true ? 'loading ... ' : null
+                        }
+                    </div>
+
+                    <div style={{
+                        width: '100%',
+                        display: this.state.ideEditing === 'HTML' ? 'flex' : 'none',
+                    }} id="ideEditor-html">
+                        {
+                            this.state.ideLoading === true ? 'loading ... ' : null
+                        }
+                    </div>
+
+                    <div style={{
+                        width: '100%',
+                        display: this.state.ideEditing === 'CSS' ? 'flex' : 'none',
+                    }} id="ideEditor-css">
+                        {
+                            this.state.ideLoading === true ? 'loading ... ' : null
+                        }
+                    </div>
+
+                    <div style={{
+                        width: '100%',
+                        height: '100%',
+                        display: this.state.ideEditing === 'WINDOW_CONFIGURE' ? 'flex' : 'none',
+                    }}>
                         {/* Browser View配置项 */}
                         <div style={{
-                            width: '80%',
+                            width: '100%',
                             display: 'flex',
                             marginTop: '20px',
                         }}>
@@ -718,64 +887,6 @@ class FactoryPanel extends React.Component {
                                 onChange={e => { this.onBrowserWindowConfigureChange(e) }}
                             />
                         </div>
-                        <div style={{
-                            width: '20%'
-                        }}></div>
-
-                        {/* 提示配置已同步的 Toast */}
-                        <Snackbar
-                            anchorOrigin={{
-                                vertical: "bottom",
-                                horizontal: "right"
-                            }}
-                            open={this.state.toastIsDoneSyncConfigure}
-                            autoHideDuration={1500}
-                            onClose={(event, reason) => {
-                                if (reason === 'clickaway') {
-                                    return;
-                                }
-                                this.setState({
-                                    toastIsDoneSyncConfigure: false
-                                })
-                            }}
-                            message={`${this.state.i18n['capp-doneSyncConfigure']}`}
-                        />
-
-                        {/* 提示同步失败的Toast */}
-                        <Snackbar
-                            anchorOrigin={{
-                                vertical: "bottom",
-                                horizontal: "right"
-                            }}
-                            open={this.state.toastNotDoneSyncConfigure}
-                            autoHideDuration={1500}
-                            onClose={(event, reason) => {
-                                if (reason === 'clickaway') {
-                                    return;
-                                }
-                                this.setState({
-                                    toastNotDoneSyncConfigure: false
-                                })
-                            }}
-                            message={`${this.state.toastNotDoneSyncConfigureMessage}`}
-                        />
-                    </div>
-                )}
-
-                {/* 专门放ide的地方 */}
-                {/* ide */}
-
-                <div style={{
-                    width: '100%',
-                    height: 'calc(100vh - 700px)',
-                    display: this.state.currentAppInfo ? 'flex' : 'none',
-                }}>
-                    <div style={{
-                        width: '100%',
-                    }} id="ideEditor">
-                        {
-                            this.state.ideLoading === true ? 'loading ... ' : null
-                        }
                     </div>
                 </div>
             </div>
@@ -804,11 +915,36 @@ const ConfigureTextField = styled(TextField)(({ theme }) => ({
     '& .MuiInputBase-input': {
         fontFamily: 'JiangCheng',
         color: '#444',
-        fontSize: '10px',
-        lineHeight: '12px'
+        fontSize: '18px',
+        lineHeight: '30px'
     },
     '& textarea:invalid': {
         boxShadow: 'none'
     },
-
 }));
+
+const IdeSelect = styled(Select)(({ theme }) => ({
+    '& .MuiSelect-select': {
+        fontFamily: 'JiangCheng',
+        fontSize: '14px',
+        color: '#444',
+        '& .MuiSelect-icon': {
+            color: '#444',
+        },
+        '& .MuiSelect-iconOpen': {
+            color: '#444',
+        },
+    },
+    '& .MuiInputBase-root': {
+        height: '20px'
+    }
+}))
+
+const IdeSelectItem = styled(MenuItem)(({ theme }) => ({
+    '& .MuiMenuItem-root': {
+        fontFamily: 'JiangCheng',
+        fontSize: '14px',
+        lineHeight: '16px',
+        color: '#444',
+    },
+}))
