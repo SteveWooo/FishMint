@@ -776,7 +776,6 @@ class FactoryPanel extends React.Component {
 
                 {/* 专门放ide的地方 */}
                 {/* ide */}
-
                 <div style={{
                     padding: '0 0 0 20px',
                     width: '100%',

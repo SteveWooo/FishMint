@@ -60,6 +60,7 @@ class FMRoot extends React.Component {
                     width: '100%',
                     flexGrow: 1
                 }}> 
+                123
                      {/* <input style={this.inputStyle()} ref={this.langRef} value="JavaScript" placeholder="lang" /> */}
                      <textarea style={this.inputStyle()} ref={this.promptRef} value="用html css js，写一个页面，背景是白色，有一个h1标签，内容是hello world" placeholder="prompt" />
                      <Button onClick={() => {this.submit()}}>Submit</Button>
