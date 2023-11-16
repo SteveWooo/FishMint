@@ -1,1 +1,21 @@
-{"browserWindowOptions":{"width":380,"height":220,"type":"toolbar","frame":false,"resizable":true,"transparent":true,"hasShadow":false,"alwaysOnTop":true},"configure":{"devTools":false,"isolateSessionLevel":"app","webSecurity":true,"showWhenStartup":true,"closeWarn":true,"appDirName":"DO_NOT_EDIT_THIS_PARAMETER","__wid":"DO_NOT_EDIT_THIS_PARAMETER"}}
+{
+    "browserWindowOptions": {
+        "width": 380,
+        "height": 220,
+        "type": "toolbar",
+        "frame": false,
+        "resizable": true,
+        "transparent": true,
+        "hasShadow": false,
+        "alwaysOnTop": false
+    },
+    "configure": {
+        "devTools": false,
+        "isolateSessionLevel": "app",
+        "webSecurity": true,
+        "showWhenStartup": true,
+        "closeWarn": true,
+        "appDirName": "DO_NOT_EDIT_THIS_PARAMETER",
+        "__wid": "DO_NOT_EDIT_THIS_PARAMETER"
+    }
+}

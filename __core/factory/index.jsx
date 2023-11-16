@@ -61,7 +61,12 @@ class FMRoot extends React.Component {
 
     render() {
         return (
-            <WindowFrame closeButton={true} closeWarn={false} maximizeButton={true} minimizeButton={true}>
+            <WindowFrame
+                closeButton={true}
+                closeWarn={false}
+                minimizeButton={true}
+                pinButton={true}
+            >
                 <GlobalHandler />
                 <div style={{
                     display: 'flex',
@@ -147,8 +152,8 @@ class FMRoot extends React.Component {
                             height: '100%',
                             // backgroundColor: '#f5f5f5'
                         }}>
-                            <AppList 
-                                selectApp={(info) => {this.selectApp(info)}}
+                            <AppList
+                                selectApp={(info) => { this.selectApp(info) }}
                                 currentAppInfo={this.state.currentAppInfo} />
                         </div>
 
@@ -160,8 +165,8 @@ class FMRoot extends React.Component {
                             padding: '0 0 0 20px'
                             // backgroundColor: '#fff'
                         }}>
-                            <FactoryPanel ref={this.factoryPanelRef} 
-                                selectApp={(info) => {this.selectApp(info)}}
+                            <FactoryPanel ref={this.factoryPanelRef}
+                                selectApp={(info) => { this.selectApp(info) }}
                                 currentAppInfo={this.state.currentAppInfo} />
                         </div>
                     </div>

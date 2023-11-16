@@ -338,7 +338,6 @@ class FactoryPanel extends React.Component {
                 r()
             })
         })
-
     }
 
     // 改名 - 打开名称修改框

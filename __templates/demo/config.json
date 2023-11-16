@@ -9,7 +9,7 @@
         "resizable": false,
         "transparent": true,
         "hasShadow": false,
-        "alwaysOnTop": true
+        "alwaysOnTop": false
     },
     "configure": {
         "devTools": false,

@@ -34,66 +34,86 @@ window.fmComponents.DragBar = class KtDragBar extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            isMax: undefined
+            isMax: undefined,
+            isAlwaysOnTop: undefined
         }
 
         this.draggerRef = React.createRef()
 
-        this.syncMaxState()
+        // this.syncMaxState()
+        this.syncOnTopState()
     }
     componentDidMount() {
-       
+
     }
-    // =========== 管理窗口最大化的 ===========
-    async isMax() {
+    // ========== 管理窗口是否保持在上 ==========
+    async isAlwaysOnTop() {
         const res = await fm.eWindow.__call({
-            functionName: 'isMaximized',
+            functionName: 'isAlwaysOnTop',
         })
         return res.result
     }
-    async syncMaxState() {
-        this.isMax().then(r => {
-            this.setState({
-                isMax: r
-            })
+    async syncOnTopState() {
+        this.setState({
+            isAlwaysOnTop: await this.isAlwaysOnTop()
         })
     }
-    async restore() {
-        const windowInfo = await fm.window.getInfo()
-        if (windowInfo.originConfigJSON) {
-            let windowOpts = windowInfo.originConfigJSON.browserWindowOptions
-            fm.window.setRect({
-                width: windowOpts.width,
-                height: windowOpts.height,
-                saveWindowData: true
-            })
-            fm.window.restore()
-            this.syncMaxState()
-        }
+    async switchAlwaysOnTop() {
+        fm.window.setAlwaysOnTop({
+            isAlwaysOnTop: !(await this.isAlwaysOnTop())
+        })
+        this.syncOnTopState()
     }
-    async maximize() {
-        if (this.state.isMax) {
-            this.restore()
-            return
-        }
+    // =========== 管理窗口最大化的(很多底层BUG，不搞) ===========
+    // async isMax() {
+    //     const res = await fm.eWindow.__call({
+    //         functionName: 'isMaximized',
+    //     })
+    //     return res.result
+    // }
+    // async syncMaxState() {
+    //     this.isMax().then(r => {
+    //         this.setState({
+    //             isMax: r
+    //         })
+    //     })
+    // }
+    // async restore() {
+    //     const windowInfo = await fm.window.getInfo()
+    //     if (windowInfo.originConfigJSON) {
+    //         // let windowOpts = windowInfo.originConfigJSON.browserWindowOptions
+    //         // fm.window.setRect({
+    //         //     width: windowOpts.width,
+    //         //     height: windowOpts.height,
+    //         //     saveWindowData: true
+    //         // })
+    //         fm.window.restore()
+    //         this.syncMaxState()
+    //     }
+    // }
+    // async maximize() {
+    //     if (this.state.isMax) {
+    //         this.restore()
+    //         return
+    //     }
 
-        // 设置最大化的屏幕坐标
-        const cursorPoint = (await await fm.eScreen.getCursorScreenPoint()).result
-        const screenInfo = (await fm.eScreen.getDisplayMatching({
-            params: [{
-                x: cursorPoint.x,
-                y: cursorPoint.y,
-                width: 1,
-                height: 1
-            }]
-        })).result
-        await fm.window.setRect({
-            x: screenInfo.bounds.x,
-            y: screenInfo.bounds.y,
-        })
-        fm.window.maximize()
-        this.syncMaxState()
-    }
+    //     // 设置最大化的屏幕坐标
+    //     const cursorPoint = (await await fm.eScreen.getCursorScreenPoint()).result
+    //     const screenInfo = (await fm.eScreen.getDisplayMatching({
+    //         params: [{
+    //             x: cursorPoint.x,
+    //             y: cursorPoint.y,
+    //             width: 1,
+    //             height: 1
+    //         }]
+    //     })).result
+    //     await fm.window.setRect({
+    //         x: screenInfo.bounds.x,
+    //         y: screenInfo.bounds.y,
+    //     })
+    //     fm.window.maximize()
+    //     this.syncMaxState()
+    // }
 
     style() {
         const colors = window.fmComponents.getThemeColors()
@@ -111,7 +131,8 @@ window.fmComponents.DragBar = class KtDragBar extends React.Component {
     }
 
     render() {
-        const { CloseWindowButton, RefreshButton, MinimizeButton, MaximizeButton } = window.fmComponents
+        const { CloseWindowButton, RefreshButton, MinimizeButton, MaximizeButton,
+            PinButton } = window.fmComponents
         return (
             <div style={this.style()} ref={this.draggerRef}>
                 <div style={{
@@ -134,18 +155,25 @@ window.fmComponents.DragBar = class KtDragBar extends React.Component {
                     paddingRight: '10px'
                 }}>
                     {
+                        this.props.pinButton ? (
+                            <PinButton
+                                isAlwaysOnTop={this.state.isAlwaysOnTop}
+                                switchAlwaysOnTop={() => { this.switchAlwaysOnTop() }} />
+                        ) : null
+                    }
+                    {
                         this.props.minimizeButton ? (
                             <MinimizeButton />
                         ) : null
                     }
-                    {
+                    {/* {
                         this.props.maximizeButton ? (
                             <MaximizeButton
                                 isMax={this.state.isMax}
                                 maximize={() => { this.maximize() }}
                             />
                         ) : null
-                    }
+                    } */}
                     {
                         this.props.closeButton ? (
                             <CloseWindowButton closeWarn={this.props.closeWarn} />
@@ -256,7 +284,8 @@ window.fmComponents.CloseWindowButton = class KtCloseWindowButton extends React.
             justifyContent: 'center',
             alignItems: 'center',
             backgroundColor: colors.ButtonBackgroundColor,
-            height: '100%'
+            height: '100%',
+            cursor: 'pointer'
         }
     }
 
@@ -302,7 +331,7 @@ window.fmComponents.CloseWindowButton = class KtCloseWindowButton extends React.
     render() {
         const colors = window.fmComponents.getThemeColors()
         return (
-            <div className="div-container"
+            <div className="div-container hvr-pop"
                 style={this.style()}
                 onClick={() => { this.closeWindow() }}
             >
@@ -421,7 +450,8 @@ window.fmComponents.MinimizeButton = class KtMinimizeButton extends React.Compon
             justifyContent: 'center',
             alignItems: 'center',
             height: '100%',
-            color: colors.ButtonFontColor
+            color: colors.ButtonFontColor,
+            cursor: 'pointer'
         }
     }
 
@@ -433,11 +463,62 @@ window.fmComponents.MinimizeButton = class KtMinimizeButton extends React.Compon
     render() {
         const colors = window.fmComponents.getThemeColors()
         return (
-            <div className="div-container" style={this.style()}
+            <div className="div-container hvr-pop" style={this.style()}
                 onClick={this.minimize}>
                 <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24">
                     <path d="M200-440v-80h560v80H200Z" fill={colors.ButtonFontColor} />
                 </svg>
+            </div>
+        )
+    }
+}
+
+/**
+ * 窗口pin按钮
+ */
+window.fmComponents.PinButton = class KtPinButton extends React.Component {
+    constructor(p) {
+        super(p)
+    }
+    style() {
+        const colors = window.fmComponents.getThemeColors()
+        return {
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            height: '100%',
+            color: colors.ButtonFontColor,
+            cursor: 'pointer'
+        }
+    }
+    iconStyle() {
+        return {
+            height: '60%'
+        }
+    }
+    render() {
+        const colors = window.fmComponents.getThemeColors()
+        return (
+            <div className="div-container hvr-pop" style={this.style()}
+                onClick={() => {
+                    this.props.switchAlwaysOnTop()
+                }}>
+                {
+                    this.props.isAlwaysOnTop === true ? (
+                        <svg style={{
+                            transform: 'rotate(-45deg)'
+                        }} xmlns="http://www.w3.org/2000/svg" height="18" viewBox="0 -960 960 960" width="18">
+                            <path fill={colors.ButtonFontColor} d="m640-480 80 80v80H520v240l-40 40-40-40v-240H240v-80l80-80v-280h-40v-80h400v80h-40v280Zm-286 80h252l-46-46v-314H400v314l-46 46Zm126 0Z"/>
+                        </svg>
+                    ) : null
+                }
+                {
+                    this.props.isAlwaysOnTop === false ? (
+                        <svg xmlns="http://www.w3.org/2000/svg" height="18" viewBox="0 -960 960 960" width="18">
+                            <path fill={colors.ButtonFontColor} d="m640-480 80 80v80H520v240l-40 40-40-40v-240H240v-80l80-80v-280h-40v-80h400v80h-40v280Zm-286 80h252l-46-46v-314H400v314l-46 46Zm126 0Z"/>
+                        </svg>
+                    ) : null
+                }
             </div>
         )
     }

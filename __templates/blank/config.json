@@ -5,11 +5,11 @@
         "width": 300,
         "height": 200,
         "type": "toolbar",
-        "frame": false,
+        "frame": true,
         "resizable": false,
         "transparent": true,
         "hasShadow": false,
-        "alwaysOnTop": true
+        "alwaysOnTop": false
     },
     "configure": {
         "devTools": false,
