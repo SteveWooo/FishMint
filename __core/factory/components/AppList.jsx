@@ -89,10 +89,11 @@ class AppList extends React.Component {
         // await fm.controller.openExplorer({
         //     appDirName: newAppRes.appDirName
         // })
-
+        this.updateList()
         // 创建完毕后，切换app
         setTimeout(() => {
             const newAppInfo = this.state.appList[newAppRes.appDirName]
+            console.log(newAppInfo)
             if (!newAppInfo) return
             this.selectApp(newAppInfo)
         }, 200)

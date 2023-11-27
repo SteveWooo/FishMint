@@ -66,7 +66,9 @@ class FactoryPanel extends React.Component {
     }
 
     async componentDidUpdate(prevProps) {
+        // console.log('did update')
         if (this.props.currentAppInfo !== prevProps.currentAppInfo) {
+            // console.log('do updateInfo')
             this.setState({
                 isEditingAppDirName: false
             })
@@ -228,6 +230,7 @@ class FactoryPanel extends React.Component {
 
     // 更新 app 配置
     async updateAppInfo() {
+        console.log('updateing')
         const currentAppInfo = this.props.currentAppInfo
         if (currentAppInfo === null) {
             this.props.selectApp && this.props.selectApp(null)
@@ -400,7 +403,7 @@ class FactoryPanel extends React.Component {
             return
         }
 
-        // location.reload()
+        location.reload()
     }
 
     render() {
