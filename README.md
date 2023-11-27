@@ -37,13 +37,11 @@ Windows
 ## 开发文档
 ### 1、创建一个app
 
-在apps目录下找到demo目录，整个目录复制一份，就完成app的创建辣
-
-[config.json 配置项说明](https://stevewooo.github.io/FishMint/global.html#WindowConfigure)
+通过热键（默认alt + `）打开欢迎页面，点击“工坊”，进入工坊后，点击左下角的 “创建挂件应用”，选择一个模板，其中blank模板为纯净的web应用，Demo则是带了react cdn版的应用。
 
 ### 2、fm api
 
-fm实例挂载在全局window上，可以从note和控制台应用中了解具体DEMO用法，以下是通用用法与接口文档
+fm实例挂载在全局window上，可以通过文档查看使用方法，也可以通过查看__core应用写法来了解用法
 
 #### 通用调用方式
 基座内核接口调用示例如下
@@ -57,22 +55,16 @@ let res = await fm.window.getInfo()
 
 将应用文件夹拷贝给你的朋友使用即可，比如想分享note应用，就将本项目的note目录整个拷贝出去即可。
 
-注意安全问题，早期切勿乱放入陌生人写的应用。
+注意安全问题，切勿乱放入陌生人写的应用。
 
 欢迎提pr贡献app
-
-## 生态&兼容
-
-相关社区中挂件的兼容方式：
-- 在index.html中，请规范地引入css与js文件。FishMint 没有破坏浏览器原生加载模式。
-- config.json 中给窗口配置属性的字段是 browserWindowOptions。而且 FishMint 禁止配置 webPreferences，请参考 [config.json configure 配置项说明](https://stevewooo.github.io/FishMint/global.html#WindowConfigure) 文档进行相关功能的配置
-- 需要参考 fm 接口进行相关修改，FishMint的 windows 上只额外挂载了一个对象，叫fm。
-- 定制交付版中，preload.js 将不会整合 nodejs 环境。
 
 ## 数据&配置
 所有应用产生的数据，都在软件目录的 'userData' 目录中，用户可自行备份。
 
-文件夹名称作为应用唯一ID，请注意解决冲突问题
+所有数据，都在这里，我们除了开机启动这个功能外，不会动你的用户目录。
+
+文件夹名称作为应用唯一ID，请注意解决冲突问题。
 
 ## 免责声明
 本项目内提供的所有软件与资料均遵循本项目开源协议内容，基于本平台二次开发应用的责任均有开发者自行承担，望开发者知悉
@@ -87,8 +79,10 @@ let res = await fm.window.getInfo()
 - 密码学：secp256k1
 - 前端：react、babel、elementUI、animation.css、hover.css
 - 实用工具：monent
+- IDE：monaco
+- AI：transformer.js
 
-以上均为MIT或Apache2.0协议，基座未对源码进行修改
+以上均为MIT或Apache2.0协议，基座未对源码进行修改。
 
 ## License
 MIT
