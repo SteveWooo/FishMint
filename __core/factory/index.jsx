@@ -1,5 +1,6 @@
 const { DragBar, WindowFrame, GlobalHandler } = window.fmComponents
 const { Switch, TextField, styled } = window.MaterialUI
+const { pipeline } = window.transformers
 
 class FMRoot extends React.Component {
     constructor(props) {

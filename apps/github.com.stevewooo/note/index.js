@@ -24,7 +24,7 @@ class NoteTextarea extends React.Component {
         if (res.status !== 2000) {
             console.log(res)
             alert('发生错误辣~建议备份该页笔记后，关闭窗口重开')
-            return 
+            return
         }
         if (res.value === undefined) {
             this.noteRef.current.value = '' // 初次打开窗口
@@ -90,8 +90,8 @@ class NoteTextarea extends React.Component {
             <div style={this.style()}>
                 <textarea
                     spellCheck={false}
-                    style={this.textareaStyle()} 
-                    className='kt-good-textarea-1' 
+                    style={this.textareaStyle()}
+                    className='kt-good-textarea-1'
                     ref={this.noteRef}
                 ></textarea>
             </div>
@@ -139,11 +139,15 @@ class FMRoot extends React.Component {
 
     render() {
         return (
-            <WindowFrame>
+            <WindowFrame 
+                closeButton={true}
+                closeWarn={true}
+                minimizeButton={false}
+                pinButton={true}>
                 <GlobalHandler hotUpdate={window.fmComponents.doHotUpdate} />
                 <div style={this.contentStyle()}
                     className='div-container'>
-                    <NoteTextarea/>
+                    <NoteTextarea />
                 </div>
             </WindowFrame>
         )

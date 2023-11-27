@@ -23,6 +23,13 @@
     <script src="/fm_app/utils/mui_material@5.14.3_umd_material-ui.production.min.js"></script>
     <!-- ide的loader -->
     <script src="/fm_app/utils/ide/loader.min.js"></script>
+    <!-- transformer.js -->
+    <script type="module">
+        import { pipeline } from "/fm_app/utils/transformers.js";
+        window.transformers = {
+            pipeline: pipeline
+        }
+    </script>
     <!-- 入口 -->
     <script type="text/babel" src="./components/FactoryPanel.jsx"></script>
     <script type="text/babel" src="./components/AppList.jsx"></script>
