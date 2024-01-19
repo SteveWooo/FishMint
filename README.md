@@ -18,7 +18,8 @@ Windows
 
 ## ‍快速开始
 
-- 下载基座：进入 [下载页面](https://github.com/SteveWooo/FishMint/releases) 
+- 下载基座：进入 [下载页面](https://github.com/SteveWooo/FishMint/releases)
+- 解压后，双击FishMintCore启动程序
 - 按下 Alt+` 即可召唤出控制面板
 - 进入挂件库后，将你想要的挂件拖出桌面即可使用
 - 进入工坊后，你可以尽情创作、修改你的挂件应用
