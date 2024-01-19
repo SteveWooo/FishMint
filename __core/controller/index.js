@@ -44,7 +44,6 @@ class FMRoot extends React.Component {
                 await this.doHide()
                 return
             }
-
             await this.doShow()
         })
 
@@ -172,7 +171,7 @@ class FMRoot extends React.Component {
     render() {
         const colors = window.fmComponents.themes[window.fmComponents.usingTheme]
         const isHor = this.state.appBaseWidth > this.state.appBaseHeight
-        console.log(this.state.appBaseHeight)
+        // console.log(this.state.appBaseHeight)
         return (
             <div
                 style={{

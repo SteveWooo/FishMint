@@ -230,7 +230,6 @@ class FactoryPanel extends React.Component {
 
     // 更新 app 配置
     async updateAppInfo() {
-        console.log('updateing')
         const currentAppInfo = this.props.currentAppInfo
         if (currentAppInfo === null) {
             this.props.selectApp && this.props.selectApp(null)
@@ -395,7 +394,7 @@ class FactoryPanel extends React.Component {
         const res = await fm.controller.deleteApp({
             appDirName: appDirName
         })
-
+        // console.log(res)
         if (res.status !== 2000) {
             await fm.dialog.showErrorBox({
                 message: res.message
@@ -403,7 +402,8 @@ class FactoryPanel extends React.Component {
             return
         }
 
-        location.reload()
+        // location.reload()
+        this.updateAppList()
     }
 
     render() {
@@ -657,7 +657,7 @@ class FactoryPanel extends React.Component {
                                 </svg>
                             </div>
                             {/* 按钮2 */}
-                            <div style={{
+                            {/* <div style={{
                                 width: '40px',
                                 cursor: 'pointer'
                             }} onClick={async () => {
@@ -669,7 +669,7 @@ class FactoryPanel extends React.Component {
                                 <svg width="33" height="33" viewBox="0 0 24 24" fill="#f08b06 " xmlns="http://www.w3.org/2000/svg">
                                     <path stroke="#f00606" d="M9.8788 7.05025L7.75748 4.92893C6.97643 4.14788 5.7101 4.14788 4.92905 4.92893C4.148 5.70997 4.148 6.9763 4.92905 7.75735L9.17169 12L4.92905 16.2426C4.148 17.0237 4.148 18.29 4.92905 19.0711C5.7101 19.8521 6.97643 19.8521 7.75747 19.0711L12.0001 14.8284L16.2428 19.0711C17.0238 19.8521 18.2901 19.8521 19.0712 19.0711C19.8522 18.29 19.8522 17.0237 19.0712 16.2426L14.8285 12L19.0712 7.75735C19.8522 6.97631 19.8522 5.70998 19.0712 4.92893C18.2901 4.14788 17.0238 4.14788 16.2428 4.92893L12.0001 9.17157" stroke-linecap="round" stroke-linejoin="round" />
                                 </svg>
-                            </div>
+                            </div> */}
                         </div>
                         {/* <div style={{ width: '20%' }}></div> */}
 
