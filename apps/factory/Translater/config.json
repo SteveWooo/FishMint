@@ -1,0 +1,23 @@
+{
+    "browserWindowOptions": {
+        "x": 100,
+        "y": 100,
+        "width": 1040,
+        "height": 660,
+        "type": "normal",
+        "frame": false,
+        "resizable": true,
+        "transparent": true,
+        "hasShadow": false,
+        "alwaysOnTop": false
+    },
+    "configure": {
+        "devTools": false,
+        "isolateSessionLevel": "app",
+        "webSecurity": true,
+        "recordRectInfo": true,
+        "showWhenStartup": true,
+        "closeWarn": true,
+        "disableContextMenu": false
+    }
+}
